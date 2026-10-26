@@ -1,5 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk";
+import { after } from "next/server";
 import { systemPrompt } from "@/lib/assistant";
+import { saveTranscript } from "@/lib/transcripts";
 
 /** Longest answer we will pay for, in tokens. Roughly 700 words. */
 const MAX_TOKENS = 1024;
@@ -84,15 +86,37 @@ export async function POST(req: Request) {
     );
   }
 
-  let turns: Turn[] | null;
+  let payload: { messages?: unknown; sessionId?: unknown } | null = null;
   try {
-    turns = parseTurns((await req.json())?.messages);
+    payload = await req.json();
   } catch {
-    turns = null;
+    payload = null;
   }
+  const turns = parseTurns(payload?.messages);
   if (!turns) {
     return Response.json({ error: "Malformed request." }, { status: 400 });
   }
+
+  // A random id the browser makes per conversation. Used only to group turns
+  // of one chat into one row; it identifies nobody. Anything that is not the
+  // expected shape means the transcript is skipped, not that the chat fails.
+  const sessionId =
+    typeof payload?.sessionId === "string" &&
+    /^[A-Za-z0-9_-]{8,64}$/.test(payload.sessionId)
+      ? payload.sessionId
+      : null;
+
+  // The full reply only exists once the stream ends, and the response must not
+  // wait on a database write. `after` runs when the response is finished; the
+  // promise makes that ordering explicit rather than assumed.
+  let reply = "";
+  let finish!: () => void;
+  const finished = new Promise<void>((resolve) => (finish = resolve));
+  const conversation = turns;
+  after(async () => {
+    await finished;
+    if (sessionId) await saveTranscript(sessionId, conversation, reply);
+  });
 
   const stream = anthropic().beta.messages.stream({
     // Both providers understand a Claude model name: DeepSeek's
@@ -148,14 +172,24 @@ export async function POST(req: Request) {
   const body = new ReadableStream<Uint8Array>({
     async start(controller) {
       try {
-        if (!first.done) controller.enqueue(encoder.encode(first.value));
-        for await (const chunk of deltas) controller.enqueue(encoder.encode(chunk));
+        if (!first.done) {
+          reply += first.value;
+          controller.enqueue(encoder.encode(first.value));
+        }
+        for await (const chunk of deltas) {
+          reply += chunk;
+          controller.enqueue(encoder.encode(chunk));
+        }
         controller.close();
       } catch (err) {
         // The headers are long gone; the client notices a short reply and
         // offers the email route.
         console.error("chat: stream ended early", err);
         controller.error(err);
+      } finally {
+        // Whatever the stream managed to produce still gets recorded, which is
+        // how a broken reply is visible rather than silent.
+        finish();
       }
     },
   });

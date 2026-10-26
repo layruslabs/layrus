@@ -376,6 +376,15 @@ Enter; it does not stop a distributed one. The real ceilings are `MAX_TOKENS`
 and the spend limit on the Anthropic account. Vercel's WAF rate limiting (no
 code) or Upstash (shared state) is the upgrade.
 
+**Transcripts are stored in Postgres, after the response.** Each finished
+conversation is written to a `conversations` row keyed by a random id the
+browser generates, so a question about a project can be followed up by a
+person. Nothing identifying is kept: no IP, no cookie, no account. The write
+runs in `after()`, so it cannot delay or fail a reply, and every error in
+`lib/transcripts.ts` is swallowed on purpose. Without `DATABASE_URL` nothing
+is stored and the chat behaves exactly as before, which is how development
+and previews run. `/privacy` states all of this and must keep stating it.
+
 ## Key Constraints
 
 - **The enquiry form does not submit anywhere.** `sections/StartProject.tsx`

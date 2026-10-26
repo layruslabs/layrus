@@ -36,6 +36,11 @@ ANTHROPIC_API_KEY=<your deepseek key>
 
 `LYRA_MODEL` overrides the model if you ever need to pin one.
 
+`DATABASE_URL` points at a Neon Postgres database and turns on transcript
+storage. Run `scripts/schema.sql` against it once. Without it the chat works
+exactly as before and nothing is stored, which is how local development and
+previews run.
+
 ## Layout
 
 ```

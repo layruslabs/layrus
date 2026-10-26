@@ -4,6 +4,15 @@ import { useEffect, useRef, useState } from "react";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
+/** A random id per conversation, so the server can group its turns into one
+ *  row. Not a cookie and not tied to a person: a new one on every page load. */
+function newSessionId(): string {
+  return (
+    globalThis.crypto?.randomUUID?.() ??
+    `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`
+  );
+}
+
 /* The first thing anyone reads here. It was written as a description of the
    assistant — what it is, what it knows, what it does when it fails — which
    reads like a bot introducing its feature set. Someone opening a chat wants
@@ -38,9 +47,11 @@ const TEASER_KEY = "lyra-teaser";
 /**
  * The assistant, as a panel in the corner.
  *
- * The conversation lives in this component's state and nowhere else — nothing
- * is stored, and closing the panel ends it. That is the honest default for a
- * chat on a marketing site: no transcript we would then have to look after.
+ * The conversation lives in this component's state, and a finished copy of it
+ * is written to the database so a question can be picked up by a person
+ * afterwards (see lib/transcripts.ts). Closing the panel ends the session in
+ * the browser; the stored copy stays until someone deletes it, which /privacy
+ * says plainly.
  *
  * Replies arrive as SSE from /api/chat and are appended a delta at a time, so
  * the first words land immediately rather than after the whole answer is
@@ -65,6 +76,7 @@ export function ChatWidget() {
     setTeaser(true);
   };
 
+  const sessionRef = useRef<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const launcherRef = useRef<HTMLButtonElement>(null);
@@ -160,7 +172,10 @@ export function ChatWidget() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ messages: next }),
+        body: JSON.stringify({
+          messages: next,
+          sessionId: (sessionRef.current ??= newSessionId()),
+        }),
       });
 
       if (!res.ok || !res.body) {

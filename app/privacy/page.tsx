@@ -39,16 +39,21 @@ export default function PrivacyPage() {
         <h2>The assistant on this site</h2>
         <p>
           The chat assistant is called Lyra. It is AI, not a person, and it
-          says so if you ask. What
-          you type into it is sent to Anthropic, which provides the model that
-          writes the reply, under their API terms. It is not used to train
-          their models and we do not store the conversation: it lives in the
-          browser tab and is gone when you close it or reload the page.
+          says so if you ask. What you type into it is sent to Anthropic, which
+          provides the model that writes the reply, under their API terms. It
+          is not used to train their models.
+        </p>
+        <p>
+          We keep a copy of each conversation in our own database, so that a
+          question about a project can be picked up by a person afterwards. It
+          is stored against a random identifier generated in your browser, with
+          no IP address, cookie or account attached to it. Ask us to delete it
+          and we will.
         </p>
         <p>
           Please do not type anything into it that you would not put in an
-          email. If you want a conversation that is not processed this way,
-          write to us instead.
+          email. If you want a conversation that is not stored, write to us
+          instead.
         </p>
 
         <h2>When you contact us</h2>
