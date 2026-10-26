@@ -337,6 +337,12 @@ reflexively, which reads as a deflection even when the answer above it was
 good. Both are in the prompt as explicit instructions because both regress
 easily.
 
+**The assistant speaks as a member of the team.** Asked who it is, it says Lyra,
+on the Layrus Labs team, and it uses "we" and "our" for the company. An earlier
+version described Layrus from the outside ("their services", "what they have
+shipped"), which read like a third-party chatbot bolted onto the site rather
+than a person working there.
+
 The registrations block is deliberately worded as *what the site states*
 rather than as fact to assert. Compliance.tsx carries its own warning that
 those claims need confirming with the client before launch, and an assistant

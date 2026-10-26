@@ -11,7 +11,7 @@ type Msg = { role: "user" | "assistant"; content: string };
    disclosure that this is an AI lives in the header, where it belongs,
    rather than in the first sentence a person hears. */
 const OPENING =
-  "Hi, I’m Lyra — happy to help. Tell me what you’re working on, or ask anything about working with Layrus. If I can’t answer something, I’ll point you to someone who can.";
+  "Hi, I’m Lyra. Happy to help. Tell me what you’re working on, or ask anything about working with us. If I can’t answer something, I’ll point you to someone who can.";
 
 /**
  * When the nudge fires, and the rules around it.
