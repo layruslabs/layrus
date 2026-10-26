@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Arrow } from "@/components/Arrow";
 import { ArchitectureDiagram, type DiagramSpec } from "@/components/ArchitectureDiagram";
 import { TestimonialCarousel, type Testimonial } from "@/components/TestimonialCarousel";
+import { PROJECTS } from "@/lib/projects";
+import { SERVICES } from "@/lib/services";
 
 /* PLACEHOLDER — every quote, person and role below is invented, like the
    client names in TrustBar. Replace with real, attributable quotes before
@@ -66,6 +68,25 @@ const HERO_ARCH: DiagramSpec = {
   // Users, Client, APIs, Backend, Cloud, AI Models, Database.
   order: [[0, 0], [0, 1], [0, 2], [1, 0], [2, 2], [2, 1], [2, 0]],
 };
+
+/**
+ * The three numbers in the hero, counted rather than claimed.
+ *
+ * They used to read "50+ Projects Delivered" and "98% Client Satisfaction" —
+ * neither had a source, and the first contradicted the portfolio two sections
+ * below it, which lists nine systems by name. Anything here is now derived
+ * from the data, so the hero cannot say something the rest of the page
+ * disproves, and a project going live updates it without anyone remembering to.
+ */
+const STATS = [
+  { value: String(PROJECTS.length), label: "Systems built", color: "var(--stat-1)" },
+  {
+    value: String(PROJECTS.filter((p) => p.status === "Live").length),
+    label: "Live in production",
+    color: "var(--stat-2)",
+  },
+  { value: String(SERVICES.length), label: "Services offered", color: "var(--stat-3)" },
+];
 
 /* ─── Stat ──────────────────────────────────────────────────────────────────── */
 function Stat({ value, label, color }: { value: string; label: string; color: string }) {
@@ -138,11 +159,7 @@ export function Hero() {
               style={{ borderTopColor: "var(--rule)" }}
               className="mt-2 lg:mt-auto flex flex-wrap items-stretch gap-y-6 pt-8 border-t"
             >
-              {[
-                { value: "3+", label: "Core Disciplines", color: "var(--stat-1)" },
-                { value: "50+", label: "Projects Delivered", color: "var(--stat-2)" },
-                { value: "98%", label: "Client Satisfaction", color: "var(--stat-3)" },
-              ].map((s, i) => (
+              {STATS.map((s, i) => (
                 <div
                   key={s.label}
                   role="listitem"
