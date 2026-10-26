@@ -27,7 +27,12 @@ export const ORG = {
   legalName: "Layrus Labs Ltd",
   email: "hello@layrus.com",
   locality: "Abuja",
+  region: "FCT",
   country: "NG",
+  // As registered with the Corporate Affairs Commission. Verifiable against
+  // the public register, which is exactly why it belongs on the page.
+  rcNumber: "9918991",
+  registered: "2026-10-08",
 };
 
 /** The company entity. Emitted once, in the layout, so every page carries it. */
@@ -49,12 +54,21 @@ export function organizationLd() {
     description:
       "Layrus Labs designs, builds and implements custom software systems, AI automation and connected hardware for businesses with complex technical needs.",
     email: ORG.email,
+    identifier: {
+      "@type": "PropertyValue",
+      name: "RC Number",
+      value: ORG.rcNumber,
+    },
+    foundingDate: ORG.registered,
     address: {
       "@type": "PostalAddress",
+      // The CAC record spells this "NTERNATIONAL" — a typo in the register
+      // itself. Corrected here; keep whichever form you use identical to the
+      // Google Business Profile, because that is what gets matched.
+      streetAddress: "Shop CB11/283, International Motor Spare Parts Market, Zuba",
       addressLocality: ORG.locality,
+      addressRegion: ORG.region,
       addressCountry: ORG.country,
-      // streetAddress / postalCode: add once the registered address is
-      // confirmed, and keep it identical to the Google Business Profile.
     },
     areaServed: [
       { "@type": "Country", name: "Nigeria" },
@@ -76,12 +90,14 @@ export function organizationLd() {
       "https://github.com/layrus",
       "https://x.com/layrustech",
     ],
-    contactPoint: {
-      "@type": "ContactPoint",
-      email: ORG.email,
-      contactType: "sales",
-      availableLanguage: ["English"],
-    },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        email: ORG.email,
+        contactType: "sales",
+        availableLanguage: ["English"],
+      },
+    ],
   };
 }
 

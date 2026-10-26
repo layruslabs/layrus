@@ -10,7 +10,7 @@ the two match.
 
 ## The one thing that has to be decided first
 
-**The site says Abuja. Your CV says Abuja.** Google matches a website to a
+**Settled: Abuja.** Google matches a website to a
 Business Profile by comparing name, address and phone. If they disagree, the
 listing and the site are treated as two different businesses and neither ranks.
 
@@ -18,10 +18,8 @@ Decide the operating base, then change one of them so they agree. The site
 currently states Abuja in six places (`app/layout.tsx`, `lib/seo.ts`,
 `app/about`, `app/contact`, the OG image, and `public/llms.txt`).
 
-Also missing, and required by Google: **a street address** and **a phone
-number**. Neither exists anywhere on the site today. Until they do, the
-`ProfessionalService` schema in `lib/seo.ts` declares city and country only —
-which is honest, and not enough for a local listing.
+Still missing, and required by Google: **a phone number**. The address and RC
+number are now in `lib/seo.ts`; no telephone appears anywhere on the site.
 
 ---
 
@@ -32,10 +30,11 @@ Set these once, then keep every other listing identical to them.
 | Field | Value |
 |---|---|
 | Business name | `Layrus Labs` — exactly, no "Ltd", no keywords |
+| Registration | `RC 9918991` — add it to the profile description; it is a trust signal for enterprise buyers |
 | Category (primary) | *Software company* |
 | Secondary categories | *Computer consultant*, *Web designer*, *Information technology support service* |
-| Address | ⚠️ **you must supply** — a real address you can receive post at |
-| Service area | Abuja (or Abuja — whichever you settle on), and surrounding states |
+| Address | `Shop CB11/283, International Motor Spare Parts Market, Zuba, FCT` — as registered. The CAC record spells "International" as "NTERNATIONAL"; use one spelling in both places. Note this is a market unit, not a walk-in office |
+| Service area | Abuja (FCT) and surrounding states |
 | Phone | ⚠️ **you must supply** — a number you answer. Google calls it during verification |
 | Website | `https://layrus.com` |
 | Email | `hello@layrus.com` |

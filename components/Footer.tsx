@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { LayrusMark } from "@/components/LayrusMark";
 import { LayrusTagline, LayrusWordmark } from "@/components/LayrusWordmark";
+import { ORG } from "@/lib/seo";
 
 /* ─── Footer nav columns ─────────────────────────────────────────────────────── */
 const NAV_COLUMNS = [
@@ -176,6 +177,9 @@ export function Footer() {
             className="text-[0.8125rem]"
           >
             &copy; {year} Layrus Labs Ltd. All rights reserved.
+            <span className="block sm:inline sm:ml-2">
+              RC {ORG.rcNumber} &middot; Registered in Nigeria
+            </span>
           </p>
 
           {/* Center nav links */}
