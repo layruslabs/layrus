@@ -4,8 +4,14 @@ import { useEffect, useRef, useState } from "react";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
+/* The first thing anyone reads here. It was written as a description of the
+   assistant — what it is, what it knows, what it does when it fails — which
+   reads like a bot introducing its feature set. Someone opening a chat wants
+   to be greeted and helped, so this does that and gets out of the way. The
+   disclosure that this is an AI lives in the header, where it belongs,
+   rather than in the first sentence a person hears. */
 const OPENING =
-  "I am Lyra, the Layrus Labs assistant. Ask me about what Layrus Labs builds, or about any of the systems on this site. If I do not know something, I will say so and point you at a person.";
+  "Hi, I’m Lyra — happy to help. Tell me what you’re working on, or ask anything about working with Layrus. If I can’t answer something, I’ll point you to someone who can.";
 
 /**
  * When the nudge fires, and the rules around it.
@@ -324,7 +330,7 @@ export function ChatWidget() {
               ref={inputRef}
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask about a service or a project"
+              placeholder="What are you trying to build?"
               aria-label="Your message"
               maxLength={2000}
               style={{
