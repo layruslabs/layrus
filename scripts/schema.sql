@@ -23,3 +23,8 @@ create index if not exists conversations_visitor_idx
 -- answer, and it is ordered by time.
 create index if not exists conversations_updated_at_idx
   on conversations (updated_at desc);
+
+-- Details a visitor gives when they ask us to save the conversation. Null for
+-- one-off chats, which are never linked to a person.
+alter table conversations add column if not exists visitor_name  text;
+alter table conversations add column if not exists visitor_email text;

@@ -376,13 +376,16 @@ Enter; it does not stop a distributed one. The real ceilings are `MAX_TOKENS`
 and the spend limit on the Anthropic account. Vercel's WAF rate limiting (no
 code) or Upstash (shared state) is the upgrade.
 
-**Transcripts are stored in Postgres, after the response.** Each finished
-conversation is written to a `conversations` row keyed by a random id the
-browser generates, so a question about a project can be followed up by a
-person. A second id, kept in localStorage, is stable across visits so rows
-from the same browser can be linked; the conversation id is per page load, so
-a returning visitor writes a new row rather than overwriting the last one.
-Nothing identifying is kept: no IP, no cookie, no account. The write
+**Transcripts are stored in Postgres, after the response, and the visitor
+chooses how.** Before the first message the panel asks whether to save the
+conversation. "Just this once" sends only the per-load conversation id, so the
+row is linked to nobody and `/api/chat/history` cannot reach it. "Save for
+later" takes a name and email and a visitor id kept in localStorage, so a
+returning browser resumes its last chat through `/api/chat/history`. That
+endpoint is authorised by the random id alone, which is why it is never
+rendered or logged. The write runs in `after()`, cannot delay or fail a reply,
+and without `DATABASE_URL` nothing is stored at all. `/privacy` states all of
+this and must keep stating it. The write
 runs in `after()`, so it cannot delay or fail a reply, and every error in
 `lib/transcripts.ts` is swallowed on purpose. Without `DATABASE_URL` nothing
 is stored and the chat behaves exactly as before, which is how development

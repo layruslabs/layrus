@@ -24,6 +24,8 @@ import { Pool } from "pg";
  */
 type Turn = { role: "user" | "assistant"; content: string };
 
+export type VisitorDetails = { name: string; email: string };
+
 let pool: Pool | undefined;
 
 function connect(): Pool | null {
@@ -43,6 +45,7 @@ function connect(): Pool | null {
 export async function saveTranscript(
   sessionId: string,
   visitorId: string | null,
+  details: VisitorDetails | null,
   turns: Turn[],
   reply: string,
 ): Promise<void> {
@@ -55,15 +58,50 @@ export async function saveTranscript(
     // One row per conversation; each turn replaces the previous copy, so a row
     // is always the whole conversation and never a fragment of one.
     await db.query(
-      `insert into conversations (session_id, visitor_id, messages)
-       values ($1, $2, $3::jsonb)
+      `insert into conversations
+         (session_id, visitor_id, visitor_name, visitor_email, messages)
+       values ($1, $2, $3, $4, $5::jsonb)
        on conflict (session_id) do update
          set messages = excluded.messages,
              visitor_id = coalesce(excluded.visitor_id, conversations.visitor_id),
+             visitor_name = coalesce(excluded.visitor_name, conversations.visitor_name),
+             visitor_email = coalesce(excluded.visitor_email, conversations.visitor_email),
              updated_at = now()`,
-      [sessionId, visitorId, JSON.stringify(messages)],
+      [
+        sessionId,
+        visitorId,
+        details?.name ?? null,
+        details?.email ?? null,
+        JSON.stringify(messages),
+      ],
     );
   } catch (err) {
     console.error("transcripts: save failed", err);
+  }
+}
+
+/**
+ * The last conversation saved by this browser, for the resume path.
+ *
+ * Only rows with a visitor id qualify; a one-off chat belongs to nobody and is
+ * deliberately unreachable from here.
+ */
+export async function loadTranscript(visitorId: string): Promise<Turn[] | null> {
+  const db = connect();
+  if (!db) return null;
+
+  try {
+    const { rows } = await db.query<{ messages: Turn[] }>(
+      `select messages from conversations
+       where visitor_id = $1
+       order by updated_at desc
+       limit 1`,
+      [visitorId],
+    );
+    const messages = rows[0]?.messages;
+    return Array.isArray(messages) ? messages : null;
+  } catch (err) {
+    console.error("transcripts: load failed", err);
+    return null;
   }
 }

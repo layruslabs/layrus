@@ -86,8 +86,12 @@ export async function POST(req: Request) {
     );
   }
 
-  let payload: { messages?: unknown; sessionId?: unknown; visitorId?: unknown } | null =
-    null;
+  let payload: {
+    messages?: unknown;
+    sessionId?: unknown;
+    visitorId?: unknown;
+    visitor?: unknown;
+  } | null = null;
   try {
     payload = await req.json();
   } catch {
@@ -106,7 +110,23 @@ export async function POST(req: Request) {
 
   const sessionId = id(payload?.sessionId);
   // Stable across visits on one browser, so returning conversations link up.
+  // Absent for a one-off chat, which is stored but linked to nobody.
   const visitorId = id(payload?.visitorId);
+
+  // Only sent when the visitor chose to save the chat. Validation happens
+  // here because the browser is not a trust boundary: a name and an email
+  // that fail these checks are dropped, not stored.
+  const raw = payload?.visitor as { name?: unknown; email?: unknown } | undefined;
+  const details =
+    visitorId &&
+    typeof raw?.name === "string" &&
+    typeof raw?.email === "string" &&
+    raw.name.trim().length >= 2 &&
+    raw.name.trim().length <= 80 &&
+    raw.email.trim().length <= 200 &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(raw.email.trim())
+      ? { name: raw.name.trim(), email: raw.email.trim() }
+      : null;
 
   // The full reply only exists once the stream ends, and the response must not
   // wait on a database write. `after` runs when the response is finished; the
@@ -117,7 +137,9 @@ export async function POST(req: Request) {
   const conversation = turns;
   after(async () => {
     await finished;
-    if (sessionId) await saveTranscript(sessionId, visitorId, conversation, reply);
+    if (sessionId) {
+      await saveTranscript(sessionId, visitorId, details, conversation, reply);
+    }
   });
 
   const stream = anthropic().beta.messages.stream({

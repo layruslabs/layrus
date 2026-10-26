@@ -13,34 +13,24 @@ function randomId(): string {
   );
 }
 
-/**
- * A stable id for this browser, kept in localStorage.
- *
- * The conversation id is new on every page load, so without this a returning
- * visitor is an unrelated row and their earlier questions are invisible. This
- * is not an identity: clearing site data, using a private window or opening
- * the site on another device all start a new one, and it is never linked to a
- * name or an email by the site.
- */
-function loadVisitorId(): string {
-  const KEY = "lyra-visitor";
+/** The saved-chat id for this browser, or null if they never opted in. */
+function readVisitorId(): string | null {
   try {
-    const saved = localStorage.getItem(KEY);
-    if (saved) return saved;
-    const id = randomId();
-    localStorage.setItem(KEY, id);
-    return id;
+    return localStorage.getItem("lyra-visitor");
   } catch {
-    return randomId(); // storage blocked — this visit simply stands alone
+    return null;
   }
 }
 
-/* The first thing anyone reads here. It was written as a description of the
-   assistant — what it is, what it knows, what it does when it fails — which
-   reads like a bot introducing its feature set. Someone opening a chat wants
-   to be greeted and helped, so this does that and gets out of the way. The
-   disclosure that this is an AI lives in the header, where it belongs,
-   rather than in the first sentence a person hears. */
+/** Remember the id so this browser's chat can be resumed next time. */
+function rememberVisitorId(id: string): void {
+  try {
+    localStorage.setItem("lyra-visitor", id);
+  } catch {
+    /* storage blocked: they can still chat, the session just will not resume */
+  }
+}
+
 const OPENING =
   "Hi, I’m Lyra. Happy to help. Tell me what you’re working on, or ask anything about working with us. If I can’t answer something, I’ll point you to someone who can.";
 
@@ -87,6 +77,11 @@ export function ChatWidget() {
   const [error, setError] = useState<string | null>(null);
   const [teaser, setTeaser] = useState(false);
   const [teaserHeld, setTeaserHeld] = useState(false);
+  // "unset" until the visitor chooses. Only "saved" keeps a visitor id and
+  // their details; "once" leaves the conversation linked to nobody.
+  const [consent, setConsent] = useState<"unset" | "once" | "saved">("unset");
+  const [asking, setAsking] = useState(false);
+  const [details, setDetails] = useState({ name: "", email: "" });
 
   /** Fire the nudge, once, and record that it has been seen this session. */
   const showTeaser = () => {
@@ -113,6 +108,23 @@ export function ChatWidget() {
   useEffect(() => {
     if (open) inputRef.current?.focus();
   }, [open]);
+
+  // A browser that saved a chat before resumes it without asking again. The
+  // fetch is best-effort: failing to restore a previous chat is not an error.
+  useEffect(() => {
+    const id = readVisitorId();
+    if (!id) return;
+    visitorRef.current = id;
+    setConsent("saved");
+    fetch(`/api/chat/history?visitorId=${encodeURIComponent(id)}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data?.messages) && data.messages.length) {
+          setMessages(data.messages);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -171,6 +183,10 @@ export function ChatWidget() {
     return () => window.clearTimeout(t);
   }, [teaser, teaserHeld]);
 
+  const canSave =
+    details.name.trim().length >= 2 &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(details.email.trim());
+
   async function send() {
     const text = input.trim();
     if (!text || busy) return;
@@ -198,7 +214,14 @@ export function ChatWidget() {
         body: JSON.stringify({
           messages: next,
           sessionId: (sessionRef.current ??= randomId()),
-          visitorId: (visitorRef.current ??= loadVisitorId()),
+          ...(consent === "saved" && visitorRef.current
+            ? {
+                visitorId: visitorRef.current,
+                ...(details.name.trim() && details.email.trim()
+                  ? { visitor: { name: details.name, email: details.email } }
+                  : {}),
+              }
+            : {}),
         }),
       });
 
@@ -325,12 +348,112 @@ export function ChatWidget() {
           </header>
 
           <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4" aria-live="polite">
-            <p
-              style={{ color: "var(--text-muted)", fontFamily: "var(--font-inter)" }}
-              className="text-sm leading-relaxed"
-            >
-              {OPENING}
-            </p>
+            {consent === "unset" && (
+              <div className="flex flex-col gap-3">
+                <p
+                  style={{ color: "var(--text-primary)", fontFamily: "var(--font-inter)" }}
+                  className="text-sm font-medium"
+                >
+                  Shall we save this conversation?
+                </p>
+                <p
+                  style={{ color: "var(--text-muted)", fontFamily: "var(--font-inter)" }}
+                  className="text-sm leading-relaxed"
+                >
+                  Saved chats can be picked up again next time, by you or by us.
+                  A one-off chat is not linked to anything.
+                </p>
+
+                {asking ? (
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      const id = randomId();
+                      rememberVisitorId(id);
+                      visitorRef.current = id;
+                      setConsent("saved");
+                    }}
+                    className="flex flex-col gap-2"
+                  >
+                    <input
+                      value={details.name}
+                      onChange={(e) => setDetails((d) => ({ ...d, name: e.target.value }))}
+                      placeholder="Your name"
+                      aria-label="Your name"
+                      maxLength={80}
+                      style={{
+                        backgroundColor: "var(--bg-page)",
+                        borderColor: "var(--border-subtle)",
+                        color: "var(--text-primary)",
+                        fontFamily: "var(--font-inter)",
+                      }}
+                      className="border px-3 py-2 text-sm outline-none focus:border-[var(--accent-green)]"
+                    />
+                    <input
+                      value={details.email}
+                      onChange={(e) => setDetails((d) => ({ ...d, email: e.target.value }))}
+                      placeholder="Email address"
+                      aria-label="Email address"
+                      type="email"
+                      maxLength={200}
+                      style={{
+                        backgroundColor: "var(--bg-page)",
+                        borderColor: "var(--border-subtle)",
+                        color: "var(--text-primary)",
+                        fontFamily: "var(--font-inter)",
+                      }}
+                      className="border px-3 py-2 text-sm outline-none focus:border-[var(--accent-green)]"
+                    />
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="submit"
+                        disabled={!canSave}
+                        style={{ backgroundColor: "var(--accent-green)", color: "var(--bg-page)" }}
+                        className="px-3 py-2 text-sm font-semibold transition-opacity disabled:opacity-40"
+                      >
+                        Save and start
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setAsking(false)}
+                        style={{ color: "var(--text-muted)" }}
+                        className="px-2 py-2 text-sm"
+                      >
+                        Back
+                      </button>
+                    </div>
+                  </form>
+                ) : (
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setAsking(true)}
+                      style={{ backgroundColor: "var(--accent-green)", color: "var(--bg-page)" }}
+                      className="px-3 py-2 text-sm font-semibold"
+                    >
+                      Save for later
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setConsent("once")}
+                      style={{ borderColor: "var(--border-subtle)", color: "var(--text-secondary)" }}
+                      className="border px-3 py-2 text-sm"
+                    >
+                      Just this once
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {consent !== "unset" && (
+              <p
+                style={{ color: "var(--text-muted)", fontFamily: "var(--font-inter)" }}
+                className="text-sm leading-relaxed"
+              >
+                {OPENING}
+              </p>
+            )}
 
             {messages.map((m, i) => (
               <div key={i} className={`mt-4 flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
@@ -357,6 +480,7 @@ export function ChatWidget() {
             )}
           </div>
 
+          {consent !== "unset" && (
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -392,6 +516,7 @@ export function ChatWidget() {
               Send
             </button>
           </form>
+          )}
         </section>
       )}
     </>
