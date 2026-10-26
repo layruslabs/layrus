@@ -1,26 +1,468 @@
 @import "tailwindcss";
 
+/* ─── Brand palette ──────────────────────────────────────────────────────────
+   Straight from docs/images/color_palette.png. Everything else in the theme
+   is derived from these five.                                                  */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --forest-green:    #0F6B43;
+  --warm-beige:      #D9D6C9;
+  --dark-cocoa:      #4A2E1F;
+  --burnt-clay:      #8B3A0E;
+  --warm-terracotta: #B46E3A;
+
+  /* ── Light theme ───────────────────────────────────────────────────────── */
+  --bg-page:          #D9D6C9;   /* warm beige */
+  --bg-surface:       #E2DFD4;   /* card, one step up */
+  --bg-raised:        #ECE9E1;   /* panel / mockup, top step */
+  --bg-invert:        #0B3D28;   /* deep green band */
+  --bg-invert-deep:   #082E1E;
+
+  --text-primary:     #221A12;
+  --text-secondary:   #3E4B43;
+  --text-muted:       #6D7A72;
+  --text-on-invert:   #EFEBDF;
+  --text-on-invert-muted: rgba(239, 235, 223, 0.62);
+  --text-on-invert-faint: rgba(239, 235, 223, 0.32);
+
+  --accent-green:      #0F6B43;
+  --accent-terracotta: #B46E3A;
+  --accent-clay:       #8B3A0E;
+  --accent-cocoa:      #4A2E1F;
+
+  --border:        #C3BFAF;
+  --border-card:   #0F6B43;                 /* outlined cards are green */
+  --border-subtle: rgba(15, 107, 67, 0.30);
+  --rule:          rgba(34, 26, 18, 0.16);
+
+  /* the three hero stats, each in a different brand colour */
+  --stat-1: var(--forest-green);
+  --stat-2: var(--dark-cocoa);
+  --stat-3: var(--warm-terracotta);
+
+  /* accents for the deep-green bands: the brand hues lifted enough to read
+     against green, in both themes (the band is green either way) */
+  --on-invert-1: #7FC9A6;
+  --on-invert-2: #DDA771;
+  --on-invert-3: #C9814F;
+
+  --nav-bg:      rgba(217, 214, 201, 0.92);
+  --nav-border:  rgba(34, 26, 18, 0.12);
+  --nav-active:  #B46E3A;
+
+  --btn-primary-bg:    #0F6B43;
+  --btn-primary-fg:    #FFFFFF;
+  --btn-primary-hover: #0B5636;
+  --btn-ghost-border:  rgba(34, 26, 18, 0.30);
+
+  --focus: #B46E3A;
 }
 
+/* ─── Dark theme ─────────────────────────────────────────────────────────────
+   Warm cocoa-black rather than neutral grey, per the dark design.             */
+[data-theme="dark"] {
+  --bg-page:          #17110B;
+  --bg-surface:       #201811;
+  --bg-raised:        #2A2118;
+  --bg-invert:        #0B3D28;
+  --bg-invert-deep:   #082E1E;
+
+  --text-primary:     #F1ECE1;
+  --text-secondary:   #C2BBAD;
+  --text-muted:       #8A8275;
+  --text-on-invert:   #EFEBDF;
+  --text-on-invert-muted: rgba(239, 235, 223, 0.62);
+  --text-on-invert-faint: rgba(239, 235, 223, 0.32);
+
+  --accent-green:      #3E9E70;
+  --accent-terracotta: #C8834E;
+  --accent-clay:       #A8521F;
+  --accent-cocoa:      #4A2E1F;
+
+  --border:        #342A1E;
+  --border-card:   #7A4E28;
+  --border-subtle: rgba(200, 131, 78, 0.32);
+  --rule:          rgba(241, 236, 225, 0.14);
+
+  /* on cocoa-black the deep cocoa stat would vanish, so it lifts to a tan */
+  --stat-1: #3E9E70;
+  --stat-2: #D8C3A5;
+  --stat-3: #C8834E;
+
+  --nav-bg:      rgba(23, 17, 11, 0.92);
+  --nav-border:  rgba(241, 236, 225, 0.10);
+  --nav-active:  #C8834E;
+
+  --btn-primary-bg:    #B46E3A;
+  --btn-primary-fg:    #FFFFFF;
+  --btn-primary-hover: #9A5C2E;
+  --btn-ghost-border:  rgba(241, 236, 225, 0.28);
+
+  --focus: #C8834E;
+}
+
+/* ─── Tailwind v4 theme tokens ──────────────────────────────────────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg-page:        var(--bg-page);
+  --color-bg-surface:     var(--bg-surface);
+  --color-bg-raised:      var(--bg-raised);
+  --color-bg-invert:      var(--bg-invert);
+  --color-text-primary:   var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted:     var(--text-muted);
+  --color-text-on-invert: var(--text-on-invert);
+  --color-accent-green:   var(--accent-green);
+  --color-accent-orange:  var(--accent-terracotta);
+  --color-accent-rust:    var(--accent-clay);
+  --color-border:         var(--border);
+  --color-border-card:    var(--border-card);
+  --color-nav-bg:         var(--nav-bg);
+  --color-nav-border:     var(--nav-border);
+
+  --font-serif: var(--font-playfair);
+  --font-sans:  var(--font-inter);
+  --font-brand: var(--font-layrus);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Base ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* The brand is square-cornered throughout: every surface, button and image is
+   a right angle. The circular icon badges are the single exception.
+   These live in the base layer so Tailwind utilities can still override. */
+@layer base {
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-secondary);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), ui-serif, Georgia, serif;
+  color: var(--text-primary);
+  line-height: 1.12;
+}
+
+::selection {
+  background: var(--accent-terracotta);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+} /* @layer base */
+
+/* ─── Components ────────────────────────────────────────────────────────────
+   Everything below sits in the components layer, which Tailwind's utilities
+   override — otherwise `.btn-primary { display:inline-flex }` would beat the
+   `hidden` utility and break responsive hiding. */
+@layer components {
+
+/* Type helpers */
+/* Section eyebrow: "// ENGINEERING TECHNOLOGY" — terracotta in both themes. */
+.section-label {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-terracotta);
+}
+.section-label::before {
+  content: "// ";
+  opacity: 0.6;
+}
+
+/* Small caps eyebrow without the slashes (card categories, tags). */
+.eyebrow {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ─── Buttons — square corners, per the logotype ────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
+  font-family: var(--font-inter), sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--btn-primary-bg);
+  border-radius: 0;
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background-color: var(--btn-primary-hover);
+  border-color: var(--btn-primary-hover);
+}
+
+/* Outlined button — the "Request a proposal" / "Explore our services" shape. */
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-inter), sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--btn-ghost-border);
+  border-radius: 0;
+  text-decoration: none;
+  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.btn-outline:hover {
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+}
+
+/* Inline text link with underline + arrow. */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-inter), sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.25rem 0;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+.btn-ghost:hover { color: var(--accent-terracotta); }
+
+/* ─── Surfaces ──────────────────────────────────────────────────────────── */
+/* Outlined card: transparent fill, hairline brand border. */
+.card {
+  background-color: transparent;
+  border: 1px solid var(--border-card);
+  border-radius: 0;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--rule);
+}
+
+/* The short accent rule that sits under card footers. */
+.accent-rule {
+  height: 3px;
+  width: 2rem;
+  transition: width 0.25s ease;
+}
+.group:hover .accent-rule { width: 3.5rem; }
+
+/* Circular icon badge (the one rounded thing in the system). */
+.icon-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: var(--bg-invert);
+  color: var(--text-on-invert);
+  flex-shrink: 0;
+}
+
+.nav-scrolled {
+  border-bottom-color: var(--nav-border) !important;
+  box-shadow: 0 1px 0 0 var(--nav-border);
+}
+
+/* Image wrapper for cards that zoom slightly on hover. */
+.media {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-surface);
+}
+.media img {
+  transition: transform 0.5s ease;
+}
+.group:hover .media img { transform: scale(1.04); }
+
+/* Client names crossing the trust band. Two identical groups sit in a row and
+   the track slides by exactly half its width, so the loop has no seam. Each
+   item carries its own trailing margin rather than the groups carrying a gap:
+   with a gap between them, half the track would not be a whole group and the
+   join would show as a stutter once per cycle. */
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 46s linear infinite;
+}
+.marquee-group {
+  display: flex;
+  align-items: center;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+/* The assistant's nudge, unfolding out of the launcher it belongs to. Motion
+   only — under reduced motion it still appears, it just arrives rather than
+   sliding. Suppressing the message because the animation is unwanted would be
+   solving the wrong problem. */
+.lyra-nudge {
+  animation: lyra-nudge-in 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes lyra-nudge-in {
+  from { opacity: 0; transform: translateX(10px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lyra-nudge { animation: none; }
+}
+
+/* Portraits drifting, so the people on the about page are not stills. Small
+   enough to read as presence rather than animation, offset per person in the
+   component so a row never moves in unison. */
+.portrait-drift {
+  animation: portrait-drift 26s ease-in-out infinite alternate;
+}
+@keyframes portrait-drift {
+  from { transform: scale(1.07) translate3d(-1.5%, -1%, 0); }
+  to   { transform: scale(1.07) translate3d(1.5%, 1%, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portrait-drift { animation: none; transform: scale(1.02); }
+}
+
+/* A backdrop photo drifting on one of the inverted bands.
+   Blurred on purpose: a recognisable photo behind type competes with it, so
+   this reads as depth rather than as something to look at. The image is
+   oversized so neither the blur nor the travel ever uncovers an edge — the
+   movement stays well inside the crop margin at every point of the cycle. */
+.photo-drift {
+  filter: blur(6px);
+  animation: photo-drift 36s ease-in-out infinite alternate;
+}
+@keyframes photo-drift {
+  from { transform: scale(1.14) translate3d(-2.5%, -1%, 0); }
+  to   { transform: scale(1.14) translate3d(2.5%, 1%, 0); }
+}
+
+/* ─── Architecture diagram: a signal travelling through the system ─────────
+   The signal visits one node at a time. A node lights, the connector out of
+   it carries a pulse, the node that pulse lands on lights, and so on. It is a
+   queue, not a flash — a row of three boxes lights three times, not once.
+
+   So the phase cannot key off the stage (`--arch-depth`): every box in a row
+   shares a stage, and they all light together. It keys off `--arch-slot`, the
+   node's position in the traversal order, which the component computes. A
+   connector takes the slot *before* its destination, so it fires in the gap
+   between the two boxes it joins, and a row traversed right to left staggers
+   the same way without any extra work.
+
+   `--arch-slots` must stay at or above the largest diagram's node count, or
+   the sweep wraps into itself. */
+.arch-diagram {
+  --arch-slots: 7;
+  --arch-cycle: 7s;
+  --arch-step: calc(var(--arch-cycle) / var(--arch-slots));
+  --arch-lit: var(--accent-green);
+}
+
+.arch-node {
+  --arch-dim: var(--border-subtle);
+  stroke: var(--arch-dim);
+  stroke-width: 1;
+  animation: arch-lit var(--arch-cycle) linear infinite;
+  animation-delay: calc(var(--arch-slot) * var(--arch-step));
+}
+
+/* the full-width band keeps its heavier resting outline */
+.arch-band { --arch-dim: var(--border-card); }
+
+/* Bright for the first third of the slot, dim well before the next begins —
+   that gap before the next slot is what keeps it one at a time. */
+@keyframes arch-lit {
+  0%, 5%    { stroke: var(--arch-lit); stroke-width: 2.2; }
+  12%, 100% { stroke: var(--arch-dim); stroke-width: 1; }
+}
+
+.arch-pulse {
+  stroke-dasharray: 14 100;
+  opacity: 0;
+  animation: arch-travel var(--arch-cycle) linear infinite;
+  animation-delay: calc(var(--arch-slot) * var(--arch-step));
+}
+
+/* Connectors carry pathLength=100, so the dash enters at 14 and leaves at
+   -100 whatever the line's real length — those two are the only offsets that
+   put it just off one end or the other. Anything smaller parks it on the
+   line, where it fades in and out mid-connector instead of arriving. */
+@keyframes arch-travel {
+  0%        { stroke-dashoffset: 14; opacity: 0; }
+  2%        { opacity: 1; }
+  12%       { stroke-dashoffset: -100; opacity: 1; }
+  13%, 100% { stroke-dashoffset: -100; opacity: 0; }
+}
+
+/* The motion is decoration; the diagram reads fine without it. */
+@media (prefers-reduced-motion: reduce) {
+  .arch-node { animation: none; stroke: var(--arch-dim); }
+  .arch-pulse { display: none; }
+  .photo-drift { animation: none; transform: scale(1.14); }
+  /* No travel: drop the duplicate and let the names wrap instead of sliding
+     past a window too narrow to hold them. */
+  .marquee { mask-image: none; }
+  .marquee-track { animation: none; width: auto; }
+  .marquee-group { flex-wrap: wrap; row-gap: 0.75rem; }
+  .marquee-group + .marquee-group { display: none; }
+}
+
+} /* @layer components */
+
+/* ─── Buttons on inverted (deep green) surfaces ─────────────────────────── */
+/* The light theme's green CTA disappears against the green band, so any
+   button sitting on an inverted surface uses the terracotta instead. */
+.btn-invert {
+  background-color: var(--warm-terracotta);
+  border-color: var(--warm-terracotta);
+  color: #FFFFFF;
+}
+.btn-invert:hover {
+  background-color: #9A5C2E;
+  border-color: #9A5C2E;
+}
+.btn-outline-invert {
+  background: transparent;
+  border-color: rgba(239, 235, 223, 0.34);
+  color: var(--text-on-invert);
+}
+.btn-outline-invert:hover {
+  border-color: var(--warm-terracotta);
+  color: var(--warm-terracotta);
 }

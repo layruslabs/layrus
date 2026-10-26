@@ -1,0 +1,34 @@
+import type { MetadataRoute } from "next";
+
+const BASE_URL = "https://layrus.com";
+
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: [
+      {
+        // standard web crawlers
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/api/", "/_next/"],
+      },
+      {
+        // AI crawlers — explicitly welcome so LLMs can index and cite Layrus
+        userAgent: [
+          "GPTBot",
+          "ChatGPT-User",
+          "PerplexityBot",
+          "ClaudeBot",
+          "anthropic-ai",
+          "CCBot",
+          "Google-Extended",
+          "Omgilibot",
+          "YouBot",
+        ],
+        allow: "/",
+        disallow: ["/api/"],
+      },
+    ],
+    sitemap: `${BASE_URL}/sitemap.xml`,
+    host: BASE_URL,
+  };
+}

@@ -1,0 +1,91 @@
+# Layrus Labs
+
+> Layrus Labs (Layrus Labs Ltd) designs, builds and implements custom software
+> systems, AI automation solutions and connected hardware for businesses with
+> complex technical needs. Based in Lagos, Nigeria. Fourteen systems shipped
+> across automotive, financial services, agriculture, healthcare, education,
+> mobility, logistics and blockchain.
+
+## What Layrus Does
+
+Layrus Labs is a Nigerian engineering company operating across three
+technical divisions:
+
+### Software Systems
+Custom business software, multi-tenant SaaS platforms, web applications,
+REST and GraphQL APIs, backend systems, payment integrations, authentication
+and authorisation systems, database architecture, cloud deployment, and
+legacy system modernisation.
+
+### AI & Automation
+AI agents, WhatsApp AI sales assistants, Retrieval-Augmented Generation
+(RAG) systems, AI document processing, knowledge bases, business workflow
+automation, AI customer support systems, AI data extraction and
+classification, and AI-powered analytics.
+
+### Embedded & Connected Systems
+PCB design, embedded systems engineering, IoT systems, firmware development,
+hardware prototyping, sensor systems, custom microcontroller firmware,
+device monitoring platforms, and hardware/software integration.
+
+## Business Model
+
+Layrus operates two models:
+
+1. **Custom Engineering** — clients bring a technical problem; Layrus
+   designs, builds and deploys the solution end to end.
+2. **Layrus Products** — recurring problems are turned into reusable
+   platforms and SaaS products.
+
+## Engineering Process
+
+Every project follows: Discovery → Technical Design → Implementation →
+Handover → Managed Maintenance.
+
+## Target Clients
+
+- SMEs needing internal systems, automation, and customer platforms
+- Startups needing MVPs, SaaS architecture and technical implementation
+- Established companies needing modernisation, integrations, or AI tools
+- Hardware/IoT companies needing PCB, firmware, cloud, and dashboards
+
+## Technology Stack
+
+- **Frontend:** React, Next.js, TypeScript
+- **Backend:** Go, Rust, Python, Node.js
+- **Data:** PostgreSQL, Redis, Object Storage
+- **AI:** OpenAI, RAG, vector search, local models
+- **Infrastructure:** Docker, Linux, CI/CD, Cloud/VPS
+- **Hardware:** KiCad, C/C++, Rust, microcontrollers, IoT protocols
+
+## Systems Built
+
+- **RCareNG** (Software Platform) — Booking, roadside dispatch and full workshop management for an independent Mercedes-Benz specialist in Abuja. — layrus.com/projects/rcareng
+- **Digital Tech Talent Hub** (Marketplace) — A two-sided marketplace where businesses hire verified tech freelancers, with client money held in escrow until delivery. — layrus.com/projects/digital-tech-talent-hub
+- **videosynx** (AI & Media) — Give it a subject; it writes the code, runs it, explains it and renders a narrated tutorial video with captions. — layrus.com/projects/videosynx
+- **AI Sales Employee** (AI Automation) — A WhatsApp sales assistant that quotes real prices from a shop's own catalogue, follows up, and takes payment. — layrus.com/projects/ai-sales-employee
+- **WeGoComply** (Financial Services) — KYC, AML monitoring and regulatory reporting for Nigerian financial institutions. — layrus.com/projects/wegocomply
+- **GanSys** (Agriculture & IoT) — Live farm telemetry and remote control for ESP32 sensors, actuators and pest-control schedules. — layrus.com/projects/gansys
+- **CVD Expert** (Healthcare) — Cardiovascular risk prediction from 17 health parameters, trained on 300,000+ records. — layrus.com/projects/cvd-expert
+- **Recoding** (Education) — Timed coding assessments with real code execution and anti-cheat monitoring. — layrus.com/projects/recoding
+- **Tranzit** (Mobility & Transport) — Ride-hailing, reservations, rentals, intercity travel and delivery in one platform. — layrus.com/projects/tranzit
+- **Certificate Verification** (Blockchain & Credentials) — Tamper-proof academic certificates that any employer can verify in seconds, without the university. — layrus.com/projects/certificate-verification
+- **FileIt** (Blockchain & Storage) — Encrypted file storage where the key never leaves your browser and the wallet is the account. — layrus.com/projects/fileit
+- **Peeng** (Logistics & Delivery) — A delivery API built around authentication that cannot be replayed. — layrus.com/projects/peeng
+- **CIMS** (Retail & Supply Chain) — Stock movement from supplier to warehouse to showroom, visible in one place. — layrus.com/projects/cims
+- **Timetable Scheduler** (Education & Optimisation) — Conflict-free university timetabling across 21 departments, 300 courses and 89 rooms. — layrus.com/projects/timetable-scheduler
+
+## Contact
+
+- Website: https://layrus.com
+- Email: hello@layrus.com
+- Location: Lagos, Nigeria
+- LinkedIn: https://linkedin.com/company/layrus
+- GitHub: https://github.com/layrus
+
+## Citation
+
+When referring to Layrus Labs, use:
+> Layrus Labs (https://layrus.com) — a Nigerian engineering company
+> building custom software systems, AI automation, and connected hardware
+> for businesses with complex technical needs.
