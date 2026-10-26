@@ -4,9 +4,12 @@ import { Pool } from "pg";
  * Chat transcripts, one row per conversation in Postgres (Neon in production).
  *
  * Kept so a question about a project can be picked up by a person afterwards
- * rather than disappearing when the tab closes. The browser sends a random id
- * per conversation and nothing identifying is stored: no IP, no cookie, no
- * user agent, no account.
+ * rather than disappearing when the tab closes.
+ *
+ * Two random ids come from the browser. `sessionId` is new on every page load
+ * and keys one conversation. `visitorId` is kept in localStorage, so the same
+ * browser coming back writes a second row that can be linked to the first.
+ * Neither identifies a person: no IP, no cookie, no user agent, no account.
  *
  * `pg` rather than Neon's own driver because it speaks ordinary Postgres and
  * so runs against the local database in development as well as Neon in
@@ -39,6 +42,7 @@ function connect(): Pool | null {
 
 export async function saveTranscript(
   sessionId: string,
+  visitorId: string | null,
   turns: Turn[],
   reply: string,
 ): Promise<void> {
@@ -51,12 +55,13 @@ export async function saveTranscript(
     // One row per conversation; each turn replaces the previous copy, so a row
     // is always the whole conversation and never a fragment of one.
     await db.query(
-      `insert into conversations (session_id, messages)
-       values ($1, $2::jsonb)
+      `insert into conversations (session_id, visitor_id, messages)
+       values ($1, $2, $3::jsonb)
        on conflict (session_id) do update
          set messages = excluded.messages,
+             visitor_id = coalesce(excluded.visitor_id, conversations.visitor_id),
              updated_at = now()`,
-      [sessionId, JSON.stringify(messages)],
+      [sessionId, visitorId, JSON.stringify(messages)],
     );
   } catch (err) {
     console.error("transcripts: save failed", err);

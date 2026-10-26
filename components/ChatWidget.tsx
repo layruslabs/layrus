@@ -6,11 +6,33 @@ type Msg = { role: "user" | "assistant"; content: string };
 
 /** A random id per conversation, so the server can group its turns into one
  *  row. Not a cookie and not tied to a person: a new one on every page load. */
-function newSessionId(): string {
+function randomId(): string {
   return (
     globalThis.crypto?.randomUUID?.() ??
     `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`
   );
+}
+
+/**
+ * A stable id for this browser, kept in localStorage.
+ *
+ * The conversation id is new on every page load, so without this a returning
+ * visitor is an unrelated row and their earlier questions are invisible. This
+ * is not an identity: clearing site data, using a private window or opening
+ * the site on another device all start a new one, and it is never linked to a
+ * name or an email by the site.
+ */
+function loadVisitorId(): string {
+  const KEY = "lyra-visitor";
+  try {
+    const saved = localStorage.getItem(KEY);
+    if (saved) return saved;
+    const id = randomId();
+    localStorage.setItem(KEY, id);
+    return id;
+  } catch {
+    return randomId(); // storage blocked — this visit simply stands alone
+  }
 }
 
 /* The first thing anyone reads here. It was written as a description of the
@@ -76,7 +98,8 @@ export function ChatWidget() {
     setTeaser(true);
   };
 
-  const sessionRef = useRef<string | null>(null);
+  const sessionRef = useRef<string | null>(null); // one per page load
+  const visitorRef = useRef<string | null>(null); // one per browser
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const launcherRef = useRef<HTMLButtonElement>(null);
@@ -174,7 +197,8 @@ export function ChatWidget() {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
           messages: next,
-          sessionId: (sessionRef.current ??= newSessionId()),
+          sessionId: (sessionRef.current ??= randomId()),
+          visitorId: (visitorRef.current ??= loadVisitorId()),
         }),
       });
 

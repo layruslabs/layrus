@@ -45,10 +45,13 @@ export default function PrivacyPage() {
         </p>
         <p>
           We keep a copy of each conversation in our own database, so that a
-          question about a project can be picked up by a person afterwards. It
-          is stored against a random identifier generated in your browser, with
-          no IP address, cookie or account attached to it. Ask us to delete it
-          and we will.
+          question about a project can be picked up by a person afterwards. Two
+          random identifiers are involved: one for the conversation, made fresh
+          each time you load the page, and one kept in your browser&rsquo;s local
+          storage so that if you come back we can tell the earlier conversations
+          came from the same browser. Neither is linked to your name, your IP
+          address or an account, and clearing your browser&rsquo;s site data
+          removes the second. Ask us to delete what we hold and we will.
         </p>
         <p>
           Please do not type anything into it that you would not put in an

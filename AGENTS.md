@@ -379,7 +379,10 @@ code) or Upstash (shared state) is the upgrade.
 **Transcripts are stored in Postgres, after the response.** Each finished
 conversation is written to a `conversations` row keyed by a random id the
 browser generates, so a question about a project can be followed up by a
-person. Nothing identifying is kept: no IP, no cookie, no account. The write
+person. A second id, kept in localStorage, is stable across visits so rows
+from the same browser can be linked; the conversation id is per page load, so
+a returning visitor writes a new row rather than overwriting the last one.
+Nothing identifying is kept: no IP, no cookie, no account. The write
 runs in `after()`, so it cannot delay or fail a reply, and every error in
 `lib/transcripts.ts` is swallowed on purpose. Without `DATABASE_URL` nothing
 is stored and the chat behaves exactly as before, which is how development

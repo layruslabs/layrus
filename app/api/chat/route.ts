@@ -86,7 +86,8 @@ export async function POST(req: Request) {
     );
   }
 
-  let payload: { messages?: unknown; sessionId?: unknown } | null = null;
+  let payload: { messages?: unknown; sessionId?: unknown; visitorId?: unknown } | null =
+    null;
   try {
     payload = await req.json();
   } catch {
@@ -100,11 +101,12 @@ export async function POST(req: Request) {
   // A random id the browser makes per conversation. Used only to group turns
   // of one chat into one row; it identifies nobody. Anything that is not the
   // expected shape means the transcript is skipped, not that the chat fails.
-  const sessionId =
-    typeof payload?.sessionId === "string" &&
-    /^[A-Za-z0-9_-]{8,64}$/.test(payload.sessionId)
-      ? payload.sessionId
-      : null;
+  const id = (value: unknown) =>
+    typeof value === "string" && /^[A-Za-z0-9_-]{8,64}$/.test(value) ? value : null;
+
+  const sessionId = id(payload?.sessionId);
+  // Stable across visits on one browser, so returning conversations link up.
+  const visitorId = id(payload?.visitorId);
 
   // The full reply only exists once the stream ends, and the response must not
   // wait on a database write. `after` runs when the response is finished; the
@@ -115,7 +117,7 @@ export async function POST(req: Request) {
   const conversation = turns;
   after(async () => {
     await finished;
-    if (sessionId) await saveTranscript(sessionId, conversation, reply);
+    if (sessionId) await saveTranscript(sessionId, visitorId, conversation, reply);
   });
 
   const stream = anthropic().beta.messages.stream({
