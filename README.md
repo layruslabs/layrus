@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# layrus.com
 
-## Getting Started
+The website for **Layrus Labs Ltd**, an engineering company in Lagos, Nigeria —
+custom software, AI automation and connected hardware.
 
-First, run the development server:
+Next.js 16 (App Router), React 19, Tailwind v4. Fully static apart from one API
+route, so it deploys anywhere and costs almost nothing to run.
+
+## Running it
+
+The repo uses **pnpm** — `pnpm-lock.yaml` is the lockfile.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev          # http://localhost:3000
+pnpm build && pnpm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Node 20.9 or newer.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.env.example` to `.env.local`. Nothing is required to build or serve the
+site — only the assistant reads these, and without a key it answers 503 with a
+message rather than failing obscurely.
 
-## Learn More
+```bash
+# Anthropic directly
+ANTHROPIC_API_KEY=sk-ant-...
 
-To learn more about Next.js, take a look at the following resources:
+# …or DeepSeek, which serves an Anthropic-compatible endpoint. The model name
+# still says claude-opus-5-5: DeepSeek maps claude-opus* to deepseek-v4-pro.
+ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic
+ANTHROPIC_API_KEY=<your deepseek key>
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`LYRA_MODEL` overrides the model if you ever need to pin one.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Layout
 
-## Deploy on Vercel
+```
+app/            routes — one page.tsx per URL
+  api/chat/     Lyra's streaming endpoint (the only server code)
+components/     Navbar, Footer, diagrams, the assistant, page sections
+lib/
+  services.ts   the six services — drives pages, cards, sitemap, llms.txt
+  projects.ts   the fourteen shipped systems
+  team.ts       the people
+  seo.ts        structured data (JSON-LD) for every entity
+  assistant.ts  Lyra's system prompt, built from the lists above
+public/         logos, project screenshots, team photos, llms.txt
+docs/           google-business.md — the off-platform setup steps
+AGENTS.md       deep notes: conventions, traps, and why things are the way they are
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Data drives the site.** Services, projects and team each exist once, in
+`lib/`, and the pages, the sitemap, `llms.txt` and the assistant's prompt all
+read from those same files. Renaming a service means editing one line, not
+seven.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## SEO and GEO
+
+| Surface | Where |
+|---|---|
+| Per-page metadata + canonicals | each `page.tsx` |
+| Structured data (JSON-LD) | `lib/seo.ts`, emitted via `<JsonLd>` |
+| Sitemap — 29 URLs, generated | `app/sitemap.ts` |
+| robots.txt — AI crawlers explicitly welcome | `app/robots.ts` |
+| `llms.txt` — plain-text brief for LLMs | `public/llms.txt` |
+| Social card, 1200×630 | `public/og-image.png` |
+
+The sitemap is generated from `lib/services.ts` and `lib/projects.ts`, so a new
+service or project cannot be published without appearing in it. Pages are added
+to the static list in `app/sitemap.ts`.
+
+**Still to do off-platform**, because neither can be done from this repo:
+
+1. **Submit the sitemap** to Google Search Console and Bing Webmaster Tools
+   (`https://layrus.com/sitemap.xml`). Verification needs DNS or a file upload
+   through your account.
+2. **Create the Google Business Profile** — see `docs/google-business.md`. It
+   needs a real street address and phone number, neither of which the site
+   currently states.
+
+## The assistant
+
+`components/ChatWidget.tsx` posts to `app/api/chat/route.ts`, which streams from
+Claude. The system prompt is assembled from the service and project data, so it
+cannot describe the company differently from the pages it is talking about.
+
+Two things in that route are load-bearing and explained in comments: the first
+delta is pulled before the response is committed (so an auth failure becomes a
+status code rather than a dead connection), and thinking deltas are dropped
+deliberately. Rate limiting is per-instance and best-effort — the real ceiling
+is the spend limit on your API account.
+
+## Known gaps
+
+- **The enquiry form does nothing.** `components/sections/StartProject.tsx` has
+  no `action` and no handler — the primary call to action submits nowhere.
+- **Compliance claims are unverified.** The ten registrations on the site need
+  confirming before launch; an inaccurate claim is a real liability.
+- **Testimonials are invented** — three quotes attributed to named people.
+  Replace with real ones or remove.
+- **Governance details are placeholders.** `/privacy` and `/terms` describe what
+  the site actually does, but neither has been reviewed by a lawyer.
+- **Lagos or Abuja is unresolved.** The site says Lagos; the founder's CV and
+  personal site say Abuja. This must be settled before the Google listing.
+
+## Deploying
+
+Vercel: import the repository, set the environment variables above, deploy. All
+routes prerender; the chat endpoint runs as a serverless function.
