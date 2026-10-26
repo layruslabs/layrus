@@ -284,29 +284,6 @@ export const PROJECTS: Project[] = [
   },
 
   // ── Mobility ─────────────────────────────────────────────────────────────
-  {
-    slug: "tranzit",
-    name: "Tranzit",
-    category: "Mobility & Transport",
-    tagline:
-      "Ride-hailing, reservations, rentals, intercity travel and delivery in one platform.",
-    summary:
-      "Urban transport in African cities is unreliable in a specific way: the options exist, but they live in different apps, different phone numbers and different price logics. Tranzit puts rides, reservations, rentals, intercity travel, food and grocery delivery behind one account.",
-    built: [
-      "A multi-service platform with tap-to-book flows, drag-and-drop trip planning and a driver/affiliate onboarding path.",
-      "Raw PostgreSQL through the pg driver rather than an ORM, for control over the queries on the hot path.",
-      "Session-based auth with Next.js App Router, chosen for iteration speed on a product whose shape was still moving.",
-    ],
-    highlights: [
-      {
-        title: "Six products, one identity",
-        body: "A rider who books a car, a rental and a delivery is the same person to the business. Sharing identity and billing across service categories from the start avoids the merge that otherwise arrives in year two.",
-      },
-    ],
-    status: "Live",
-    url: "https://tranzit.cc",
-    accent: "var(--forest-green)",
-  },
 
   // ── Blockchain ───────────────────────────────────────────────────────────
   {
@@ -332,104 +309,12 @@ export const PROJECTS: Project[] = [
     url: "https://certificatechain.vercel.app",
     accent: "var(--accent-green)",
   },
-  {
-    slug: "fileit",
-    name: "FileIt",
-    category: "Blockchain & Storage",
-    tagline:
-      "Encrypted file storage where the key never leaves your browser and the wallet is the account.",
-    summary:
-      "Centralised storage asks you to trust the operator not to look. FileIt removes the question: files are encrypted in the browser with AES-256-GCM before they are uploaded, pinned to IPFS, and registered on Hedera with access roles held in a contract.",
-    built: [
-      "In-browser AES-256-GCM encryption through the Web Crypto API, so plaintext never reaches the network.",
-      "Encryption keys derived deterministically from a wallet signature (keccak256) — no password to reset and no account to breach.",
-      "Ownership and access roles on Hedera through OpenZeppelin-based contracts, with blockchain event monitoring for changes.",
-      "The IPFS pinning token proxied through a Cloudflare Worker, so no API key reaches the front end.",
-    ],
-    highlights: [
-      {
-        title: "Zero-trust is an architecture, not a promise",
-        body: "The server cannot read what it stores, the front end holds no signing key, and the access rules live on-chain. Each of those removes a party that would otherwise have to be trusted.",
-      },
-    ],
-    status: "Live",
-    url: "https://file-it.vercel.app",
-    accent: "var(--burnt-clay)",
-  },
 
   // ── Logistics ────────────────────────────────────────────────────────────
-  {
-    slug: "peeng",
-    name: "Peeng",
-    category: "Logistics & Delivery",
-    tagline:
-      "A delivery API built around authentication that cannot be replayed.",
-    summary:
-      "The delivery backend for a courier product, written in Rust. The interesting part is not the routing — it is that sessions can be revoked instantly, which most JWT implementations quietly cannot do.",
-    built: [
-      "A Rust/Actix-Web 4 API on SeaORM with auto-migrating PostgreSQL.",
-      "Argon2id password hashing, short-lived HS256 access tokens carrying a token version for immediate revocation, and rotating opaque refresh tokens.",
-      "Per-session and global logout, with protected routes enforced by custom Actix extractors.",
-    ],
-    highlights: [
-      {
-        title: "Revocation is the JWT problem",
-        body: "A stateless token is valid until it expires, which is exactly wrong when an account is compromised. A version stamped into the token and checked on every request makes logout instantaneous without giving up statelessness.",
-      },
-    ],
-    status: "Pre-launch",
-    accent: "var(--warm-terracotta)",
-  },
 
   // ── Retail & supply chain ────────────────────────────────────────────────
-  {
-    slug: "cims",
-    name: "CIMS",
-    category: "Retail & Supply Chain",
-    tagline:
-      "Stock movement from supplier to warehouse to showroom, visible in one place.",
-    summary:
-      "A supply-chain inventory system for small and mid-sized businesses that lose visibility the moment goods leave a supplier. Three domain modules — warehouse, manager and showroom — trace the same stock through every handover.",
-    built: [
-      "Laravel and MySQL with Blade templating, chosen for a working product quickly over a more fashionable stack.",
-      "Three domain modules modelling the warehouse, the manager and the showroom as distinct roles over one stock ledger.",
-      "A CI pipeline on GitHub Actions, with a documented contribution guide for an open-source release.",
-    ],
-    highlights: [
-      {
-        title: "The ledger is the source of truth",
-        body: "Stock is not a number you update, it is a history you append to. Modelling it that way is what makes it possible to answer where a discrepancy entered the chain rather than only that one exists.",
-      },
-    ],
-    status: "Live",
-    url: "https://github.com/jvcByte/inventory_management_system",
-    accent: "var(--forest-green)",
-  },
 
   // ── Education & optimisation ─────────────────────────────────────────────
-  {
-    slug: "timetable-scheduler",
-    name: "Timetable Scheduler",
-    category: "Education & Optimisation",
-    tagline:
-      "Conflict-free university timetabling across 21 departments, 300 courses and 89 rooms.",
-    summary:
-      "Building a university timetable by hand takes weeks and still produces clashes. This system solves the same problem as a constraint-satisfaction problem: every lecture placed, no room double-booked, no instructor in two places at once.",
-    built: [
-      "Two solver modes: simulated annealing for a usable schedule in 10–60 seconds, and Google OR-Tools CP-SAT for a provably optimal one when time allows.",
-      "A FastAPI solver service separated from the Next.js application, so a long solve never blocks a request.",
-      "Drag-and-drop manual editing on top of the solver output, because the last 5% of a timetable is always a human judgement call.",
-      "CSV and Excel import, role-based access for admin, faculty and student, and end-to-end tests with Playwright.",
-    ],
-    highlights: [
-      {
-        title: "Fast and provably correct are different products",
-        body: "A registrar wants a schedule before the meeting, not the best schedule after it. Offering both a fast approximation and an optimal solve lets the tool fit the deadline rather than the other way round.",
-      },
-    ],
-    status: "Live",
-    accent: "var(--accent-green)",
-  },
 ];
 
 export const projectBySlug = (slug: string) =>

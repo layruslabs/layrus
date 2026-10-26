@@ -100,7 +100,7 @@ export default function ProjectsPage() {
       <PageHeader
         eyebrow="Shipped & Running"
         title="Systems we've built"
-        intro="Fourteen systems, built end to end across automotive, financial services, agriculture, healthcare, education, mobility, logistics and blockchain. Each entry says whether it is live, in pilot or pre-launch, because a portfolio that rounds everything up to “live” is not much use to anybody."
+        intro="Nine systems, built end to end across automotive, financial services, agriculture, healthcare, education, mobility, logistics and blockchain. Each entry says whether it is live, in pilot or pre-launch, because a portfolio that rounds everything up to “live” is not much use to anybody."
       />
 
       <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-20">

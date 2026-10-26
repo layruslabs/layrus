@@ -1,6 +1,6 @@
 # layrus.com
 
-The website for **Layrus Labs Ltd**, an engineering company in Lagos, Nigeria —
+The website for **Layrus Labs Ltd**, an engineering company in Abuja, Nigeria —
 custom software, AI automation and connected hardware.
 
 Next.js 16 (App Router), React 19, Tailwind v4. Fully static apart from one API
@@ -104,7 +104,7 @@ is the spend limit on your API account.
   Replace with real ones or remove.
 - **Governance details are placeholders.** `/privacy` and `/terms` describe what
   the site actually does, but neither has been reviewed by a lawyer.
-- **Lagos or Abuja is unresolved.** The site says Lagos; the founder's CV and
+- **Abuja or Abuja is unresolved.** The site says Abuja; the founder's CV and
   personal site say Abuja. This must be settled before the Google listing.
 
 ## Deploying

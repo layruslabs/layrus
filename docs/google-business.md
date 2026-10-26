@@ -10,12 +10,12 @@ the two match.
 
 ## The one thing that has to be decided first
 
-**The site says Lagos. Your CV says Abuja.** Google matches a website to a
+**The site says Abuja. Your CV says Abuja.** Google matches a website to a
 Business Profile by comparing name, address and phone. If they disagree, the
 listing and the site are treated as two different businesses and neither ranks.
 
 Decide the operating base, then change one of them so they agree. The site
-currently states Lagos in six places (`app/layout.tsx`, `lib/seo.ts`,
+currently states Abuja in six places (`app/layout.tsx`, `lib/seo.ts`,
 `app/about`, `app/contact`, the OG image, and `public/llms.txt`).
 
 Also missing, and required by Google: **a street address** and **a phone
@@ -35,7 +35,7 @@ Set these once, then keep every other listing identical to them.
 | Category (primary) | *Software company* |
 | Secondary categories | *Computer consultant*, *Web designer*, *Information technology support service* |
 | Address | ⚠️ **you must supply** — a real address you can receive post at |
-| Service area | Lagos (or Abuja — whichever you settle on), and surrounding states |
+| Service area | Abuja (or Abuja — whichever you settle on), and surrounding states |
 | Phone | ⚠️ **you must supply** — a number you answer. Google calls it during verification |
 | Website | `https://layrus.com` |
 | Email | `hello@layrus.com` |
@@ -45,7 +45,7 @@ Set these once, then keep every other listing identical to them.
 
 ### Description (copy this)
 
-> Layrus Labs is an engineering company in Lagos, Nigeria. We design, build and
+> Layrus Labs is an engineering company in Abuja, Nigeria. We design, build and
 > implement custom software systems, AI automation and connected hardware for
 > businesses with complex technical needs. Our work spans financial services,
 > agriculture, healthcare, education, mobility, logistics and blockchain —
@@ -89,7 +89,7 @@ those ready before you start the recording.
 ## 4. Do not
 
 - Do not put keywords in the business name ("Layrus Labs — Software Company
-  Lagos"). It is a suspension risk.
+  Abuja"). It is a suspension risk.
 - Do not use a virtual office or a P.O. box as the address.
 - Do not create a second listing for the same business at a second address.
   One business, one listing.

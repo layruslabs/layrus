@@ -44,10 +44,10 @@ export const metadata: Metadata = {
     template: "%s | Layrus Labs",
   },
   description:
-    "Layrus Labs designs, builds and implements custom software systems, AI automation and connected hardware for businesses with complex technical needs. Based in Lagos, Nigeria.",
+    "Layrus Labs designs, builds and implements custom software systems, AI automation and connected hardware for businesses with complex technical needs. Based in Abuja, Nigeria.",
   keywords: [
     "custom software development Nigeria",
-    "AI automation Lagos",
+    "AI automation Abuja",
     "embedded systems engineering",
     "IoT development Nigeria",
     "SaaS development Africa",
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     siteName: "Layrus Labs",
     title: "Layrus Labs — Engineering Technology for Real-World Businesses",
     description:
-      "Custom software, AI systems and connected hardware for businesses with complex technical needs. Lagos, Nigeria.",
+      "Custom software, AI systems and connected hardware for businesses with complex technical needs. Abuja, Nigeria.",
     images: [
       {
         url: "/og-image.png",

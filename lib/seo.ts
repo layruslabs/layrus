@@ -15,7 +15,7 @@ import type { Project } from "@/lib/projects";
  * TODO before launch — these are the blanks only the business can fill, and
  * they must match the Google Business Profile character for character:
  *   streetAddress, postalCode, telephone, and whether the operating base is
- *   Lagos (as this site says) or Abuja (as the CV says).
+ *   Abuja (as this site says) or Abuja (as the CV says).
  */
 export const BASE_URL = "https://layrus.com";
 
@@ -26,7 +26,7 @@ export const ORG = {
   name: "Layrus Labs",
   legalName: "Layrus Labs Ltd",
   email: "hello@layrus.com",
-  locality: "Lagos",
+  locality: "Abuja",
   country: "NG",
 };
 

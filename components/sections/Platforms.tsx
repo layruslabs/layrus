@@ -53,7 +53,7 @@ export function Platforms() {
             style={{ color: "var(--text-on-invert-muted)", fontFamily: "var(--font-inter)" }}
             className="text-base leading-relaxed max-w-lg"
           >
-            Fourteen systems across automotive, finance, agriculture,
+            Nine systems across automotive, finance, agriculture,
             healthcare, education and logistics — from a workshop&rsquo;s back
             office to a marketplace that holds client money in escrow.
           </p>
