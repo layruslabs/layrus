@@ -32,7 +32,7 @@ export const TEAM: Person[] = [
     name: "John Okonkwo",
     role: "Founder & CTO",
     bio: "First-Class Software Engineering graduate from Veritas University, and the engineer behind every system on this site. Works across Rust and Go backends, Solidity contracts and embedded hardware — usually on the same project.",
-    photo: "/team/john.png",
+    photo: "/team/john.jpg",
     website: "https://jvcbyte.dev",
     focus: ["Rust", "Solidity", "AI systems", "Embedded"],
     github: "https://github.com/jvcByte",
