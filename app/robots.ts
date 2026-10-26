@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         // standard web crawlers
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/_next/"],
+        disallow: ["/api/"],
       },
       {
         // AI crawlers — explicitly welcome so LLMs can index and cite Layrus
