@@ -6,9 +6,15 @@ import { TestimonialCarousel, type Testimonial } from "@/components/TestimonialC
 import { PROJECTS } from "@/lib/projects";
 import { SERVICES } from "@/lib/services";
 
-/* PLACEHOLDER — every quote, person and role below is invented, like the
-   client names in TrustBar. Replace with real, attributable quotes before
-   launch; an invented one attributed to a named person is a liability.
+/* PLACEHOLDER — every quote and person below is invented, like the client
+   names in TrustBar. Replace with real, attributable quotes before launch; an
+   invented one attributed to a named person is a liability.
+
+   Each quote is anchored to one of the systems in lib/projects, and describes
+   a mechanism that system actually has — the link beside it opens the case
+   study. Keep it that way. A quote that praises work the portfolio does not
+   contain is the one a visitor can catch, and once they have caught it every
+   other claim on the page is worth less.
 
    Keep them about the same length. The carousel is as tall as its longest
    slide, and the hero's two columns are matched by height, so one runaway
@@ -16,24 +22,27 @@ import { SERVICES } from "@/lib/services";
 const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      "Our operations ran on three systems that never agreed with each other. Layrus replaced them with one, and month-end close went from nine days to two.",
-    name: "Adaeze Okonkwo",
-    role: "Operations Director",
-    company: "Meridian Health",
+      "We quoted from memory and lost track of who approved what. The customer now gets a running estimate, and work does not continue until they accept it.",
+    name: "Emeka Nwosu",
+    role: "Workshop Manager",
+    company: "Mercedes-Benz specialist",
+    project: { name: "RCareNG", slug: "rcareng" },
   },
   {
     quote:
-      "We tracked fleet maintenance on spreadsheets across four depots. Layrus built one platform, and the same data now schedules every service.",
-    name: "Ibrahim Danladi",
-    role: "Fleet Manager",
-    company: "Sahel Logistics",
+      "Marking code by hand took the team a week. Candidates now write against a real runtime, and we can replay how any answer was produced.",
+    name: "Halima Sani",
+    role: "Programme Lead",
+    company: "Coding bootcamp",
+    project: { name: "Recoding", slug: "recoding" },
   },
   {
     quote:
-      "Stock counts took three days and were stale before they landed. They now reconcile across every branch the same evening, out of one system.",
-    name: "Grace Adeyemi",
-    role: "General Manager",
-    company: "Kano Agri Co-op",
+      "The client's money is held before work starts and only released when they approve it. Neither side is relying on the other's goodwill.",
+    name: "Tobi Adebayo",
+    role: "Founder",
+    company: "Software studio",
+    project: { name: "Digital Tech Talent Hub", slug: "digital-tech-talent-hub" },
   },
 ];
 

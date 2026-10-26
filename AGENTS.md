@@ -385,7 +385,10 @@ code) or Upstash (shared state) is the upgrade.
   interactivity is genuinely required (ThemeToggle, Navbar hamburger)
 - Section copy that is not yet real (client names in TrustBar, the Platforms
   list, every entry in Compliance, and **all three hero testimonials — every
-  quote, person, role and company is invented**) is placeholder text. Check
+  quote and person is invented**) is placeholder text. Each testimonial names
+  a real project and describes a mechanism that project actually has, so the
+  claimed client relationship is checkable — which raises the stakes rather
+  than lowering them. Check
   these with the client before launch, especially Compliance, which makes
   legal claims, and the testimonials, which put words in named people's
   mouths. Real quotes or none at all; invented ones are a liability, not

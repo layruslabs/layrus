@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export interface Testimonial {
@@ -7,6 +8,9 @@ export interface Testimonial {
   name: string;
   role: string;
   company: string;
+  /** The shipped system the quote is about. Rendered as a link to its case
+   *  study, so a claim in the hero can be checked against the work itself. */
+  project?: { name: string; slug: string };
 }
 
 const ADVANCE_MS = 7000;
@@ -77,6 +81,18 @@ export function TestimonialCarousel({ items }: { items: Testimonial[] }) {
                 className="pr-28 text-[0.8125rem]"
               >
                 {t.name} &middot; {t.role}, {t.company}
+                {t.project && (
+                  <>
+                    {" · "}
+                    <Link
+                      href={`/projects/${t.project.slug}`}
+                      style={{ color: "var(--accent-green)" }}
+                      className="underline-offset-2 hover:underline"
+                    >
+                      {t.project.name}
+                    </Link>
+                  </>
+                )}
               </figcaption>
             </figure>
           ))}
