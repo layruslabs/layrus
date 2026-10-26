@@ -88,7 +88,8 @@ components/
     Hero.tsx              — headline, CTAs, ruled stats + an editorial
                             collage: engineer photo, PCB shot, system
                             architecture card, terracotta accent card
-    TrustBar.tsx          — "trusted by" strip
+    TrustBar.tsx          — "shipped and running" strip, read from
+                            lib/projects
     CoreCapabilities.tsx  — 4 service cards, each showing that field's
                             architecture diagram
     WhyLayrus.tsx         — deep green band, photo, stats
@@ -292,7 +293,7 @@ Two things about it are load-bearing rather than stylistic:
   the column and break the match. Their padding is the tap target and the
   negative margin takes that padding back out of the layout.
 
-**Client names** in the trust strip cross the band as a marquee. Two identical
+**Project names** in the trust strip cross the band as a marquee. Two identical
 groups sit in a row and the track slides by exactly half its width, so the loop
 closes on itself. Each item carries its own trailing margin rather than the
 groups carrying a gap between them — with a gap, half the track is not a whole
@@ -383,7 +384,7 @@ code) or Upstash (shared state) is the upgrade.
 
 - All pages are **Server Components** by default; only use `"use client"` where
   interactivity is genuinely required (ThemeToggle, Navbar hamburger)
-- Section copy that is not yet real (client names in TrustBar, the Platforms
+- Section copy that is not yet real (the Platforms
   list, every entry in Compliance, and **all three hero testimonials — every
   quote and person is invented**) is placeholder text. Each testimonial names
   a real project and describes a mechanism that project actually has, so the

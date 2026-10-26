@@ -1,32 +1,32 @@
 import Image from "next/image";
+import { PROJECTS } from "@/lib/projects";
 
 /**
- * Trust strip — the "trusted by" band that sits under the hero.
+ * The band under the hero: what is shipped and running.
  *
- * Layrus has no client logo files yet, so the names are set as type. Swap the
- * strings for <Image> logos when the real marks are available; the layout
- * takes either.
+ * It used to read "Trusted by" over six invented company names. That is the
+ * one kind of claim this site cannot back: only one deployment names its
+ * client anywhere in the portfolio (Learn2Earn, on Recoding), and a marquee
+ * of two real names looks like a mistake. So it says what is true instead —
+ * the systems that are live, read from the same list the rest of the site
+ * renders, which is why it cannot drift from the portfolio or the hero
+ * counters.
  *
- * The backdrop is a photo of a network — abstract enough to sit behind type.
- * It drifts (see `.photo-drift`), and the scrim is what keeps the names
- * readable over it, so it stays close to opaque.
+ * Set as type because there are no client logo files yet; the layout takes
+ * <Image> marks if those arrive. The backdrop is a photo of a network,
+ * abstract enough to sit behind type — it drifts (see `.photo-drift`), and
+ * the scrim is what keeps the names readable over it, so it stays close to
+ * opaque.
  */
 const PHOTO_NETWORK =
   "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?auto=format&fit=crop&w=1800&q=80";
 
-const CLIENTS = [
-  "Northbridge Group",
-  "Sahel Logistics",
-  "Kano Agri Co-op",
-  "Meridian Health",
-  "Lagos Retail Partners",
-  "Vantage Energy",
-] as const;
+const LIVE = PROJECTS.filter((p) => p.status === "Live");
 
 export function TrustBar() {
   return (
     <section
-      aria-label="Organisations we work with"
+      aria-label="Systems shipped and running in production"
       className="relative overflow-hidden"
     >
       <Image
@@ -48,7 +48,7 @@ export function TrustBar() {
             style={{ color: "var(--text-on-invert-muted)", fontFamily: "var(--font-inter)" }}
             className="eyebrow shrink-0"
           >
-            Trusted by
+            Shipped and running
           </p>
           {/* The names cross the band. Two identical groups sit side by side
               and the track slides exactly half its width, so the loop closes
@@ -63,13 +63,13 @@ export function TrustBar() {
                   className="marquee-group"
                   aria-hidden={duplicate || undefined}
                 >
-                  {CLIENTS.map((name) => (
+                  {LIVE.map((project) => (
                     <li
-                      key={name}
+                      key={project.slug}
                       style={{ color: "var(--text-on-invert)", fontFamily: "var(--font-playfair)" }}
                       className="mr-8 whitespace-nowrap text-base opacity-70 sm:text-xl lg:mr-12"
                     >
-                      {name}
+                      {project.name}
                     </li>
                   ))}
                 </ul>
