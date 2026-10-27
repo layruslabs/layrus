@@ -67,9 +67,22 @@ export function HeroBackdrop() {
         </div>
       ))}
 
+      {/* Base wash: light enough that the photograph is visible as a
+          photograph, not as texture. */}
       <div
         className="absolute inset-0"
-        style={{ backgroundColor: "var(--bg-page)", opacity: 0.9 }}
+        style={{ backgroundColor: "var(--bg-page)", opacity: 0.62 }}
+      />
+      {/* Extra weight on the left, where the headline, copy and stats sit.
+          The right half stays lighter, and the collage covers most of it
+          anyway. If color-mix is unsupported this layer is simply dropped and
+          the base wash still protects the text. */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(90deg, color-mix(in srgb, var(--bg-page) 72%, transparent) 0%, color-mix(in srgb, var(--bg-page) 40%, transparent) 46%, transparent 72%)",
+        }}
       />
     </div>
   );
