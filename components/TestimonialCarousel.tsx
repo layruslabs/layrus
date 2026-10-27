@@ -77,8 +77,8 @@ export function TestimonialCarousel({ items }: { items: Testimonial[] }) {
                 &ldquo;{t.quote}&rdquo;
               </blockquote>
               <figcaption
-                style={{ color: "var(--text-muted)", fontFamily: "var(--font-inter)" }}
-                className="pr-28 text-[0.8125rem]"
+                style={{ color: "var(--text-secondary)", fontFamily: "var(--font-inter)" }}
+                className="pr-28 text-sm font-medium"
               >
                 {t.name} &middot; {t.role}, {t.company}
                 {t.project && (

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Arrow } from "@/components/Arrow";
-import { ArchitectureDiagram, type DiagramSpec } from "@/components/ArchitectureDiagram";
 import { HeroBackdrop } from "@/components/sections/HeroBackdrop";
 import { TestimonialCarousel, type Testimonial } from "@/components/TestimonialCarousel";
 import { PROJECTS } from "@/lib/projects";
@@ -46,32 +45,6 @@ const TESTIMONIALS: Testimonial[] = [
   },
 ];
 
-const HERO_ARCH: DiagramSpec = {
-  caption: "System Architecture",
-  stages: [
-    {
-      nodes: [
-        { label: "Users", icon: "users" },
-        { label: "Client", icon: "web" },
-        { label: "APIs", icon: "api" },
-      ],
-    },
-    { band: true, nodes: [{ label: "Backend Services", icon: "server" }] },
-    {
-      nodes: [
-        { label: "Database", icon: "db" },
-        { label: "AI Models", icon: "spark" },
-        { label: "Cloud", icon: "cloud" },
-      ],
-    },
-  ],
-  skipDrops: [[0, 0]],   // users arrive through the client, not directly
-  // The signal arrives at the right-hand drop, so it works back along the
-  // stores rather than jumping to the far left one:
-  // Users, Client, APIs, Backend, Cloud, AI Models, Database.
-  order: [[0, 0], [0, 1], [0, 2], [1, 0], [2, 2], [2, 1], [2, 0]],
-};
-
 /**
  * The three numbers in the hero, counted rather than claimed.
  *
@@ -97,13 +70,13 @@ function Stat({ value, label, color }: { value: string; label: string; color: st
     <div className="flex flex-col gap-1">
       <span
         style={{ color, fontFamily: "var(--font-inter)" }}
-        className="text-3xl font-bold leading-none tracking-tight"
+        className="text-[2.125rem] font-bold leading-none tracking-tight"
       >
         {value}
       </span>
       <span
-        style={{ color: "var(--text-muted)", fontFamily: "var(--font-inter)" }}
-        className="text-[0.8125rem]"
+        style={{ color: "var(--text-secondary)", fontFamily: "var(--font-inter)" }}
+        className="text-sm font-medium"
       >
         {label}
       </span>
@@ -179,20 +152,7 @@ export function Hero() {
             </div>
           </div>
 
-          {/* ── Right — editorial collage, angled off the page ───────── */}
-          <div className="flex flex-col gap-3">
 
-            {/* The architecture card, full width of the column. The photographs
-                behind it are the hero backdrop. */}
-            <figure
-              aria-label="System architecture overview"
-              style={{ backgroundColor: "var(--bg-page)", borderColor: "var(--border-card)" }}
-              className="relative z-10 w-full border p-3 sm:p-4 lg:ml-auto lg:max-w-[330px]"
-            >
-              <ArchitectureDiagram spec={HERO_ARCH} />
-            </figure>
-
-          </div>
         </div>
       </div>
     </section>
