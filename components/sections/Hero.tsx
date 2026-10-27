@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Arrow } from "@/components/Arrow";
 import { ArchitectureDiagram, type DiagramSpec } from "@/components/ArchitectureDiagram";
@@ -46,12 +45,6 @@ const TESTIMONIALS: Testimonial[] = [
     project: { name: "Digital Tech Talent Hub", slug: "digital-tech-talent-hub" },
   },
 ];
-
-/* ─── Photos ────────────────────────────────────────────────────────────────── */
-const PHOTO_ENGINEER =
-  "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=85";
-const PHOTO_PCB =
-  "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=700&q=85";
 
 const HERO_ARCH: DiagramSpec = {
   caption: "System Architecture",
@@ -192,57 +185,12 @@ export function Hero() {
             style={{ transform: "perspective(1400px) rotateY(-9deg)" }}
           >
 
-            {/* Row 1: engineer photo | tagline + PCB.
-                The photo's ratio is what sets this row's height, and the row
-                is what sets the collage's — it is trimmed to land the collage
-                on the same height as the pitch beside it, so neither column
-                ends up with slack the other has to stretch into. */}
-            <div className="grid grid-cols-[1.02fr_1fr] gap-3">
-              <div className="media aspect-[14/9]">
-                <Image
-                  src={PHOTO_ENGINEER}
-                  alt="Engineer working at a laptop with code on screen"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width:1024px) 50vw, 26vw"
-                  priority
-                />
-              </div>
-
-              <div className="flex flex-col gap-3">
-                <div className="flex items-start justify-between gap-3 pb-1">
-                  <p
-                    style={{ color: "var(--text-muted)", fontFamily: "var(--font-inter)" }}
-                    className="eyebrow leading-relaxed"
-                  >
-                    Software / AI / Embedded
-                    <br />
-                    Built for what&rsquo;s next
-                  </p>
-                  <span
-                    style={{ borderColor: "var(--border-subtle)" }}
-                    className="mt-0.5 hidden h-4 w-4 shrink-0 border sm:block"
-                    aria-hidden="true"
-                  />
-                </div>
-
-                <div className="media min-h-[110px] flex-1">
-                  <Image
-                    src={PHOTO_PCB}
-                    alt="Close-up of a printed circuit board"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width:1024px) 50vw, 24vw"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Row 2: the architecture card, full width of the column */}
+            {/* The architecture card, full width of the column. The photographs
+                behind it are the hero backdrop. */}
             <figure
               aria-label="System architecture overview"
               style={{ backgroundColor: "var(--bg-page)", borderColor: "var(--border-card)" }}
-              className="relative z-10 -mt-14 border p-5"
+              className="relative z-10 border p-5"
             >
               <ArchitectureDiagram spec={HERO_ARCH} />
             </figure>
