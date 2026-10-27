@@ -9,13 +9,13 @@ import type { Enquiry } from "@/lib/enquiries";
  * from the real mailbox means SPF and DKIM already pass, so there is no second
  * provider to verify a domain with.
  *
- * This is a notification, never the record. The enquiry is written to Postgres
- * before this runs, so a failed send loses nothing — and every failure is
- * swallowed for the same reason: the person who filled the form must not see
- * an error because the mail server was slow.
+ * The enquiry is written to Postgres before this runs, so a failed send loses
+ * nothing — but it does not go unnoticed either: this returns whether the mail
+ * actually left, and the form tells the person when it did not. The database
+ * is a record for later; nobody is watching it for new enquiries.
  *
  * Without SMTP_USER and SMTP_PASS nothing is sent, which is how local
- * development runs.
+ * development runs, and the caller is told so.
  */
 let cached: Transporter | undefined;
 
@@ -38,9 +38,9 @@ function transport(): Transporter | null {
   }));
 }
 
-export async function notifyEnquiry(e: Enquiry): Promise<void> {
+export async function notifyEnquiry(e: Enquiry): Promise<boolean> {
   const t = transport();
-  if (!t) return;
+  if (!t) return false;
 
   try {
     await t.sendMail({
@@ -56,7 +56,9 @@ export async function notifyEnquiry(e: Enquiry): Promise<void> {
         e.message,
       ].join("\n"),
     });
+    return true;
   } catch (err) {
     console.error("mailer: send failed", err);
+    return false;
   }
 }

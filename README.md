@@ -41,6 +41,30 @@ storage. Run `scripts/schema.sql` against it once. Without it the chat works
 exactly as before and nothing is stored, which is how local development and
 previews run.
 
+### Form email (Spacemail SMTP)
+
+Spacemail has no sending API. The contact form sends its notification through
+the mailbox's own SMTP server, from the same address, so SPF and DKIM already
+pass:
+
+```bash
+SMTP_USER=hello@layrus.com
+SMTP_PASS=<the mailbox password>   # Spacemail Manager → mailbox → IMAP/POP3/SMTP
+ENQUIRY_TO=hello@layrus.com        # where the notification lands
+# SMTP_HOST=mail.spacemail.com     # defaults
+# SMTP_PORT=465                    # defaults; 465/SSL is the documented port
+```
+
+`SMTP_FROM` is optional and only useful once the address exists as an **alias**
+on the mailbox, e.g. `website@layrus.com`; replies still go to the enquirer
+through `replyTo`.
+
+The enquiry is written to the database first and then emailed. If the email
+does not go out, **the form says so** and asks the person to write to
+`hello@layrus.com` directly. That is deliberate: the database is a record for
+later, not an inbox anyone is watching, so a silent failure would be a lost
+enquiry.
+
 ## Layout
 
 ```

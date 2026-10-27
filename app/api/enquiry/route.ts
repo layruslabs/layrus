@@ -1,4 +1,3 @@
-import { after } from "next/server";
 import { saveEnquiry } from "@/lib/enquiries";
 import { notifyEnquiry } from "@/lib/mailer";
 
@@ -56,9 +55,19 @@ export async function POST(req: Request) {
     );
   }
 
-  // Sent after the response, so a slow mail handshake never delays the
-  // thank-you. The row is already stored; this is only the notification.
-  after(() => notifyEnquiry(enquiry));
+  // Awaited rather than fired and forgotten: if the mail does not leave, the
+  // person has to know, because nobody is watching the table for new rows.
+  const sent = await notifyEnquiry(enquiry);
+
+  if (!sent) {
+    return Response.json(
+      {
+        error:
+          "Your message was saved, but we could not send it. Please email hello@layrus.com so it reaches us today.",
+      },
+      { status: 502 },
+    );
+  }
 
   return Response.json({ ok: true });
 }
