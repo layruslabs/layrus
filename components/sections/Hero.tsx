@@ -181,7 +181,7 @@ export function Hero() {
 
           {/* ── Right — editorial collage, angled off the page ───────── */}
           <div
-            className="flex flex-col justify-end gap-3"
+            className="flex flex-col gap-3"
             style={{ transform: "perspective(1400px) rotateY(-9deg)" }}
           >
 
