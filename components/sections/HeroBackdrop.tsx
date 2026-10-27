@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 /**
- * The hero's backdrop: the six photographs cross-fading behind everything.
+ * The hero's backdrop: the photographs cross-fading behind everything.
  *
  * Decorative, so it is `aria-hidden` and carries no captions or controls —
  * the hero's own content is the content. What keeps it readable is the wash:
@@ -24,6 +24,10 @@ const SLIDES = [
   "/hero/ops-desk.webp",
   "/hero/whiteboard.webp",
   "/hero/board-detail.webp",
+  "/hero/robotics.webp",
+  "/hero/technician.webp",
+  "/hero/gateway.webp",
+  "/hero/field-service.webp",
 ];
 
 const ADVANCE_MS = 7000;
