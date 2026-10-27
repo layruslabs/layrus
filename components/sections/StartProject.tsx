@@ -130,7 +130,7 @@ export function StartProject() {
               style={{ color: "var(--text-on-invert)", fontFamily: "var(--font-playfair)" }}
               className="text-[2.75rem] md:text-[3.5rem] font-bold"
             >
-              Tell us what you need
+              Start the conversation
             </h2>
             <p
               style={{ color: "var(--text-on-invert-muted)", fontFamily: "var(--font-inter)" }}
