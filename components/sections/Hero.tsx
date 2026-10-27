@@ -180,10 +180,7 @@ export function Hero() {
           </div>
 
           {/* ── Right — editorial collage, angled off the page ───────── */}
-          {/* The 3D tilt only exists above lg, where the column sits beside the
-              copy. Below it the column stacks full-width, and a rotateY across
-              the whole width skews the card instead of angling it. */}
-          <div className="flex flex-col gap-3 lg:[transform:perspective(1400px)_rotateY(-9deg)]">
+          <div className="flex flex-col gap-3">
 
             {/* The architecture card, full width of the column. The photographs
                 behind it are the hero backdrop. */}
