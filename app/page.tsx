@@ -1,4 +1,5 @@
 import { Hero } from "@/components/sections/Hero";
+import { HeroCarousel } from "@/components/sections/HeroCarousel";
 import { TrustBar } from "@/components/sections/TrustBar";
 import { CoreCapabilities } from "@/components/sections/CoreCapabilities";
 import { WhyLayrus } from "@/components/sections/WhyLayrus";
@@ -13,6 +14,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <HeroCarousel />
       <TrustBar />
       <CoreCapabilities />
       <WhyLayrus />
