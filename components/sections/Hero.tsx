@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Arrow } from "@/components/Arrow";
 import { ArchitectureDiagram, type DiagramSpec } from "@/components/ArchitectureDiagram";
+import { HeroBackdrop } from "@/components/sections/HeroBackdrop";
 import { TestimonialCarousel, type Testimonial } from "@/components/TestimonialCarousel";
 import { PROJECTS } from "@/lib/projects";
 import { SERVICES } from "@/lib/services";
@@ -119,8 +120,12 @@ function Stat({ value, label, color }: { value: string; label: string; color: st
 
 export function Hero() {
   return (
-    <section aria-labelledby="hero-heading" className="pt-28 pb-16 md:pt-32 md:pb-20">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+    <section
+      aria-labelledby="hero-heading"
+      className="relative overflow-hidden pt-28 pb-16 md:pt-32 md:pb-20"
+    >
+      <HeroBackdrop />
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
         {/* Columns stretch to a common height — the collage sets it, and the
             stats ride the bottom of it rather than leaving the pitch short. */}
         <div className="grid grid-cols-1 lg:grid-cols-[1.12fr_1fr] gap-12 lg:gap-10">
