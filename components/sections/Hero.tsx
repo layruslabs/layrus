@@ -181,7 +181,7 @@ export function Hero() {
 
           {/* ── Right — editorial collage, angled off the page ───────── */}
           <div
-            className="flex flex-col gap-3"
+            className="flex flex-col justify-end gap-3"
             style={{ transform: "perspective(1400px) rotateY(-9deg)" }}
           >
 
@@ -190,7 +190,7 @@ export function Hero() {
             <figure
               aria-label="System architecture overview"
               style={{ backgroundColor: "var(--bg-page)", borderColor: "var(--border-card)" }}
-              className="relative z-10 border p-5"
+              className="relative z-10 ml-auto w-full max-w-[330px] border p-3 sm:p-4"
             >
               <ArchitectureDiagram spec={HERO_ARCH} />
             </figure>
