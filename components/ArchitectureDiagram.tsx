@@ -417,8 +417,8 @@ export function ArchitectureDiagram({ spec }: { spec: DiagramSpec }) {
     <div className="arch-diagram flex h-full flex-col">
       {caption && (
         <p
-          style={{ color: "var(--text-secondary)", fontFamily: "var(--font-inter)" }}
-          className="mb-3 text-[0.6875rem] font-semibold uppercase tracking-[0.14em]"
+          style={{ color: "var(--text-primary)", fontFamily: "var(--font-inter)" }}
+          className="mb-3 text-[0.6875rem] font-bold uppercase tracking-[0.14em]"
         >
           {caption}
         </p>
@@ -507,7 +507,7 @@ export function ArchitectureDiagram({ spec }: { spec: DiagramSpec }) {
                     fontSize={st.band ? 13.5 : 12}
                     fill="var(--text-primary)"
                     fontFamily="var(--font-inter)"
-                  >
+                   fontWeight={700}>
                     {n.label}
                   </text>
 
