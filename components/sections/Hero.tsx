@@ -180,17 +180,17 @@ export function Hero() {
           </div>
 
           {/* ── Right — editorial collage, angled off the page ───────── */}
-          <div
-            className="flex flex-col gap-3"
-            style={{ transform: "perspective(1400px) rotateY(-9deg)" }}
-          >
+          {/* The 3D tilt only exists above lg, where the column sits beside the
+              copy. Below it the column stacks full-width, and a rotateY across
+              the whole width skews the card instead of angling it. */}
+          <div className="flex flex-col gap-3 lg:[transform:perspective(1400px)_rotateY(-9deg)]">
 
             {/* The architecture card, full width of the column. The photographs
                 behind it are the hero backdrop. */}
             <figure
               aria-label="System architecture overview"
               style={{ backgroundColor: "var(--bg-page)", borderColor: "var(--border-card)" }}
-              className="relative z-10 ml-auto w-full max-w-[330px] border p-3 sm:p-4"
+              className="relative z-10 w-full border p-3 sm:p-4 lg:ml-auto lg:max-w-[330px]"
             >
               <ArchitectureDiagram spec={HERO_ARCH} />
             </figure>
