@@ -45,7 +45,7 @@ function Field({
         {required && <span aria-hidden="true"> *</span>}
       </label>
       {area ? (
-        <textarea {...shared} rows={4} placeholder="Tell us what you're building…" />
+        <textarea {...shared} rows={4} placeholder="A new system, support for one you already run, a partnership…" />
       ) : (
         <input {...shared} type={type} placeholder={label} />
       )}
@@ -86,21 +86,22 @@ export function StartProject() {
               style={{ color: "var(--accent-terracotta)", fontFamily: "var(--font-inter)" }}
               className="text-[0.8125rem] font-semibold tracking-[0.14em] uppercase"
             >
-              // Let&rsquo;s Build Together
+              // Talk to Layrus
             </p>
             <h2
               id="start-heading"
               style={{ color: "var(--text-on-invert)", fontFamily: "var(--font-playfair)" }}
               className="text-[2.75rem] md:text-[3.5rem] font-bold"
             >
-              Start a project with us
+              Tell us what you need
             </h2>
             <p
               style={{ color: "var(--text-on-invert-muted)", fontFamily: "var(--font-inter)" }}
               className="text-base leading-relaxed max-w-sm"
             >
-              Tell us about your idea, challenge or project. We&rsquo;ll get back
-              to you with the right team, next steps and a clear plan.
+              A new build, a system that needs support, a partnership,
+              procurement, or a question about how we work. We&rsquo;ll get back
+              to you with the right person and clear next steps.
             </p>
 
             <dl className="flex flex-col gap-4 mt-4">
@@ -112,18 +113,18 @@ export function StartProject() {
 
           <form
             className="flex flex-col gap-5"
-            aria-label="Project enquiry"
+            aria-label="Enquiry"
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <Field label="Your name" name="name" required autoComplete="name" />
               <Field label="Email address" name="email" type="email" required autoComplete="email" />
             </div>
             <Field label="Subject" name="subject" />
-            <Field label="Tell us what you're building" name="message" area required />
+            <Field label="How can we help?" name="message" area required />
 
             <div className="flex flex-wrap gap-3 pt-1">
               <button type="submit" className="btn-primary btn-invert">
-                Start a project
+                Send enquiry
                 <Arrow />
               </button>
               <a href="/services" className="btn-outline btn-outline-invert">

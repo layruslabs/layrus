@@ -5,7 +5,7 @@ import { StartProject } from "@/components/sections/StartProject";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Tell us what you are trying to build, or what is currently slowing you down. Layrus Labs, Abuja, Nigeria.",
+    "Talk to Layrus Labs in Abuja about a new project, support for a system you already run, a partnership, procurement, or anything else.",
   alternates: { canonical: "/contact" },
 };
 
@@ -14,8 +14,8 @@ export default function ContactPage() {
     <>
       <PageHeader
         eyebrow="Contact"
-        title="Tell us what you're trying to build"
-        intro="The more concrete you can be about the problem, the more useful our first reply will be — but a rough description is a fine place to start."
+        title="Tell us what you need"
+        intro="A new system, one that needs looking after, a partnership, a procurement question, or something else entirely. The more concrete you can be, the more useful our first reply will be."
       />
       <StartProject />
     </>
