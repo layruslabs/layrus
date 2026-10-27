@@ -9,7 +9,7 @@ import { collectionLd } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Embedded systems, IoT and robotics, with the software, AI and cloud that run them. What Layrus Labs does, and what each engagement covers.",
+    "Custom software, AI automation, embedded engineering and the cloud work that keeps them running. What Layrus Labs does, and what each engagement covers.",
   alternates: { canonical: "/services" },
 };
 

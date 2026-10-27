@@ -52,7 +52,7 @@ export function organizationLd() {
     },
     image: `${BASE_URL}/og-image.png`,
     description:
-      "Layrus Labs designs and builds embedded systems, IoT devices and robotics in Abuja, Nigeria, together with the software, AI and cloud infrastructure that runs them.",
+      "Layrus Labs designs, builds and implements custom software systems, AI automation and connected hardware for businesses with complex technical needs.",
     email: ORG.email,
     identifier: {
       "@type": "PropertyValue",
@@ -75,11 +75,6 @@ export function organizationLd() {
       { "@type": "Place", name: "West Africa" },
     ],
     knowsAbout: [
-      "robotics",
-      "embedded systems",
-      "IoT devices",
-      "firmware",
-      "motion control",
       "custom software development",
       "AI automation",
       "large language model integration",

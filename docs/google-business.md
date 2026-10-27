@@ -44,15 +44,15 @@ Set these once, then keep every other listing identical to them.
 
 ### Description (copy this)
 
-> Layrus Labs is an embedded systems, IoT and robotics company in Abuja,
-> Nigeria. We design and build the devices and the software that runs them,
-> from circuit board and firmware through to the cloud platform. Our work spans financial services,
+> Layrus Labs is an engineering company in Abuja, Nigeria. We design, build and
+> implement custom software systems, AI automation and connected hardware for
+> businesses with complex technical needs. Our work spans financial services,
 > agriculture, healthcare, education, mobility, logistics and blockchain —
 > including a workshop management platform for a Mercedes-Benz specialist, a
 > hiring marketplace that holds client money in escrow, and IoT monitoring for
 > farm equipment. We work from discovery through to long-term support, so
-> clients deal with the same team that built the system. Nine systems shipped
-> to date.
+> clients deal with the same team that built the system. Fourteen systems
+> shipped to date.
 
 ### Photos (Google ranks profiles with photos higher)
 

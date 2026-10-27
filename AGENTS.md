@@ -23,8 +23,7 @@ a nav that eventually goes missing from one of them.
 ```
 lib/
   services.ts      — the six services. Single source: the footer links to
-                     every one and the homepage cards render four of them.
-                     Sorted so embedded leads; numbers follow position
+                     every one and the homepage cards render four of them
   projects.ts      — the four shipped products, written from their repos
 
 app/

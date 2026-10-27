@@ -19,9 +19,9 @@ const NAV_COLUMNS = [
   {
     heading: "Our Services",
     links: [
-      { label: "Embedded Engineering",  href: "/services/embedded"   },
       { label: "Software Systems",      href: "/services/software"   },
       { label: "AI & Automation",       href: "/services/ai"         },
+      { label: "Embedded & Connected",  href: "/services/embedded"   },
       { label: "Cloud & Infrastructure",href: "/services/cloud"      },
       { label: "Technical Discovery",   href: "/services/discovery"  },
       { label: "Managed Implementation",href: "/services/managed"    },

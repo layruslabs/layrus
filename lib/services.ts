@@ -101,9 +101,9 @@ export const SERVICES: Service[] = [
     num: "03",
     title: "Embedded Engineering",
     tagline:
-      "PCB design, embedded systems, IoT and robotics, firmware and hardware/software integration from prototype through to production.",
+      "PCB design, embedded systems, IoT, firmware and hardware/software integration from prototype through to production.",
     intro:
-      "Machines that have to keep working in the field — on a factory floor, in a vehicle, on a farm — where the network drops and there is nobody standing by to reboot it.",
+      "Hardware that has to keep working in the field — on a factory floor, in a vehicle, on a farm — where the network drops and there is nobody standing by to reboot it.",
     includes: [
       "PCB design and prototyping",
       "Firmware for microcontrollers",
@@ -111,7 +111,6 @@ export const SERVICES: Service[] = [
       "IoT gateways and connectivity",
       "Device-to-cloud telemetry pipelines",
       "Enclosure design and production support",
-      "Robotics, motion control and remote operation",
     ],
     accent: "var(--burnt-clay)",
     // a signal chain: physical I/O into the microcontroller, out through a
@@ -219,17 +218,6 @@ export const SERVICES: Service[] = [
 
 /** A service that comes with an architecture diagram — the homepage four. */
 export type IllustratedService = Service & { arch: DiagramSpec };
-
-/* Embedded systems, IoT and robotics lead the list. That is the company's
-   stated focus, and this array is what the services page, the footer, the
-   sitemap and the homepage cards all read, so the order here is the order
-   everywhere. Numbers are reassigned from position rather than typed, so
-   moving a service never leaves a stale "03" on the first card. */
-const FOCUS_ORDER = ["embedded", "software", "ai", "cloud", "discovery", "managed"];
-SERVICES.sort((a, b) => FOCUS_ORDER.indexOf(a.slug) - FOCUS_ORDER.indexOf(b.slug));
-SERVICES.forEach((s, i) => {
-  s.num = String(i + 1).padStart(2, "0");
-});
 
 export const ILLUSTRATED = SERVICES.filter(
   (s): s is IllustratedService => Boolean(s.arch),
