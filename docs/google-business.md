@@ -51,8 +51,8 @@ Set these once, then keep every other listing identical to them.
 > including a workshop management platform for a Mercedes-Benz specialist, a
 > hiring marketplace that holds client money in escrow, and IoT monitoring for
 > farm equipment. We work from discovery through to long-term support, so
-> clients deal with the same team that built the system. Fourteen systems
-> shipped to date.
+> clients deal with the same team that built the system. Nine systems shipped
+> to date.
 
 ### Photos (Google ranks profiles with photos higher)
 
