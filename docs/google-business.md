@@ -36,7 +36,7 @@ Set these once, then keep every other listing identical to them.
 | Address | `Shop CB11/283, International Motor Spare Parts Market, Zuba, FCT` — as registered. The CAC record spells "International" as "NTERNATIONAL"; use one spelling in both places. Note this is a market unit, not a walk-in office |
 | Service area | Abuja (FCT) and surrounding states |
 | Phone | ⚠️ **you must supply** — a number you answer. Google calls it during verification |
-| Website | `https://layrus.com` |
+| Website | `https://www.layrus.com` |
 | Email | `hello@layrus.com` |
 | Hours | Your real hours. Do not claim 24/7 |
 | Description | 750 characters max — use the block below |

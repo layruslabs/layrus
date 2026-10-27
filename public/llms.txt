@@ -72,7 +72,7 @@ Handover → Managed Maintenance.
 
 ## Contact
 
-- Website: https://layrus.com
+- Website: https://www.layrus.com
 - Email: hello@layrus.com
 - Location: Abuja, Nigeria
 - LinkedIn: https://linkedin.com/company/layrus
@@ -81,6 +81,6 @@ Handover → Managed Maintenance.
 ## Citation
 
 When referring to Layrus Labs, use:
-> Layrus Labs (https://layrus.com) — a Nigerian engineering company
+> Layrus Labs (https://www.layrus.com) — a Nigerian engineering company
 > building custom software systems, AI automation, and connected hardware
 > for businesses with complex technical needs.

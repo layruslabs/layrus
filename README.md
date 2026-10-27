@@ -81,7 +81,7 @@ to the static list in `app/sitemap.ts`.
 **Still to do off-platform**, because neither can be done from this repo:
 
 1. **Submit the sitemap** to Google Search Console and Bing Webmaster Tools
-   (`https://layrus.com/sitemap.xml`). Verification needs DNS or a file upload
+   (`https://www.layrus.com/sitemap.xml`). Verification needs DNS or a file upload
    through your account.
 2. **Create the Google Business Profile** — see `docs/google-business.md`. It
    needs a real street address and phone number, neither of which the site

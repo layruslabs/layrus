@@ -17,7 +17,7 @@ import type { Project } from "@/lib/projects";
  *   streetAddress, postalCode, telephone, and whether the operating base is
  *   Abuja (as this site says) or Abuja (as the CV says).
  */
-export const BASE_URL = "https://layrus.com";
+export const BASE_URL = "https://www.layrus.com";
 
 export const ORG_ID = `${BASE_URL}/#organization`;
 export const SITE_ID = `${BASE_URL}/#website`;
