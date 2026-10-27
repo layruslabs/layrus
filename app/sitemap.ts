@@ -1,8 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SERVICES } from "@/lib/services";
 import { PROJECTS } from "@/lib/projects";
-
-const BASE_URL = "https://layrus.com";
+import { BASE_URL } from "@/lib/seo";
 
 /**
  * Generated from the same lists the pages are, so a new service or project
