@@ -16,18 +16,25 @@ import { useEffect, useState } from "react";
  * Same crops as the band had: all 21:9, so nothing changes height as they
  * cross-fade. Rotation stops entirely under `prefers-reduced-motion`; the
  * first photograph is `priority`, the rest lazy.
+ *
+ * `focus` is the point of each frame that has to survive the crop. The hero is
+ * tall and narrow on a phone, so a 21:9 image is reduced to a vertical slice;
+ * centring that slice cuts most subjects in half. These are the positions that
+ * keep the device, the person or the screen in view on the smallest screens,
+ * and they are ignored on desktop, where the container already matches the
+ * crop.
  */
 const SLIDES = [
-  "/hero/field-node.webp",
-  "/hero/software-desk.webp",
-  "/hero/bench.webp",
-  "/hero/ops-desk.webp",
-  "/hero/whiteboard.webp",
-  "/hero/board-detail.webp",
-  "/hero/robotics.webp",
-  "/hero/technician.webp",
-  "/hero/gateway.webp",
-  "/hero/field-service.webp",
+  { src: "/hero/field-node.webp", focus: "62% 45%" },
+  { src: "/hero/software-desk.webp", focus: "62% 50%" },
+  { src: "/hero/bench.webp", focus: "58% 50%" },
+  { src: "/hero/ops-desk.webp", focus: "42% 55%" },
+  { src: "/hero/whiteboard.webp", focus: "62% 45%" },
+  { src: "/hero/board-detail.webp", focus: "55% 55%" },
+  { src: "/hero/robotics.webp", focus: "42% 50%" },
+  { src: "/hero/technician.webp", focus: "50% 45%" },
+  { src: "/hero/gateway.webp", focus: "55% 50%" },
+  { src: "/hero/field-service.webp", focus: "45% 50%" },
 ];
 
 const ADVANCE_MS = 7000;
@@ -49,20 +56,21 @@ export function HeroBackdrop() {
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 overflow-hidden"
     >
-      {SLIDES.map((src, i) => (
+      {SLIDES.map((slide, i) => (
         <div
-          key={src}
+          key={slide.src}
           className={`absolute inset-0 transition-opacity duration-[1600ms] motion-reduce:transition-none ${
             i === index ? "opacity-100" : "opacity-0"
           }`}
         >
           <Image
-            src={src}
+            src={slide.src}
             alt=""
             fill
             priority={i === 0}
             sizes="100vw"
             className="object-cover"
+            style={{ objectPosition: slide.focus }}
           />
         </div>
       ))}
