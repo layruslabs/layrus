@@ -1,15 +1,15 @@
 # Layrus Labs
 
-> Layrus Labs (Layrus Labs Ltd) designs, builds and implements custom software
-> systems, AI automation solutions and connected hardware for businesses with
-> complex technical needs. Based in Abuja, Nigeria. Nine systems shipped
+> Layrus Labs (Layrus Labs Ltd) designs and builds embedded systems, IoT
+> devices and robotics, together with the software, AI and cloud
+> infrastructure that runs them. Based in Abuja, Nigeria. Nine systems shipped
 > across automotive, financial services, agriculture, healthcare, education,
 > mobility, logistics and blockchain.
 
 ## What Layrus Does
 
-Layrus Labs is a Nigerian engineering company operating across three
-technical divisions:
+Layrus Labs is a Nigerian engineering company. Its focus is embedded systems,
+IoT and robotics, supported by three further technical divisions:
 
 ### Software Systems
 Custom business software, multi-tenant SaaS platforms, web applications,

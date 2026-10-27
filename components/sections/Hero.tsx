@@ -127,7 +127,7 @@ export function Hero() {
 
           {/* ── Left — the pitch ─────────────────────────────────────── */}
           <div className="flex flex-col gap-6 lg:pt-2">
-            <p className="section-label">Engineering Technology</p>
+            <p className="section-label">Embedded Systems &middot; IoT &middot; Robotics</p>
 
             <h1
               id="hero-heading"
@@ -143,9 +143,8 @@ export function Hero() {
               style={{ color: "var(--text-secondary)", fontFamily: "var(--font-inter)" }}
               className="text-[1.0625rem] leading-relaxed max-w-md"
             >
-              Layrus Labs designs, builds and implements custom software
-              systems, AI solutions and connected hardware for real-world
-              businesses.
+              We design and build embedded systems, IoT devices and robotics,
+              plus the software, AI and cloud that run them.
             </p>
 
             <div className="flex flex-wrap items-center gap-6 pt-1">
