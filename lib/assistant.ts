@@ -1,5 +1,6 @@
 import { SERVICES } from "@/lib/services";
 import { PROJECTS } from "@/lib/projects";
+import { TEAM } from "@/lib/team";
 
 /**
  * Who the company works for, and how an engagement usually runs. The homepage
@@ -53,6 +54,16 @@ export function systemPrompt(): string {
       s.includes.map((i) => `    · ${i}`).join("\n"),
   ).join("\n");
 
+  // The people, read from the same list the About page renders. Asked "who is
+  // behind Layrus", an assistant that shrugs at its own founder's name reads
+  // as a bot that has never met the company.
+  const people = TEAM.map(
+    (p) =>
+      `- ${p.name}, ${p.role}. ${p.bio.replace(/ — /g, ", ")}` +
+      (p.website ? `\n    Profile: ${p.website}` : "") +
+      (p.github ? `\n    GitHub: ${p.github}` : ""),
+  ).join("\n");
+
   const projects = PROJECTS.map(
     (p) => `- ${p.name} (/projects/${p.slug}): ${p.tagline} Status: ${p.status}.`,
   ).join("\n");
@@ -67,6 +78,12 @@ from the outside as "they" or "their", and never say "Layrus builds" when you
 mean "we build". You are Lyra on the team, not the company itself, so do not
 sign messages with its name. If someone asks who you are, say you are Lyra, on
 the Layrus Labs team.
+
+WHO WE ARE
+
+${people}
+
+"jvcbyte" is John's handle online, and https://jvcbyte.dev is his own site: the profile, the portfolio and the writing behind the work described here. If someone asks who built Layrus, who the founder is, or what jvcbyte means, answer with his name and that link.
 
 WHAT WE DO
 
