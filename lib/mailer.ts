@@ -1,0 +1,62 @@
+import nodemailer, { type Transporter } from "nodemailer";
+import type { Enquiry } from "@/lib/enquiries";
+
+/**
+ * The notification email, sent through the Spacemail mailbox.
+ *
+ * Spacemail has no sending API; it offers standard SMTP on
+ * mail.spacemail.com:465 with implicit TLS, which is what this uses. Sending
+ * from the real mailbox means SPF and DKIM already pass, so there is no second
+ * provider to verify a domain with.
+ *
+ * This is a notification, never the record. The enquiry is written to Postgres
+ * before this runs, so a failed send loses nothing — and every failure is
+ * swallowed for the same reason: the person who filled the form must not see
+ * an error because the mail server was slow.
+ *
+ * Without SMTP_USER and SMTP_PASS nothing is sent, which is how local
+ * development runs.
+ */
+let cached: Transporter | undefined;
+
+function transport(): Transporter | null {
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+  if (!user || !pass) return null;
+
+  const port = Number(process.env.SMTP_PORT ?? 465);
+  return (cached ??= nodemailer.createTransport({
+    host: process.env.SMTP_HOST ?? "mail.spacemail.com",
+    port,
+    secure: port === 465,
+    auth: { user, pass },
+    // A form submission must not hang on a mail handshake. These are the
+    // documented failure points: connect, greeting, and the socket itself.
+    connectionTimeout: 8000,
+    greetingTimeout: 8000,
+    socketTimeout: 10_000,
+  }));
+}
+
+export async function notifyEnquiry(e: Enquiry): Promise<void> {
+  const t = transport();
+  if (!t) return;
+
+  try {
+    await t.sendMail({
+      from: process.env.SMTP_FROM ?? process.env.SMTP_USER,
+      to: process.env.ENQUIRY_TO ?? "hello@layrus.com",
+      replyTo: e.email,
+      subject: e.subject ? `Enquiry: ${e.subject}` : `Enquiry from ${e.name}`,
+      text: [
+        `Name:    ${e.name}`,
+        `Email:   ${e.email}`,
+        `Subject: ${e.subject ?? "(none)"}`,
+        "",
+        e.message,
+      ].join("\n"),
+    });
+  } catch (err) {
+    console.error("mailer: send failed", err);
+  }
+}
