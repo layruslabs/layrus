@@ -136,9 +136,9 @@ export function StartProject() {
               style={{ color: "var(--text-on-invert-muted)", fontFamily: "var(--font-inter)" }}
               className="text-base leading-relaxed max-w-sm"
             >
-              A new build, a system that needs support, a partnership,
-              procurement, or a question about how we work. We&rsquo;ll get back
-              to you with the right person and clear next steps.
+              Nothing here needs to be a brief. Tell us what you&rsquo;re
+              working on in your own words, and we&rsquo;ll come back with the
+              right person and a clear next step.
             </p>
 
             <dl className="flex flex-col gap-4 mt-4">
