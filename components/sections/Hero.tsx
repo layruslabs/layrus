@@ -127,24 +127,24 @@ export function Hero() {
 
           {/* ── Left — the pitch ─────────────────────────────────────── */}
           <div className="flex flex-col gap-6 lg:pt-2">
-            <p className="section-label">Engineering Technology</p>
+            <p className="section-label">Embedded Systems &middot; IoT &middot; Robotics</p>
 
             <h1
               id="hero-heading"
               style={{ color: "var(--text-primary)", fontFamily: "var(--font-playfair)" }}
               className="text-[2.5rem] sm:text-[3rem] lg:text-[3.25rem] xl:text-[3.5rem] font-bold leading-[1.06] tracking-tight"
             >
-              Embedded systems,
+              We build technology
               <br />
-              IoT and robotics<span style={{ color: "var(--accent-terracotta)" }}>.</span>
+              around your business<span style={{ color: "var(--accent-terracotta)" }}>.</span>
             </h1>
 
             <p
               style={{ color: "var(--text-secondary)", fontFamily: "var(--font-inter)" }}
               className="text-[1.0625rem] leading-relaxed max-w-md"
             >
-              From the circuit board to the cloud: we design, build and support
-              the devices, firmware and platforms behind real-world systems.
+              We design and build embedded systems, IoT devices and robotics,
+              plus the software, AI and cloud that run them.
             </p>
 
             <div className="flex flex-wrap items-center gap-6 pt-1">
