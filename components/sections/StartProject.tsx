@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, type FormEvent } from "react";
 import Image from "next/image";
 import { Arrow } from "@/components/Arrow";
 
@@ -54,6 +57,40 @@ function Field({
 }
 
 export function StartProject() {
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [error, setError] = useState("");
+
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    setStatus("sending");
+    setError("");
+    try {
+      const res = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          subject: data.get("subject"),
+          message: data.get("message"),
+        }),
+      });
+      const body = await res.json().catch(() => null);
+      if (!res.ok) {
+        setError(body?.error ?? "Something went wrong. Email hello@layrus.com instead.");
+        setStatus("error");
+        return;
+      }
+      form.reset();
+      setStatus("sent");
+    } catch {
+      setError("Could not send that. Email hello@layrus.com instead.");
+      setStatus("error");
+    }
+  }
+
   return (
     <section
       aria-labelledby="start-heading"
@@ -114,6 +151,7 @@ export function StartProject() {
           <form
             className="flex flex-col gap-5"
             aria-label="Enquiry"
+            onSubmit={onSubmit}
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <Field label="Your name" name="name" required autoComplete="name" />
@@ -123,8 +161,12 @@ export function StartProject() {
             <Field label="How can we help?" name="message" area required />
 
             <div className="flex flex-wrap gap-3 pt-1">
-              <button type="submit" className="btn-primary btn-invert">
-                Send enquiry
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="btn-primary btn-invert disabled:opacity-60"
+              >
+                {status === "sending" ? "Sending…" : "Send enquiry"}
                 <Arrow />
               </button>
               <a href="/services" className="btn-outline btn-outline-invert">
@@ -132,6 +174,23 @@ export function StartProject() {
                 <Arrow />
               </a>
             </div>
+            {status === "sent" && (
+              <p
+                style={{ color: "var(--text-on-invert)", fontFamily: "var(--font-inter)" }}
+                className="text-sm"
+              >
+                Thank you. We have it, and we reply within 24 hours.
+              </p>
+            )}
+            {status === "error" && (
+              <p
+                role="alert"
+                style={{ color: "var(--warm-terracotta)", fontFamily: "var(--font-inter)" }}
+                className="text-sm"
+              >
+                {error}
+              </p>
+            )}
           </form>
 
         </div>

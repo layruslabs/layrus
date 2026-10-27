@@ -28,7 +28,7 @@ export type VisitorDetails = { name: string; email: string };
 
 let pool: Pool | undefined;
 
-function connect(): Pool | null {
+export function db(): Pool | null {
   const url = process.env.DATABASE_URL;
   if (!url) return null;
   return (pool ??= new Pool({
@@ -50,14 +50,14 @@ export async function saveTranscript(
   reply: string,
 ): Promise<void> {
   if (reply.trim() === "") return;
-  const db = connect();
-  if (!db) return;
+  const client = db();
+  if (!client) return;
 
   try {
     const messages = [...turns, { role: "assistant", content: reply }];
     // One row per conversation; each turn replaces the previous copy, so a row
     // is always the whole conversation and never a fragment of one.
-    await db.query(
+    await client.query(
       `insert into conversations
          (session_id, visitor_id, visitor_name, visitor_email, messages)
        values ($1, $2, $3, $4, $5::jsonb)
@@ -87,11 +87,11 @@ export async function saveTranscript(
  * deliberately unreachable from here.
  */
 export async function loadTranscript(visitorId: string): Promise<Turn[] | null> {
-  const db = connect();
-  if (!db) return null;
+  const client = db();
+  if (!client) return null;
 
   try {
-    const { rows } = await db.query<{ messages: Turn[] }>(
+    const { rows } = await client.query<{ messages: Turn[] }>(
       `select messages from conversations
        where visitor_id = $1
        order by updated_at desc

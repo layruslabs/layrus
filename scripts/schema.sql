@@ -24,6 +24,17 @@ begin
     )
   $ddl$;
 
+  execute $ddl$
+    create table if not exists enquiries (
+      id         bigserial primary key,
+      name       text not null,
+      email      text not null,
+      subject    text,
+      message    text not null,
+      created_at timestamptz not null default now()
+    )
+  $ddl$;
+
   -- Columns added after the table first shipped.
   execute 'alter table conversations add column if not exists visitor_id    text';
   execute 'alter table conversations add column if not exists visitor_name  text';
