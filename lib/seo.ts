@@ -89,6 +89,8 @@ export function organizationLd() {
       "https://linkedin.com/company/layrus",
       "https://github.com/layruslabs",
       "https://x.com/layrustech",
+      "https://www.instagram.com/layruslabs",
+      "https://www.facebook.com/share/1EGYy8WRAU/",
     ],
     contactPoint: [
       {
