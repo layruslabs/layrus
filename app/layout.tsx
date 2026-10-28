@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ChatWidget } from "@/components/ChatWidget";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 import "./globals.css";
 
 /* ─── Fonts ─────────────────────────────────────────────────────────────────── */
@@ -200,6 +201,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <WhatsAppButton />
           <ChatWidget />
         </ThemeProvider>
       </body>

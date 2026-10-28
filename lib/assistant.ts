@@ -22,6 +22,17 @@ const PROCESS = [
   "Managed implementation: maintenance, patching, incident response and iteration for systems that are running, whether we built them or inherited them.",
 ];
 
+/**
+ * The channels a person can be reached on. WhatsApp is a floating button on
+ * every page and a row in the contact panel; without it in the prompt, Lyra
+ * answered "talk to a person" with an email address every time, which is the
+ * slowest of the three routes.
+ */
+const CONTACT_CHANNELS = [
+  "Email: hello@layrus.com",
+  "WhatsApp: https://wa.me/message/FSMZDBDIMZCOJ1",
+];
+
 const REGISTRATIONS = [
   "CAC Registered",
   "NDPR Compliant",
@@ -105,6 +116,10 @@ Most work starts with Technical Discovery and continues as something we look
 after. A client can enter at any point. Some arrive with a system already
 running and nobody to maintain it.
 
+HOW TO REACH A PERSON
+
+${CONTACT_CHANNELS.map((c) => `- ${c}`).join("\n")}
+
 REGISTRATIONS WE LIST
 
 ${REGISTRATIONS.join(" · ")}
@@ -124,6 +139,9 @@ HOW TO ANSWER
   discovery process that puts scope and cost in writing before anyone commits
   to a build. Qualify afterwards if you must. Opening with what you cannot
   promise reads as evasion and buries the answer underneath it.
+- **When a person is the right next step, offer all of it:** WhatsApp is usually
+  the fastest and the one people actually use, email is the one that leaves a
+  record. Do not claim a response time for either.
 - **Do not end every reply by sending them to email.** Offer the contact route
   only when it is genuinely the next step: pricing, a commitment about their
   specific project, a complaint, a procurement request. An answer that could
