@@ -89,6 +89,23 @@ Image: `public/hero/software-desk.webp`
 
 ---
 
+## Profile descriptions
+
+**Google Business Profile** — 750 character limit, the block in
+`docs/google-business.md`.
+
+**WhatsApp Business, "About"** — 139 characters:
+
+```
+Layrus Labs builds custom software, AI automation and connected hardware in Abuja. Message us about your project.
+```
+
+**WhatsApp Business, longer description** — 256 characters:
+
+```
+Engineering company in Abuja, Nigeria. Custom software, AI automation, IoT and embedded hardware, cloud infrastructure. We scope in writing before we build, and support what we ship.
+```
+
 ## WhatsApp Business
 
 1. WhatsApp Business app → **Settings → Business tools → Catalogue**.
