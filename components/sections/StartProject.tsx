@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import Image from "next/image";
 import { Arrow } from "@/components/Arrow";
 
@@ -59,6 +59,29 @@ function Field({
 export function StartProject() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [error, setError] = useState("");
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // Arriving from the template catalogue: ?template=<name>&category=<slug>.
+  // The fields are uncontrolled, so this writes into them directly rather than
+  // making every input controlled for one prefill.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const template = params.get("template");
+    const form = formRef.current;
+    if (!template || !form) return;
+
+    const category = (params.get("category") ?? "").replace(/-/g, " ").trim();
+    const subject = form.elements.namedItem("subject") as HTMLInputElement | null;
+    const message = form.elements.namedItem("message") as HTMLTextAreaElement | null;
+
+    if (subject && !subject.value) subject.value = `Template: ${template}`;
+    if (message && !message.value) {
+      message.value =
+        `I would like to use the "${template}" template` +
+        (category ? ` (${category})` : "") +
+        ". ";
+    }
+  }, []);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -149,6 +172,7 @@ export function StartProject() {
           </div>
 
           <form
+            ref={formRef}
             className="flex flex-col gap-5"
             aria-label="Enquiry"
             onSubmit={onSubmit}
