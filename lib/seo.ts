@@ -86,9 +86,9 @@ export function organizationLd() {
       "payment integration",
     ],
     sameAs: [
-      "https://linkedin.com/company/layrus",
+      "https://www.linkedin.com/company/layruslabs",
       "https://github.com/layruslabs",
-      "https://x.com/layrustech",
+      "https://x.com/layruslabs",
       "https://www.instagram.com/layruslabs",
       "https://www.facebook.com/share/1EGYy8WRAU/",
     ],

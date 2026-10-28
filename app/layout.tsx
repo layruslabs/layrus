@@ -88,7 +88,7 @@ export const metadata: Metadata = {
     description:
       "Custom software, AI systems, IoT and embedded systems for businesses with complex technical needs.",
     images: ["/og-image.png"],
-    creator: "@layrustech",
+    creator: "@layruslabs",
   },
 
   robots: {
