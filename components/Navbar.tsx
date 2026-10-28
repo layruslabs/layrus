@@ -11,6 +11,9 @@ const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/projects", label: "Projects" },
+  // A sub-brand on its own host. Next's Link renders a plain anchor for an
+  // absolute URL, and the active check simply never matches it.
+  { href: "https://templates.layrus.com", label: "Templates" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ] as const;
