@@ -3,8 +3,8 @@
 The website for **Layrus Labs Ltd**, an engineering company in Abuja, Nigeria —
 custom software, AI automation and connected hardware.
 
-Next.js 16 (App Router), React 19, Tailwind v4. Fully static apart from one API
-route, so it deploys anywhere and costs almost nothing to run.
+Next.js 16 (App Router), React 19, Tailwind v4. Every page is prerendered;
+three API routes handle the assistant, its saved history and the contact form.
 
 ## Running it
 
@@ -36,10 +36,13 @@ ANTHROPIC_API_KEY=<your deepseek key>
 
 `LYRA_MODEL` overrides the model if you ever need to pin one.
 
-`DATABASE_URL` points at a Neon Postgres database and turns on transcript
-storage. Run `scripts/schema.sql` against it once. Without it the chat works
-exactly as before and nothing is stored, which is how local development and
-previews run.
+`DATABASE_URL` points at a Neon Postgres database and turns on two things:
+chat transcripts, written only when the visitor asks for them, and contact-form
+enquiries. Run `scripts/schema.sql` against it once — it is a single `do` block
+because Neon's editor rejects multi-statement scripts, and it is idempotent.
+
+Without it the assistant still answers, but the contact form reports that it
+could not save the enquiry. That is how local development and previews run.
 
 ### Form email (Spacemail SMTP)
 
@@ -69,15 +72,20 @@ enquiry.
 
 ```
 app/            routes — one page.tsx per URL
-  api/chat/     Lyra's streaming endpoint (the only server code)
+  api/chat/     Lyra's streaming endpoint
+  api/chat/history/  the saved conversation a returning browser resumes
+  api/enquiry/  the contact form: validate, store, then email
 components/     Navbar, Footer, diagrams, the assistant, page sections
 lib/
   services.ts   the six services — drives pages, cards, sitemap, llms.txt
-  projects.ts   the fourteen shipped systems
-  team.ts       the people
+  projects.ts   the nine shipped systems
+  team.ts       the people — the About page and Lyra's WHO WE ARE block
   seo.ts        structured data (JSON-LD) for every entity
   assistant.ts  Lyra's system prompt, built from the lists above
-public/         logos, project screenshots, team photos, llms.txt
+  transcripts.ts / enquiries.ts  Postgres access
+  mailer.ts     Spacemail SMTP, the enquiry notification
+scripts/        schema.sql, and the asset-generation scripts
+public/         logos, hero and social images, project shots, llms.txt
 docs/           google-business.md — the off-platform setup steps
 AGENTS.md       deep notes: conventions, traps, and why things are the way they are
 ```
@@ -93,7 +101,7 @@ seven.
 |---|---|
 | Per-page metadata + canonicals | each `page.tsx` |
 | Structured data (JSON-LD) | `lib/seo.ts`, emitted via `<JsonLd>` |
-| Sitemap — 29 URLs, generated | `app/sitemap.ts` |
+| Sitemap — 24 URLs, generated | `app/sitemap.ts` |
 | robots.txt — AI crawlers explicitly welcome | `app/robots.ts` |
 | `llms.txt` — plain-text brief for LLMs | `public/llms.txt` |
 | Social card, 1200×630 | `public/og-image.png` |
@@ -105,11 +113,11 @@ to the static list in `app/sitemap.ts`.
 **Still to do off-platform**, because neither can be done from this repo:
 
 1. **Submit the sitemap** to Google Search Console and Bing Webmaster Tools
-   (`https://www.layrus.com/sitemap.xml`). Verification needs DNS or a file upload
-   through your account.
-2. **Create the Google Business Profile** — see `docs/google-business.md`. It
-   needs a real street address and phone number, neither of which the site
-   currently states.
+   (`https://www.layrus.com/sitemap.xml`). Bing's verification file is already
+   in `public/BingSiteAuth.xml`; Google still needs DNS or a file upload through
+   your account.
+2. **Create the Google Business Profile** — see `docs/google-business.md`. The
+   registered address is now in `lib/seo.ts`; a phone number is still missing.
 
 ## The assistant
 
@@ -125,18 +133,24 @@ is the spend limit on your API account.
 
 ## Known gaps
 
-- **The enquiry form does nothing.** `components/sections/StartProject.tsx` has
-  no `action` and no handler — the primary call to action submits nowhere.
+- **SMTP on Vercel is untested.** Port 465 is the only documented Spacemail
+  port; Vercel blocks 25 and restricts some others. If sends time out, the
+  fallback is a transactional provider, not a network workaround.
 - **Compliance claims are unverified.** The ten registrations on the site need
   confirming before launch; an inaccurate claim is a real liability.
-- **Testimonials are invented** — three quotes attributed to named people.
-  Replace with real ones or remove.
+- **Testimonials are invented** — three quotes attributed to named people, each
+  naming a real project. Replace with real ones or remove.
 - **Governance details are placeholders.** `/privacy` and `/terms` describe what
   the site actually does, but neither has been reviewed by a lawyer.
-- **Abuja or Abuja is unresolved.** The site says Abuja; the founder's CV and
-  personal site say Abuja. This must be settled before the Google listing.
+- **Nothing alerts on a new enquiry.** It is stored and emailed, but if a send
+  fails the only trace is a log line.
 
 ## Deploying
 
-Vercel: import the repository, set the environment variables above, deploy. All
-routes prerender; the chat endpoint runs as a serverless function.
+The repository is `github.com/layruslabs/layrus`. On Vercel, connect that repo,
+set the environment variables above, and deploy. All pages prerender; the three
+API routes run as Node serverless functions.
+
+Use Neon's **pooled** connection string for `DATABASE_URL` (the `-pooler` host).
+The pool is capped at one connection per invocation, which is what keeps
+serverless deploys from exhausting Neon's limit.
