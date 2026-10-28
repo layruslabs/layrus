@@ -131,20 +131,6 @@ status code rather than a dead connection), and thinking deltas are dropped
 deliberately. Rate limiting is per-instance and best-effort — the real ceiling
 is the spend limit on your API account.
 
-## Known gaps
-
-- **SMTP on Vercel is untested.** Port 465 is the only documented Spacemail
-  port; Vercel blocks 25 and restricts some others. If sends time out, the
-  fallback is a transactional provider, not a network workaround.
-- **Compliance claims are unverified.** The ten registrations on the site need
-  confirming before launch; an inaccurate claim is a real liability.
-- **Testimonials are invented** — three quotes attributed to named people, each
-  naming a real project. Replace with real ones or remove.
-- **Governance details are placeholders.** `/privacy` and `/terms` describe what
-  the site actually does, but neither has been reviewed by a lawyer.
-- **Nothing alerts on a new enquiry.** It is stored and emailed, but if a send
-  fails the only trace is a log line.
-
 ## Deploying
 
 The repository is `github.com/layruslabs/layrus`. On Vercel, connect that repo,
