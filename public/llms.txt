@@ -76,7 +76,7 @@ Handover → Managed Maintenance.
 - Email: hello@layrus.com
 - Location: Abuja, Nigeria
 - LinkedIn: https://linkedin.com/company/layrus
-- GitHub: https://github.com/layrus
+- GitHub: https://github.com/layruslabs
 
 ## Citation
 

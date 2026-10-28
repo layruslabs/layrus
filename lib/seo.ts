@@ -87,7 +87,7 @@ export function organizationLd() {
     ],
     sameAs: [
       "https://linkedin.com/company/layrus",
-      "https://github.com/layrus",
+      "https://github.com/layruslabs",
       "https://x.com/layrustech",
     ],
     contactPoint: [
