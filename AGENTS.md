@@ -86,8 +86,7 @@ components/
   ThemeToggle.tsx  — client component, sun/moon button
   sections/        — page order lives in app/page.tsx
     Hero.tsx              — headline, CTAs, ruled stats + an editorial
-                            collage: engineer photo, PCB shot, system
-                            architecture card, terracotta accent card
+                            photo backdrop, architecture card top-right
     TrustBar.tsx          — "shipped and running" strip, read from
                             lib/projects
     CoreCapabilities.tsx  — 4 service cards, each showing that field's
@@ -98,7 +97,8 @@ components/
     WhoWeBuildFor.tsx     — 4 sector cards
     Compliance.tsx        — registrations / certification strip
     Insights.tsx          — 3 article cards
-    StartProject.tsx      — enquiry form + contact details
+    StartProject.tsx      — enquiry form (client) + contact details
+    HeroBackdrop.tsx      — the hero's cross-fading photographs
 
 app/
   favicon.ico      — GENERATED multi-size icon (16/32/48/64)
@@ -259,19 +259,26 @@ are oversized — `scale(1.14)` for the drifting one, `scale(1.06)` for the
 blurred static one — because both the blur and the travel bleed past the edges
 and would otherwise uncover them.
 
-### Hero: the angled collage
+### Hero: the backdrop and the card
 
-The right-hand collage carries a `rotateY` under perspective, which is what
-gives the panel its depth. It is an inline transform rather than a class
-because it is used once.
+The photographs cross-fade behind the whole hero (`HeroBackdrop`), not inside
+the column. They are decorative and `aria-hidden`, and they cross-fade rather
+than slide because a horizontal track reads as a widget.
 
-**The two hero columns are matched by sizing, not by stretching.** The
-collage's height is set by the engineer photo's aspect ratio, and the photo is
-trimmed (`aspect-[14/9]`) so the collage lands on the same height as the pitch
-beside it — 626px each at 1440. The stat row also carries `lg:mt-auto`, but
-that is now a safety net, not the mechanism: it only absorbs slack, and there
-is none. Growing the collage without growing the left column reopens the hole;
-it is the ratio, not the flex, that closes it.
+**The wash is what makes the hero readable.** The type was designed for the
+page colour, not for a photograph: 30% of `--bg-page` overall, plus a much
+heavier pass on the left (84% at the edge, gone by 82% across) where the
+headline, copy, testimonial and stats sit. Change either number and check the
+stats labels first; they go before anything else does.
+
+Each slide carries a `focus` point applied as `object-position`. The hero is
+tall and narrow on a phone, so a 21:9 frame collapses to a vertical slice, and
+a centred slice cuts the subject out of its own photograph.
+
+The architecture card is the only content left in the right column: narrow
+(`max-w-[330px]` above `lg`), anchored top-right, square to the page. The
+`rotateY` that used to angle it skewed the column at tablet widths and was
+removed rather than scoped.
 
 ### The two moving strips
 
@@ -349,7 +356,7 @@ those claims need confirming with the client before launch, and an assistant
 asserting an unconfirmed certification to a procurement team is a liability.
 
 **The system prompt is built, not written.** `lib/assistant.ts` assembles it
-from `lib/services.ts` and `lib/projects.ts` — the same lists the pages render.
+from `lib/services.ts`, `lib/projects.ts` and `lib/team.ts` — the same lists the pages render.
 A hand-written prompt is a second copy of the site's content, and the second
 copy is the one that goes stale: rename a service on a page and the assistant
 keeps describing the old name. Anything reading those two files cannot
@@ -393,11 +400,14 @@ and previews run. `/privacy` states all of this and must keep stating it.
 
 ## Key Constraints
 
-- **The enquiry form does not submit anywhere.** `sections/StartProject.tsx`
-  renders a `<form>` with no `action` and no handler, so the primary call to
-  action on the site does nothing when pressed. It needs wiring to whatever
-  receives enquiries before launch — an API route, a form service, or a
-  mailto fallback. This is the largest open gap on the site.
+- **The contact form stores first, then emails, and says when it could not.**
+  `app/api/enquiry` validates, writes a row to `enquiries`, then sends through
+  Spacemail's SMTP in `lib/mailer.ts`. The row is the record and the email is
+  the notification. A failed send returns 502 and the form tells the person to
+  write to `hello@layrus.com`; nobody watches the table for new rows, so a
+  silent failure would be a lost enquiry. Port 465 is Spacemail's only
+  documented port, so if Vercel blocks it the answer is a transactional
+  provider, not a network workaround.
 - The legal pages (`/privacy`, `/terms`) are drafted from what the site
   actually does, but **neither has been reviewed by a lawyer**. Terms of
   service in particular is a summary, not an agreement.
