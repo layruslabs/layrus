@@ -72,7 +72,7 @@ export function organizationLd() {
     },
     areaServed: [
       { "@type": "Country", name: "Nigeria" },
-      { "@type": "Place", name: "West Africa" },
+      { "@type": "Place", name: "Worldwide" },
     ],
     knowsAbout: [
       "custom software development",

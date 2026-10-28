@@ -26,7 +26,7 @@ catalogue entry is actually for.
 Longer (GBP): Custom web applications, multi-tenant platforms, APIs and
 integrations, database design and migration off spreadsheets, reporting, and
 ongoing iteration. Built for the volume you expect in year three, not for
-launch day. Abuja-based, working across Nigeria.
+launch day. Abuja-based, working with clients worldwide.
 
 Image: `public/projects/rcareng-shot.png`
 

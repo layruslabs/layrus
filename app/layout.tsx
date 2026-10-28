@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     template: "%s | Layrus Labs",
   },
   description:
-    "Layrus Labs builds custom software, AI systems, IoT, embedded systems and cloud infrastructure for businesses in Abuja and across Nigeria.",
+    "Layrus Labs builds custom software, AI systems, IoT, embedded systems and cloud infrastructure for businesses in Abuja and worldwide.",
   keywords: [
     "custom software development Nigeria",
     "AI automation Abuja",
