@@ -166,6 +166,11 @@ export function StartProject() {
 
             <dl className="flex flex-col gap-4 mt-4">
               <ContactRow label="Email" value="hello@layrus.com" href="mailto:hello@layrus.com" />
+              <ContactRow
+                label="WhatsApp"
+                value="Message us"
+                href="https://wa.me/message/FSMZDBDIMZCOJ1"
+              />
               <ContactRow label="Office" value="Abuja, Nigeria" />
               <ContactRow label="Response time" value="Within 24 hours" />
             </dl>
