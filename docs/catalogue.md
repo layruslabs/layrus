@@ -51,7 +51,7 @@ Longer (GBP): PCB design and prototyping, microcontroller firmware, sensor and
 actuator integration, IoT gateways and connectivity, device-to-cloud telemetry,
 enclosure design and production support.
 
-Image: one of `public/hero/*.webp` — bench or field-node
+Image: `public/hero/bench.webp` (or `field-node.webp` for the IoT angle)
 
 **4. Cloud and Infrastructure** — `/services/cloud`
 
