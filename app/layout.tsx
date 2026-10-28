@@ -40,11 +40,11 @@ import { BASE_URL, organizationLd, websiteLd, ORG } from "@/lib/seo";
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Layrus Labs — Engineering Technology for Real-World Businesses",
+    default: "Layrus Labs — Engineering Technology for Business",
     template: "%s | Layrus Labs",
   },
   description:
-    "Layrus Labs designs, builds and implements custom software systems, AI automation and connected hardware for businesses with complex technical needs. Based in Abuja, Nigeria.",
+    "Layrus Labs builds custom software, AI systems, connected hardware and cloud infrastructure for businesses with complex technical needs in Abuja, Nigeria.",
   keywords: [
     "custom software development Nigeria",
     "AI automation Abuja",
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     locale: "en_NG",
     url: BASE_URL,
     siteName: "Layrus Labs",
-    title: "Layrus Labs — Engineering Technology for Real-World Businesses",
+    title: "Layrus Labs — Engineering Technology for Business",
     description:
       "Custom software, AI systems and connected hardware for businesses with complex technical needs. Abuja, Nigeria.",
     images: [
@@ -76,14 +76,14 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Layrus Labs — Engineering Technology for Real-World Businesses",
+        alt: "Layrus Labs — Engineering Technology for Business",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Layrus Labs — Engineering Technology for Real-World Businesses",
+    title: "Layrus Labs — Engineering Technology for Business",
     description:
       "Custom software, AI systems and connected hardware for businesses with complex technical needs.",
     images: ["/og-image.png"],
