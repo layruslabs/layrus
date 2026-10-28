@@ -52,7 +52,7 @@ export function organizationLd() {
     },
     image: `${BASE_URL}/og-image.png`,
     description:
-      "Layrus Labs designs, builds and implements custom software systems, AI automation and connected hardware for businesses with complex technical needs.",
+      "Layrus Labs designs, builds and implements custom software systems, AI automation, IoT and embedded systems for businesses with complex technical needs.",
     email: ORG.email,
     identifier: {
       "@type": "PropertyValue",

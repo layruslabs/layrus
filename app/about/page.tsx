@@ -8,7 +8,7 @@ import { Compliance } from "@/components/sections/Compliance";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Layrus Labs is an engineering company in Abuja, Nigeria, building custom software, AI systems and connected hardware for businesses with complex technical needs.",
+    "Layrus Labs is an engineering company in Abuja, Nigeria, building custom software, AI systems, IoT and embedded systems for businesses with complex technical needs.",
   alternates: { canonical: "/about" },
 };
 

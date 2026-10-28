@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     template: "%s | Layrus Labs",
   },
   description:
-    "Layrus Labs builds custom software, AI systems, connected hardware and cloud infrastructure for businesses with complex technical needs in Abuja, Nigeria.",
+    "Layrus Labs builds custom software, AI systems, IoT, embedded systems and cloud infrastructure for businesses in Abuja and across Nigeria.",
   keywords: [
     "custom software development Nigeria",
     "AI automation Abuja",
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     siteName: "Layrus Labs",
     title: "Layrus Labs — Engineering Technology for Business",
     description:
-      "Custom software, AI systems and connected hardware for businesses with complex technical needs. Abuja, Nigeria.",
+      "Custom software, AI systems, IoT and embedded systems for businesses with complex technical needs. Abuja, Nigeria.",
     images: [
       {
         url: "/og-image.png",
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Layrus Labs — Engineering Technology for Business",
     description:
-      "Custom software, AI systems and connected hardware for businesses with complex technical needs.",
+      "Custom software, AI systems, IoT and embedded systems for businesses with complex technical needs.",
     images: ["/og-image.png"],
     creator: "@layrustech",
   },

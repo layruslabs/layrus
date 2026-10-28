@@ -97,13 +97,13 @@ Image: `public/hero/software-desk.webp`
 **WhatsApp Business, "About"** — 139 characters:
 
 ```
-Layrus Labs builds custom software, AI automation and connected hardware in Abuja. Message us about your project.
+Layrus Labs builds custom software, AI automation, IoT and embedded systems in Abuja. Message us about your project.
 ```
 
 **WhatsApp Business, longer description** — 256 characters:
 
 ```
-Engineering company in Abuja, Nigeria. Custom software, AI automation, IoT and embedded hardware, cloud infrastructure. We scope in writing before we build, and support what we ship.
+Engineering company in Abuja, Nigeria. Custom software, AI automation, IoT and embedded systems, cloud infrastructure. We scope in writing before we build, and support what we ship.
 ```
 
 ## WhatsApp Business

@@ -115,7 +115,7 @@ export function Hero() {
               className="text-[1.0625rem] leading-relaxed max-w-md"
             >
               Layrus Labs designs, builds and implements custom software
-              systems, AI solutions and connected hardware for real-world
+              systems, AI solutions, IoT and embedded systems for real-world
               businesses.
             </p>
 

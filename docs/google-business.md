@@ -46,7 +46,7 @@ Set these once, then keep every other listing identical to them.
 
 ```
 Layrus Labs is an engineering company in Abuja, Nigeria. We design and build
-custom software, AI automation, connected hardware and the cloud infrastructure
+custom software, AI automation, IoT and embedded systems, and the cloud infrastructure
 around them.
 
 Our work includes a workshop platform for a Mercedes-Benz specialist, a hiring

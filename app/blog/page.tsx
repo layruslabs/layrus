@@ -5,7 +5,7 @@ import { Insights } from "@/components/sections/Insights";
 export const metadata: Metadata = {
   title: "Insights",
   description:
-    "Notes on engineering practice, AI systems and connected hardware from the team at Layrus Labs.",
+    "Notes on engineering practice, AI systems, IoT and embedded systems from the team at Layrus Labs.",
   alternates: { canonical: "/blog" },
 };
 

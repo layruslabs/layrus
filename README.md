@@ -1,7 +1,7 @@
 # layrus.com
 
 The website for **Layrus Labs Ltd**, an engineering company in Abuja, Nigeria —
-custom software, AI automation and connected hardware.
+custom software, AI automation, IoT and embedded systems.
 
 Next.js 16 (App Router), React 19, Tailwind v4. Every page is prerendered;
 three API routes handle the assistant, its saved history and the contact form.
