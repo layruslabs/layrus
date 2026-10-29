@@ -169,7 +169,7 @@ export function StartProject() {
               <ContactRow
                 label="WhatsApp"
                 value="Message us"
-                href="https://wa.me/message/FSMZDBDIMZCOJ1"
+                href="https://wa.me/2349029733354"
               />
               <ContactRow label="Office" value="Abuja, Nigeria" />
               <ContactRow label="Response time" value="Within 24 hours" />

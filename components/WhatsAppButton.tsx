@@ -17,7 +17,7 @@
 export function WhatsAppButton() {
   return (
     <a
-      href="https://wa.me/message/FSMZDBDIMZCOJ1"
+      href="https://wa.me/2349029733354"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with Layrus Labs on WhatsApp"

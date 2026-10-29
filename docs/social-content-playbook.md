@@ -104,7 +104,7 @@ times a week without a content team.
 ## Nigeria-specific notes
 
 - **WhatsApp is where deals happen.** Every caption should end somewhere that
-  leads to `wa.me/message/FSMZDBDIMZCOJ1`, not just "link in bio".
+  leads to `wa.me/2349029733354`, not just "link in bio".
 - **Pidgin and local language lift reach on Instagram and TikTok**, but keep
   LinkedIn and X in plain English, where the audience is different.
 - **Data cost is real.** Keep Reels under 30 seconds, compress hard, and never

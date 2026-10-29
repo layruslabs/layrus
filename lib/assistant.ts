@@ -30,7 +30,7 @@ const PROCESS = [
  */
 const CONTACT_CHANNELS = [
   "Email: hello@layrus.com",
-  "WhatsApp: https://wa.me/message/FSMZDBDIMZCOJ1",
+  "WhatsApp: https://wa.me/2349029733354",
 ];
 
 const REGISTRATIONS = [
