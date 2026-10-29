@@ -1,6 +1,7 @@
 import { SERVICES } from "@/lib/services";
 import { PROJECTS } from "@/lib/projects";
 import { TEAM } from "@/lib/team";
+import { WHATSAPP_URL } from "@/lib/contact";
 
 /**
  * Who the company works for, and how an engagement usually runs. The homepage
@@ -30,7 +31,7 @@ const PROCESS = [
  */
 const CONTACT_CHANNELS = [
   "Email: hello@layrus.com",
-  "WhatsApp: https://wa.me/2349029733354",
+  "WhatsApp: " + WHATSAPP_URL,
 ];
 
 const REGISTRATIONS = [

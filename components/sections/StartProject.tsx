@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import Image from "next/image";
 import { Arrow } from "@/components/Arrow";
+import { WHATSAPP_URL } from "@/lib/contact";
 
 const PHOTO_MOUNTAIN =
   "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1600&q=85";
@@ -169,7 +170,7 @@ export function StartProject() {
               <ContactRow
                 label="WhatsApp"
                 value="Message us"
-                href="https://wa.me/2349029733354"
+                href={WHATSAPP_URL}
               />
               <ContactRow label="Office" value="Abuja, Nigeria" />
               <ContactRow label="Response time" value="Within 24 hours" />

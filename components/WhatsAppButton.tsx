@@ -1,3 +1,5 @@
+import { WHATSAPP_URL } from "@/lib/contact";
+
 /**
  * WhatsApp, floating above the assistant.
  *
@@ -17,7 +19,7 @@
 export function WhatsAppButton() {
   return (
     <a
-      href="https://wa.me/2349029733354"
+      href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with Layrus Labs on WhatsApp"
