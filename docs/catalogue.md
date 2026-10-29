@@ -40,7 +40,7 @@ automation, document extraction and classification, with human review wherever
 a mistake is expensive and evaluation suites so quality is measured rather
 than assumed.
 
-Image: `public/projects/peeng.png`
+Image: `public/projects/peengly.png`
 
 **3. Embedded, IoT and Connected Hardware** — `/services/embedded`
 

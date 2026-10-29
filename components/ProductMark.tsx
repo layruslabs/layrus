@@ -14,7 +14,7 @@ import Image from "next/image";
  * so the mark carries no information the page does not already state.
  */
 export function ProductMark({ slug, size = 32 }: { slug: string; size?: number }) {
-  if (slug === "rcareng" || slug === "videosynx" || slug === "peeng") {
+  if (slug === "rcareng" || slug === "videosynx" || slug === "peengly") {
     return (
       <Image
         src={`/projects/${slug}.png`}

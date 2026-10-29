@@ -57,7 +57,7 @@ screenshots are of live sites, so they age: re-capture them when a product's
 landing page changes, or the cards will advertise a design that no longer
 exists.
 
-**`shot` is optional, and the fallback is deliberate.** peeng is a
+**`shot` is optional, and the fallback is deliberate.** peengly is a
 signed-in dashboard with no public page, and its sign-in screen is a blank
 white form — in a card that looked broken. It falls back to its mark on the
 same 16:10 panel, so the row still aligns. Give it a real screenshot only if

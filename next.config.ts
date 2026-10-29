@@ -7,7 +7,14 @@ const nextConfig: NextConfig = {
       // still in the wild and in search results.
       {
         source: "/projects/ai-sales-employee",
-        destination: "/projects/peeng",
+        destination: "/projects/peengly",
+        permanent: true,
+      },
+      // Renamed a second time when peeng.com turned out to be taken. Anything
+      // shared or indexed under the shorter name still resolves.
+      {
+        source: "/projects/peeng",
+        destination: "/projects/peengly",
         permanent: true,
       },
     ];

@@ -26,7 +26,7 @@ export interface Project {
   url?: string;
   /**
    * Screenshot of the product's own landing page, for the cards. Optional on
-   * purpose: peeng is a signed-in dashboard with no public page,
+   * purpose: peengly is a signed-in dashboard with no public page,
    * and its sign-in screen is a blank form — worse in a portfolio card than
    * the mark it would replace. Cards without a shot fall back to the mark.
    */
@@ -146,15 +146,15 @@ export const PROJECTS: Project[] = [
     accent: "var(--accent-green)",
   },
   {
-    slug: "peeng",
+    slug: "peengly",
     featured: true,
-    name: "peeng",
+    name: "peengly",
     category: "AI Automation",
     own: true,
     tagline:
       "Our own WhatsApp sales assistant: it quotes real prices from a shop's catalogue, follows up, and takes payment.",
     summary:
-      "peeng is ours, built and run by Layrus. A shop that sells over WhatsApp loses sales for being asleep, so it answers the messages, quotes prices from the shop's own catalogue, chases the people who went quiet and sends a payment link. One rule sits above everything else: it must never invent a price, a stock figure or a payment confirmation.",
+      "peengly is ours, built and run by Layrus. A shop that sells over WhatsApp loses sales for being asleep, so it answers the messages, quotes prices from the shop's own catalogue, chases the people who went quiet and sends a payment link. One rule sits above everything else: it must never invent a price, a stock figure or a payment confirmation.",
     built: [
       "Each message runs one turn: load the customer's history and the shop's live data, call the model, let it invoke tools, then vet the reply before anything is sent.",
       "A guard rejects any reply containing a figure that did not come out of the database during that turn — and understands the four ways people write naira prices.",
