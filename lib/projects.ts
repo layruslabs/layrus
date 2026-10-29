@@ -31,6 +31,15 @@ export interface Project {
    * the mark it would replace. Cards without a shot fall back to the mark.
    */
   shot?: string;
+  /**
+   * Built and run by Layrus rather than for a client.
+   *
+   * The portfolio otherwise reads as client work, and a product we operate
+   * ourselves is a different claim: it is maintained, it has its own users, and
+   * it says something about the company that client work cannot.
+   */
+  own?: boolean;
+
   /** The accent this project's card carries. */
   accent: string;
 }
@@ -141,10 +150,11 @@ export const PROJECTS: Project[] = [
     featured: true,
     name: "peeng",
     category: "AI Automation",
+    own: true,
     tagline:
-      "A WhatsApp sales assistant that quotes real prices from a shop's own catalogue, follows up, and takes payment.",
+      "Our own WhatsApp sales assistant: it quotes real prices from a shop's catalogue, follows up, and takes payment.",
     summary:
-      "A shop that sells over WhatsApp loses sales for being asleep. This answers the messages, quotes prices from the shop's own catalogue, chases the people who went quiet and sends a payment link — with one rule held above everything else: it must never invent a price, a stock figure or a payment confirmation.",
+      "peeng is ours, built and run by Layrus. A shop that sells over WhatsApp loses sales for being asleep, so it answers the messages, quotes prices from the shop's own catalogue, chases the people who went quiet and sends a payment link. One rule sits above everything else: it must never invent a price, a stock figure or a payment confirmation.",
     built: [
       "Each message runs one turn: load the customer's history and the shop's live data, call the model, let it invoke tools, then vet the reply before anything is sent.",
       "A guard rejects any reply containing a figure that did not come out of the database during that turn — and understands the four ways people write naira prices.",

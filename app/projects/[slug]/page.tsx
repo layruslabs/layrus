@@ -42,7 +42,7 @@ export default async function CaseStudy({
   const project = projectBySlug(slug);
   if (!project) notFound();
 
-  const { name, category, status, summary, built, highlights, url, accent } = project;
+  const { name, category, status, summary, built, highlights, url, accent, own } = project;
 
   return (
     <>
@@ -77,6 +77,7 @@ export default async function CaseStudy({
                 className="eyebrow"
               >
                 {category}
+                {own && " · In-house product"}
               </span>
               <span aria-hidden="true" style={{ color: "var(--text-muted)" }}>·</span>
               <span

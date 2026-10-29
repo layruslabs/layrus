@@ -9,7 +9,7 @@ import { PROJECTS, type Project } from "@/lib/projects";
    case study, but a portfolio card should show the thing, not its logo. */
 
 function ProjectCard({ project }: { project: Project }) {
-  const { slug, name, category, tagline, status, shot } = project;
+  const { slug, name, category, tagline, status, shot, own } = project;
 
   return (
     <article
@@ -44,6 +44,7 @@ function ProjectCard({ project }: { project: Project }) {
       <div className="flex flex-col gap-2.5 p-5 flex-1">
         <p style={{ color: "var(--text-muted)", fontFamily: "var(--font-inter)" }} className="eyebrow">
           {category}
+          {own && " · In-house"}
         </p>
         <h3
           style={{ color: "var(--text-primary)", fontFamily: "var(--font-playfair)" }}
