@@ -14,7 +14,7 @@ import Image from "next/image";
  * so the mark carries no information the page does not already state.
  */
 export function ProductMark({ slug, size = 32 }: { slug: string; size?: number }) {
-  if (slug === "rcareng" || slug === "videosynx") {
+  if (slug === "rcareng" || slug === "videosynx" || slug === "peeng") {
     return (
       <Image
         src={`/projects/${slug}.png`}
@@ -23,16 +23,6 @@ export function ProductMark({ slug, size = 32 }: { slug: string; size?: number }
         height={size}
         className="object-contain"
       />
-    );
-  }
-
-  if (slug === "ai-sales-employee") {
-    // Their topbar: a rounded square in --accent with the bolt in --accent-ink.
-    return (
-      <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true">
-        <rect width="32" height="32" fill="#0f7a55" />
-        <path d="M13 2 4 14h6l-1 8 9-12h-6z" transform="translate(4 4)" fill="#ffffff" />
-      </svg>
     );
   }
 

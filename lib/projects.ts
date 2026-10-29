@@ -26,7 +26,7 @@ export interface Project {
   url?: string;
   /**
    * Screenshot of the product's own landing page, for the cards. Optional on
-   * purpose: AI Sales Employee is a signed-in dashboard with no public page,
+   * purpose: peeng is a signed-in dashboard with no public page,
    * and its sign-in screen is a blank form — worse in a portfolio card than
    * the mark it would replace. Cards without a shot fall back to the mark.
    */
@@ -137,9 +137,9 @@ export const PROJECTS: Project[] = [
     accent: "var(--accent-green)",
   },
   {
-    slug: "ai-sales-employee",
+    slug: "peeng",
     featured: true,
-    name: "AI Sales Employee",
+    name: "peeng",
     category: "AI Automation",
     tagline:
       "A WhatsApp sales assistant that quotes real prices from a shop's own catalogue, follows up, and takes payment.",

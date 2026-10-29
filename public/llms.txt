@@ -63,7 +63,7 @@ Handover → Managed Maintenance.
 - **RCareNG** (Software Platform) — Booking, roadside dispatch and full workshop management for an independent Mercedes-Benz specialist in Abuja. — layrus.com/projects/rcareng
 - **Digital Tech Talent Hub** (Marketplace) — A two-sided marketplace where businesses hire verified tech freelancers, with client money held in escrow until delivery. — layrus.com/projects/digital-tech-talent-hub
 - **videosynx** (AI & Media) — Give it a subject; it writes the code, runs it, explains it and renders a narrated tutorial video with captions. — layrus.com/projects/videosynx
-- **AI Sales Employee** (AI Automation) — A WhatsApp sales assistant that quotes real prices from a shop's own catalogue, follows up, and takes payment. — layrus.com/projects/ai-sales-employee
+- **peeng** (AI Automation) — A WhatsApp sales assistant that quotes real prices from a shop's own catalogue, follows up, and takes payment. — layrus.com/projects/peeng
 - **WeGoComply** (Financial Services) — KYC, AML monitoring and regulatory reporting for Nigerian financial institutions. — layrus.com/projects/wegocomply
 - **GanSys** (Agriculture & IoT) — Live farm telemetry and remote control for ESP32 sensors, actuators and pest-control schedules. — layrus.com/projects/gansys
 - **CVD Expert** (Healthcare) — Cardiovascular risk prediction from 17 health parameters, trained on 300,000+ records. — layrus.com/projects/cvd-expert
