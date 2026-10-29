@@ -45,19 +45,15 @@ Set these once, then keep every other listing identical to them.
 ### Description (copy this)
 
 ```
-Layrus Labs is an engineering company in Abuja, Nigeria. We design and build
-custom software, AI automation, IoT and embedded systems, and the cloud infrastructure
-around them.
+Layrus Labs is an engineering company in Abuja, Nigeria. We build the systems a business actually runs on: the devices in the field, the software that operates them, and the cloud and AI that make sense of what they collect.
 
-Our work includes a workshop platform for a Mercedes-Benz specialist, a hiring
-marketplace that holds client money in escrow until delivery, farm telemetry for
-ESP32 controllers, and certificate verification anchored to Ethereum.
+Most systems we replace were not badly built. They were built for a business that has since changed: a spreadsheet quietly running a warehouse, three tools that each hold part of the truth.
 
-Most engagements start with Technical Discovery: a scoping process that puts
-scope, phasing and cost in writing before anyone builds. We also take over
-systems that already run and have nobody maintaining them.
+So we work to one standard. The system has to keep working after launch, under the conditions the business actually operates in, and somebody has to be able to maintain it.
 
-Layrus Labs Ltd, RC 9918991.
+Discovery first, then the build in stages, then support for as long as it runs.
+
+Working worldwide.
 ```
 
 ### Photos (Google ranks profiles with photos higher)

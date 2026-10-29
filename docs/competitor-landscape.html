@@ -1,0 +1,362 @@
+<title>Layrus Competitor Landscape</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+  /* Plan: paper-and-ink report — Layrus palette, Playfair for display,
+     Inter for text, one rule-based table style, colour reserved for the
+     gap analysis and the threats. */
+  :root {
+    --bg: #efebdf;
+    --surface: #e5e1d6;
+    --raised: #f7f5ee;
+    --ink: #241a12;
+    --ink-2: rgba(36, 26, 18, 0.72);
+    --ink-3: rgba(36, 26, 18, 0.5);
+    --rule: rgba(36, 26, 18, 0.16);
+    --accent: #0f6b43;
+    --clay: #8b3a0e;
+    --warn: #8b3a0e;
+    --display: 'Playfair Display', Georgia, serif;
+    --body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17110b;
+      --surface: #201912;
+      --raised: #241c14;
+      --ink: #efebdf;
+      --ink-2: rgba(239, 235, 223, 0.74);
+      --ink-3: rgba(239, 235, 223, 0.5);
+      --rule: rgba(239, 235, 223, 0.16);
+      --accent: #7fbf9b;
+      --clay: #c98b5e;
+      --warn: #d99a6c;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17110b;
+    --surface: #201912;
+    --raised: #241c14;
+    --ink: #efebdf;
+    --ink-2: rgba(239, 235, 223, 0.74);
+    --ink-3: rgba(239, 235, 223, 0.5);
+    --rule: rgba(239, 235, 223, 0.16);
+    --accent: #7fbf9b;
+    --clay: #c98b5e;
+    --warn: #d99a6c;
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    padding-block: 48px;
+  }
+  .wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  header { display: flex; flex-direction: column; gap: 14px; margin-bottom: 40px; }
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--clay);
+  }
+  h1 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(2rem, 5.2vw, 3rem);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    margin: 0;
+  }
+  .lede { font-size: 1.0625rem; color: var(--ink-2); max-width: 62ch; margin: 0; }
+  .meta { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+
+  section { margin-top: 44px; }
+  h2 {
+    font-family: var(--body);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h3 {
+    font-family: var(--display);
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 8px;
+  }
+  p { margin: 0 0 14px; max-width: 68ch; }
+  p:last-child { margin-bottom: 0; }
+  strong { font-weight: 600; }
+
+  .table-scroll { overflow-x: auto; margin-top: 18px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; min-width: 560px; }
+  th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    padding: 0 14px 10px 0;
+    border-bottom: 1px solid var(--rule);
+    white-space: nowrap;
+  }
+  td {
+    padding: 12px 14px 12px 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    color: var(--ink-2);
+  }
+  td:first-child { color: var(--ink); font-weight: 600; }
+  tr:last-child td { border-bottom: none; }
+  .rate { font-family: var(--mono); font-size: 0.8125rem; color: var(--ink); }
+
+  .callout {
+    background: var(--surface);
+    border-left: 3px solid var(--accent);
+    padding: 20px 22px;
+    margin-top: 20px;
+  }
+  .callout p { color: var(--ink-2); }
+  .callout p:first-child { color: var(--ink); }
+
+  ul { margin: 0; padding-left: 20px; }
+  li { margin-bottom: 10px; color: var(--ink-2); max-width: 66ch; }
+  li strong { color: var(--ink); }
+  li:last-child { margin-bottom: 0; }
+
+  .threat { border-top: 1px solid var(--rule); padding-top: 14px; margin-top: 14px; }
+  .threat:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+  .threat h3 { font-size: 1.0625rem; font-family: var(--body); font-weight: 600; }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+  }
+  footer p { max-width: 72ch; }
+  a { color: var(--accent); text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .sources { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 10px; }
+  .sources a { font-size: 0.8125rem; }
+
+  @media (max-width: 640px) {
+    body { padding-block: 30px; }
+    .lede { font-size: 1rem; }
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Competitor research</span>
+    <h1>Who Layrus Labs is actually up against</h1>
+    <p class="lede">
+      Three markets overlap on this company: Abuja software agencies, Nigerian
+      embedded and IoT firms, and AI-automation shops. Nobody sells all three,
+      which is the opening. Everything below is public — company sites and B2B
+      directories — and directory pricing is self-reported.
+    </p>
+    <span class="meta">Prepared October 2026 · layrus.com</span>
+  </header>
+
+  <section>
+    <h2>The short version</h2>
+    <ul>
+      <li><strong>Software agencies stop at the API.</strong> They sell web and mobile builds, priced from about $25/hour up to $150, and none of them mention hardware.</li>
+      <li><strong>Embedded firms stop at the gateway.</strong> They are hardware-first and sector-locked — grid, climate, agriculture — and sell no software or cloud service line.</li>
+      <li><strong>AI automation is crowded and cheap.</strong> WhatsApp agents start around ₦120,000. Competing there on price is unwinnable, and the phrase itself is now a commodity.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Tier 1 · Abuja software agencies</h2>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Firm</th><th>Size / since</th><th>Focus</th><th>Price signal</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Century Information Systems</td>
+            <td>11–50, 2015</td>
+            <td>Custom software, web and mobile, networking; government and finance — CBN, NECO, Immigration</td>
+            <td class="rate">$25–49/hr · min $10k</td>
+          </tr>
+          <tr>
+            <td>Haqqman</td>
+            <td>2013, Dawaki</td>
+            <td>Web, software engineering, digital marketing, own products</td>
+            <td class="rate">$70–150/hr</td>
+          </tr>
+          <tr>
+            <td>Krustylab</td>
+            <td>2012, Wuse</td>
+            <td>Web platforms, Flutter apps, automation dashboards, AI integrations</td>
+            <td class="rate">not published</td>
+          </tr>
+          <tr>
+            <td>Lyt24 Technologies</td>
+            <td>100–200, 2024</td>
+            <td>Software, cloud, cybersecurity, USSD and SMS</td>
+            <td class="rate">not published</td>
+          </tr>
+          <tr>
+            <td>TOG Africa</td>
+            <td>2022</td>
+            <td>Web and mobile, cloud migration, UI/UX</td>
+            <td class="rate">not published</td>
+          </tr>
+          <tr>
+            <td>Webnedrix · Tech Tanks · MythicDev</td>
+            <td>1–5 people</td>
+            <td>Websites, apps, small custom builds</td>
+            <td class="rate">~$25/hr · $1–10k</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:18px">
+      Broad but shallow on engineering depth. Century is the only one with
+      institutional weight, and its $10k floor prices it out of the SME work
+      Layrus takes. Haqqman competes on rate, not capability. None mentions
+      embedded systems.
+    </p>
+  </section>
+
+  <section>
+    <h2>Tier 2 · Embedded and IoT firms</h2>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Firm</th><th>Base</th><th>What they build</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Electra Systems</td><td>Lagos, Abuja</td><td>Grid measurement hardware, LTE-connected firmware, signal conditioning for utilities and mini-grids</td></tr>
+          <tr><td>Uniccon Group</td><td>Abuja</td><td>Robotics division; PCB design, embedded, Wi-Fi/MQTT/LoRa</td></tr>
+          <tr><td>Vectar</td><td>Abuja</td><td>Climate tech, LoRa and NB-IoT, solar monitoring, dMRV platform</td></tr>
+          <tr><td>Patheon Technology Solutions</td><td>Lagos, Toronto</td><td>PCBs, sensors, connected devices, IoT prototypes</td></tr>
+          <tr><td>Zentrie Tech</td><td>Lagos</td><td>ESP32, STM32, nRF52, KiCad and Altium, MQTT/BLE, TinyML</td></tr>
+          <tr><td>Migher World Technologies</td><td>Lagos, Freetown</td><td>ESP32 and Raspberry Pi, LoRaWAN, dashboards</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:18px">
+      Hardware-first and often sector-locked. Several are recruiting embedded
+      engineers rather than selling to SMEs, which says the supply of that
+      skill is thin. None markets software systems, AI or cloud as a service.
+    </p>
+  </section>
+
+  <section>
+    <h2>Tier 3 · AI automation</h2>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Firm</th><th>Base / since</th><th>Offer</th><th>Price signal</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Jorion Technologies</td><td>Lagos, 2019</td><td>WhatsApp agents, payments, scheduling, 80+ projects</td><td class="rate">from ₦120k + ₦25k/mo</td></tr>
+          <tr><td>Fidean Technologies</td><td>Lagos</td><td>Own WhatsApp CRM and campaign products, Cloud API setup</td><td class="rate">not published</td></tr>
+          <tr><td>SabiFlow</td><td>Abuja, 2025</td><td>LLM engineering, agents, RAG, n8n, WhatsApp systems</td><td class="rate">$25–49/hr · min $1k</td></tr>
+          <tr><td>SoldOut Technologia</td><td>Lagos, 2025</td><td>No-code automation, multi-channel inbox, Pidgin support</td><td class="rate">$25–49/hr</td></tr>
+          <tr><td>MituLabs</td><td>Lagos, 2024</td><td>Voice AI, browser agents, WhatsApp sales agents</td><td class="rate">not published</td></tr>
+          <tr><td>Grace AI Lab</td><td>Lagos, 2025</td><td>Enterprise agents, WhatsApp-native, four Nigerian languages</td><td class="rate">not published</td></tr>
+          <tr><td>Zargham Labs</td><td>US, serving Nigeria</td><td>WhatsApp e-commerce automation, Paystack and Flutterwave</td><td class="rate">40–60% under UK/US</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:18px">
+      The most contested market in Nigerian tech. Entry is around ₦120,000, and
+      several of these firms are younger than two years. "We do AI automation"
+      no longer distinguishes anyone.
+    </p>
+  </section>
+
+  <section>
+    <h2>Where the gap is</h2>
+    <div class="callout">
+      <p>
+        Almost nobody sells the whole stack. Software agencies stop at the API,
+        embedded firms stop at the gateway, automation shops stop at the
+        WhatsApp flow.
+      </p>
+      <p>
+        Devices, firmware, software, cloud, AI and the support contract, from
+        one team, is a claim none of these competitors makes — and the market
+        prices around it rather than through it. Century floors at $10k,
+        Haqqman charges $70–150/hour, while the automation shops chase
+        ₦120,000 projects. The space between — a ₦2–15m system with hardware
+        and a maintenance agreement — looks thinly served.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Threats worth naming</h2>
+    <div class="threat">
+      <h3>AI automation price collapse</h3>
+      <p>A ₦120,000 WhatsApp bot undercuts any proposal that mentions AI, whatever the engineering behind it.</p>
+    </div>
+    <div class="threat">
+      <h3>The template market</h3>
+      <p>With templates.layrus.com live, Envato and the agencies reselling themes compete for the same small-business budget as entry-level work.</p>
+    </div>
+    <div class="threat">
+      <h3>Institutional procurement</h3>
+      <p>For government and bank work, Century's references beat a young company's portfolio regardless of engineering quality.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>What this implies</h2>
+    <ul>
+      <li><strong>Lead with the stack, not the services.</strong> "We build the device, the software and the cloud" is defensible; "we do custom software" is not.</li>
+      <li><strong>Publish outcomes, not features.</strong> Every competitor lists services; none shows a metric. Two case studies with numbers would separate Layrus faster than any repositioning.</li>
+      <li><strong>Don't compete with Jorion on WhatsApp bots.</strong> Sell automation as an extension of a system Layrus built or maintains, priced as part of the platform.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>
+      Rates and headcounts come from company sites and directories (Sortlist,
+      Clutch, GoodFirms, Crustdata) and are self-reported. Treat them as
+      signals, not facts, and re-check before quoting any figure in a proposal.
+    </p>
+    <div class="sources">
+      <a href="https://krustylab.com/about-krustylab/">Krustylab</a>
+      <a href="https://enosisoutsourcing.com/profile/century-information-systems-ltd">Century IS</a>
+      <a href="https://techbehemoths.com/company/haqqman#services">Haqqman</a>
+      <a href="https://www.signalhire.com/companies/lyt24-technologies">Lyt24</a>
+      <a href="https://siliconafrica.org/company/tog-africa/#1">TOG Africa</a>
+      <a href="https://electra.systems/careers">Electra Systems</a>
+      <a href="https://www.upwork.com/agencies/1962441477981659546/#1">Zentrie Tech</a>
+      <a href="https://migherworld.com/services/electronics-smart-systems">Migher World</a>
+      <a href="https://joriontech.com/ai-agents/">Jorion</a>
+      <a href="https://fideantech.com/">Fidean</a>
+      <a href="https://clutch.co/profile/sabiflow-technologies#showmore">SabiFlow</a>
+      <a href="https://www.goodfirms.co/company/soldout-technologia">SoldOut</a>
+      <a href="https://www.linkedin.com/company/mitulabs#1">MituLabs</a>
+      <a href="https://www.ai-market-watch.com/company/grace-ai-lab">Grace AI Lab</a>
+      <a href="https://www.zarghamlabs.com/whatsapp-automation-ecommerce-nigeria/#our-tech-stack">Zargham Labs</a>
+    </div>
+  </footer>
+</div>
