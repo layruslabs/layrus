@@ -168,7 +168,7 @@ export const PROJECTS: Project[] = [
     ],
     status: "Live",
     url: "https://peengly.com",
-    shot: "/projects/peengly-shot.png",
+    shot: "/projects/peengly-landing.png",
     accent: "var(--burnt-clay)",
   },
 
