@@ -31,15 +31,6 @@ export interface Project {
    * the mark it would replace. Cards without a shot fall back to the mark.
    */
   shot?: string;
-  /**
-   * Built and run by Layrus rather than for a client.
-   *
-   * The portfolio otherwise reads as client work, and a product we operate
-   * ourselves is a different claim: it is maintained, it has its own users, and
-   * it says something about the company that client work cannot.
-   */
-  own?: boolean;
-
   /** The accent this project's card carries. */
   accent: string;
 }
@@ -148,13 +139,12 @@ export const PROJECTS: Project[] = [
   {
     slug: "peengly",
     featured: true,
-    name: "peengly",
+    name: "Peengly",
     category: "AI Automation",
-    own: true,
     tagline:
-      "Our own WhatsApp sales assistant: it quotes real prices from a shop's catalogue, follows up, and takes payment.",
+      "Our own AI sales employee: it answers customers, qualifies leads, follows up and takes payment on WhatsApp, Instagram and TikTok.",
     summary:
-      "peengly is ours, built and run by Layrus. A shop that sells over WhatsApp loses sales for being asleep, so it answers the messages, quotes prices from the shop's own catalogue, chases the people who went quiet and sends a payment link. One rule sits above everything else: it must never invent a price, a stock figure or a payment confirmation.",
+      "Peengly is ours, built and run by Layrus. A shop that sells on WhatsApp, Instagram or TikTok loses sales for being asleep, so Peengly answers the messages, quotes from the shop's own catalogue, qualifies the leads, chases the ones that go quiet and sends a payment link. It also tracks stock, orders, payments and revenue, and reports what sold and why some conversations did not. One rule sits above everything else: it must never invent a price, a stock figure or a payment confirmation.",
     built: [
       "Each message runs one turn: load the customer's history and the shop's live data, call the model, let it invoke tools, then vet the reply before anything is sent.",
       "A guard rejects any reply containing a figure that did not come out of the database during that turn — and understands the four ways people write naira prices.",
@@ -176,7 +166,9 @@ export const PROJECTS: Project[] = [
         body: "Reads and replays of a payment webhook change nothing, because orders are unique on the provider's reference. \"I don pay\" from a customer is refused.",
       },
     ],
-    status: "In pilot",
+    status: "Live",
+    url: "https://peengly.com",
+    shot: "/projects/peengly-shot.png",
     accent: "var(--burnt-clay)",
   },
 
