@@ -142,9 +142,9 @@ export const PROJECTS: Project[] = [
     name: "Peengly",
     category: "AI Automation",
     tagline:
-      "Our own AI sales employee: it answers customers, qualifies leads, follows up and takes payment on WhatsApp, Instagram and TikTok.",
+      "An AI sales employee that answers customers, qualifies leads, follows up and takes payment across WhatsApp, Instagram and TikTok.",
     summary:
-      "Peengly is ours, built and run by Layrus. A shop that sells on WhatsApp, Instagram or TikTok loses sales for being asleep, so Peengly answers the messages, quotes from the shop's own catalogue, qualifies the leads, chases the ones that go quiet and sends a payment link. It also tracks stock, orders, payments and revenue, and reports what sold and why some conversations did not. One rule sits above everything else: it must never invent a price, a stock figure or a payment confirmation.",
+      "A shop that sells on WhatsApp, Instagram or TikTok loses sales for being asleep. Peengly answers the messages, quotes from the shop's own catalogue, qualifies the leads, chases the ones that go quiet and sends a payment link. It also tracks stock, orders, payments and revenue, and reports what sold and why some conversations did not. One rule sits above everything else: it must never invent a price, a stock figure or a payment confirmation.",
     built: [
       "Each message runs one turn: load the customer's history and the shop's live data, call the model, let it invoke tools, then vet the reply before anything is sent.",
       "A guard rejects any reply containing a figure that did not come out of the database during that turn — and understands the four ways people write naira prices.",
