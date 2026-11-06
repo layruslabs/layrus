@@ -115,7 +115,9 @@ export function Footer() {
     <footer
       role="contentinfo"
       style={{ borderTopColor: "var(--border)" }}
-      className="border-t"
+      // The fixed WhatsApp and Lyra buttons sit in the bottom-right corner.
+      // This reserve keeps the footer's social row above them on phones.
+      className="border-t pb-36 md:pb-0"
     >
       {/* ── Main footer body ──────────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-14 md:py-16">
