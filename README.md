@@ -25,24 +25,14 @@ site — only the assistant reads these, and without a key it answers 503 with a
 message rather than failing obscurely.
 
 ```bash
-# Anthropic directly
-ANTHROPIC_API_KEY=sk-ant-...
-
-# …or DeepSeek, which serves an Anthropic-compatible endpoint. The model name
-# still says claude-opus-5-5: DeepSeek maps claude-opus* to deepseek-v4-pro.
-ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic
-ANTHROPIC_API_KEY=<your deepseek key>
+DEEPSEEK_API_KEY=sk-...
+# DEEPSEEK_MODEL=deepseek-chat      # default
+# DEEPSEEK_BASE_URL=https://api.deepseek.com
 ```
 
-`LYRA_MODEL` overrides the model if you ever need to pin one.
-
-`DATABASE_URL` points at a Neon Postgres database and turns on two things:
-chat transcripts, written only when the visitor asks for them, and contact-form
-enquiries. Run `scripts/schema.sql` against it once — it is a single `do` block
-because Neon's editor rejects multi-statement scripts, and it is idempotent.
-
-Without it the assistant still answers, but the contact form reports that it
-could not save the enquiry. That is how local development and previews run.
+Lyra runs on DeepSeek's chat endpoint. The route calls it directly over HTTP
+and reads the server-sent events itself, so there is no vendor SDK in the
+dependency tree.
 
 ### Form email (Spacemail SMTP)
 

@@ -39,9 +39,8 @@ export default function PrivacyPage() {
         <h2>The assistant on this site</h2>
         <p>
           The chat assistant is called Lyra. It is AI, not a person, and it
-          says so if you ask. What you type into it is sent to Anthropic, which
-          provides the model that writes the reply, under their API terms. It
-          is not used to train their models.
+          says so if you ask. What you type into it is sent to DeepSeek, which
+          provides the model that writes the reply, under their API terms.
         </p>
         <p>
           Before your first message, the assistant asks whether to save the

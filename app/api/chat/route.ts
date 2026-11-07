@@ -1,4 +1,3 @@
-import Anthropic from "@anthropic-ai/sdk";
 import { after } from "next/server";
 import { systemPrompt } from "@/lib/assistant";
 import { saveTranscript } from "@/lib/transcripts";
@@ -10,10 +9,8 @@ const MAX_TURNS = 16;
 /** Per-message ceiling, so one enormous paste cannot run up a bill. */
 const MAX_CHARS = 2000;
 
-let cached: Anthropic | undefined;
-function anthropic(): Anthropic {
-  return (cached ??= new Anthropic());
-}
+const ENDPOINT = `${process.env.DEEPSEEK_BASE_URL ?? "https://api.deepseek.com"}/chat/completions`;
+const MODEL = process.env.DEEPSEEK_MODEL ?? "deepseek-chat";
 
 type Turn = { role: "user" | "assistant"; content: string };
 
@@ -37,7 +34,7 @@ function parseTurns(raw: unknown): Turn[] | null {
     turns.push({ role, content: content.slice(0, MAX_CHARS) });
   }
 
-  // The API requires the conversation to open with the user.
+  // The conversation must open with the user.
   while (turns.length && turns[0].role !== "user") turns.shift();
   return turns.length ? turns : null;
 }
@@ -48,7 +45,7 @@ function parseTurns(raw: unknown): Turn[] | null {
  * ponytail: module state, so it is per-instance and Vercel runs many. It stops
  * a script hammering one instance and a person holding down Enter; it does not
  * stop a distributed one. The real ceilings are the token cap above and the
- * spend limit on the Anthropic account. Upgrade path is Vercel's WAF rate
+ * spend limit on the DeepSeek account. Upgrade path is Vercel's WAF rate
  * limiting (no code) or Upstash, which is shared state.
  */
 const BUCKET = new Map<string, { tokens: number; seen: number }>();
@@ -73,6 +70,54 @@ function take(ip: string): boolean {
 const UNAVAILABLE =
   "I could not answer that just now. Email hello@layrus.com and we will pick it up.";
 
+/**
+ * Yield the text of each SSE event from DeepSeek's stream.
+ *
+ * Chunks arrive at arbitrary byte boundaries, so the buffer is split on the
+ * blank line between events rather than on each read — otherwise a JSON object
+ * that straddles two reads is parsed as two broken halves.
+ */
+async function* events(res: Response): AsyncGenerator<string> {
+  const reader = res.body?.getReader();
+  if (!reader) return;
+
+  const decoder = new TextDecoder();
+  let buffer = "";
+
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+
+    let split: number;
+    while ((split = buffer.indexOf("\n\n")) !== -1) {
+      const event = buffer.slice(0, split);
+      buffer = buffer.slice(split + 2);
+      for (const line of event.split("\n")) {
+        if (!line.startsWith("data:")) continue;
+        const data = line.slice(5).trim();
+        if (data === "[DONE]") return;
+        yield data;
+      }
+    }
+  }
+}
+
+/** The visible text of one chunk. Reasoning deltas, when a model sends them, are dropped. */
+function deltaText(event: string): string {
+  try {
+    const parsed = JSON.parse(event) as {
+      choices?: { delta?: { content?: unknown } }[];
+    };
+    const content = parsed.choices?.[0]?.delta?.content;
+    return typeof content === "string" ? content : "";
+  } catch {
+    // A malformed event is not worth failing the stream over; the reply simply
+    // does not contain whatever it held.
+    return "";
+  }
+}
+
 export async function POST(req: Request) {
   const ip =
     req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
@@ -84,6 +129,12 @@ export async function POST(req: Request) {
       { error: "Too many messages. Please wait a moment." },
       { status: 429 },
     );
+  }
+
+  const key = process.env.DEEPSEEK_API_KEY;
+  if (!key) {
+    console.error("chat: DEEPSEEK_API_KEY is not set");
+    return Response.json({ error: UNAVAILABLE }, { status: 503 });
   }
 
   let payload: {
@@ -142,44 +193,41 @@ export async function POST(req: Request) {
     }
   });
 
-  const stream = anthropic().beta.messages.stream({
-    // Both providers understand a Claude model name: DeepSeek's
-    // Anthropic-compatible endpoint maps claude-opus* to deepseek-v4-pro and
-    // claude-sonnet*/claude-haiku* to deepseek-flash. Override only to pin
-    // something specific — see .env.example.
-    model: process.env.LYRA_MODEL ?? "claude-opus-5-5",
-    max_tokens: MAX_TOKENS,
-    // Chat, not analysis: low effort is the documented setting for
-    // latency-sensitive routes and keeps a support reply quick.
-    output_config: { effort: "low" },
-    system: systemPrompt(),
-    messages: turns,
-    // A support assistant should not go silent on a policy decline. Claude
-    // Opus 5.5 is served by the newest models already, so "default" routes by
-    // refusal category and we never maintain a model list.
-    betas: ["server-side-fallback-2026-07-01"],
-    fallbacks: "default",
+  const upstream = await fetch(ENDPOINT, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      accept: "text/event-stream",
+      authorization: `Bearer ${key}`,
+    },
+    body: JSON.stringify({
+      model: MODEL,
+      messages: [{ role: "system", content: systemPrompt() }, ...turns],
+      max_tokens: MAX_TOKENS,
+      stream: true,
+    }),
+    // The visitor closing the panel should stop the tokens, not just hide them.
+    signal: req.signal,
+  }).catch((err) => {
+    console.error("chat: upstream call failed", err);
+    return null;
   });
 
-  // The first text delta is pulled before we commit to a response.
-  //
-  // This is not an optimisation. `new Anthropic()` does not check credentials —
-  // the SDK resolves them when the request is made — and `toReadableStream()`
-  // only reports that failure once the response headers have already gone out.
-  // The result is a 200 followed by a dead connection, which the browser can
-  // do nothing useful with. Awaiting the first delta moves every failure —
-  // missing key, bad key, rate limit, model gone — to a point where we can
-  // still choose the status code.
-  // Thinking deltas are real and billed, and are deliberately not forwarded:
-  // a visitor should not watch the model reason about them.
+  if (!upstream || !upstream.ok || !upstream.body) {
+    console.error("chat: upstream refused", upstream?.status, upstream ? await upstream.text().catch(() => "") : "");
+    return Response.json({ error: UNAVAILABLE }, { status: 502 });
+  }
+
+  // Narrowed once, because a hoisted function does not keep the guard above.
+  const source: Response = upstream;
+
+  // The first text delta is pulled before we commit to a response, so a bad
+  // key, a rate limit or an empty stream still becomes a status code the
+  // browser can act on rather than a 200 followed by a dead connection.
   async function* textDeltas() {
-    for await (const event of stream) {
-      if (
-        event.type === "content_block_delta" &&
-        event.delta.type === "text_delta"
-      ) {
-        yield event.delta.text;
-      }
+    for await (const event of events(source)) {
+      const text = deltaText(event);
+      if (text) yield text;
     }
   }
 
@@ -192,14 +240,18 @@ export async function POST(req: Request) {
     return Response.json({ error: UNAVAILABLE }, { status: 502 });
   }
 
+  if (first.done) {
+    // A stream that produced no text at all is a failure, not an empty answer.
+    console.error("chat: upstream returned no text");
+    return Response.json({ error: UNAVAILABLE }, { status: 502 });
+  }
+
   const encoder = new TextEncoder();
   const body = new ReadableStream<Uint8Array>({
     async start(controller) {
       try {
-        if (!first.done) {
-          reply += first.value;
-          controller.enqueue(encoder.encode(first.value));
-        }
+        reply += first.value;
+        controller.enqueue(encoder.encode(first.value));
         for await (const chunk of deltas) {
           reply += chunk;
           controller.enqueue(encoder.encode(chunk));

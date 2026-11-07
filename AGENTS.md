@@ -363,7 +363,7 @@ keeps describing the old name. Anything reading those two files cannot
 disagree with the pages it is talking about.
 
 **The first delta is pulled before the response is committed.** `new
-Anthropic()` does *not* check credentials — the SDK resolves them when the
+provider does not check credentials at construction — the request is the
 request is made — and `toReadableStream()` only reports that failure after the
 headers have gone out. That turns a missing key into a 200 followed by a dead
 connection, which the browser can do nothing with. Awaiting the first text
@@ -380,7 +380,7 @@ Requires `ANTHROPIC_API_KEY` in the environment. Without it the route answers
 **Rate limiting is per-instance and best-effort** — see the `ponytail:` note in
 the route. It stops a script hammering one instance and a person holding down
 Enter; it does not stop a distributed one. The real ceilings are `MAX_TOKENS`
-and the spend limit on the Anthropic account. Vercel's WAF rate limiting (no
+and the spend limit on the DeepSeek account. Vercel's WAF rate limiting (no
 code) or Upstash (shared state) is the upgrade.
 
 **Transcripts are stored in Postgres, after the response, and the visitor
