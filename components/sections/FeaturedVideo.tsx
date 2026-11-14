@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { Arrow } from "@/components/Arrow";
+
 const TRANSCRIPT = [
   "Have you ever wondered what happens when you click a link? You click a link or type an address, and just like that, a page appears. First, the name. Your browser can’t use it, because the internet only speaks numbers. So it asks a resolver: what’s the number behind layrus dot com? Then it opens a connection, and proves who’s on the other end.",
   "The address starts with https, so the browser knows this page has to be encrypted. It opens a connection and says hello: the TLS versions it speaks, the ciphers it supports, and a random number. The server replies with the version and cipher it chose, its own random number, and its certificate. That certificate is the server’s ID: who it claims to be, who issued it, and when it expires. First check: does the name on the certificate match the address you typed? Second: does the issuer chain back to a root the browser already trusts? Third: are the dates valid, and has the certificate been revoked? Then the server proves it holds the private key, and both sides derive the same session key without ever sending it. From that moment, everything is encrypted. The padlock is not a sticker; it is what four passed checks look like. If any check fails, the browser stops and shows a warning instead of the page: an expired certificate, the wrong name, or an untrusted issuer. And if a site offers no encryption at all, the browser marks it not secure, and HSTS can refuse to load it over http entirely.",
@@ -56,6 +59,10 @@ export function FeaturedVideo() {
                 ))}
               </div>
             </details>
+            <Link href="/blog/url-to-page" className="btn-outline self-start">
+              Read the full breakdown
+              <Arrow />
+            </Link>
           </div>
 
           <div className="mx-auto w-full max-w-[360px] aspect-[9/16] bg-black">
