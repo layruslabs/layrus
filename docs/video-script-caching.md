@@ -12,8 +12,8 @@
 
 | Time | Beat | What the viewer sees |
 |---|---|---|
-| 0–3s | The assumption | A product list loading, and a counter that keeps going up |
-| 3–15s | The naive solution | The same query hitting the database, over and over |
+| 0–3s | The visual hook — silent | The same product list duplicated until it fills the screen |
+| 3–15s | The naive solution | The requests behind all of it, and the counter climbing |
 | 15–32s | The fix | A cache appears in front, the first request misses, the next ones hit |
 | 32–50s | Where it breaks | A price changes, the cache does not know, the page is wrong |
 | 50–60s | The rule and the name | Expiry and invalidation; then the word "caching" |
@@ -22,24 +22,36 @@
 
 ## Script
 
-### 0–3s — The assumption
+### 0–3s — The visual hook
 
-**Visual:** Phone frame centred. A product list renders. Behind it, a database
-cylinder pulses once per request. A small counter in the corner ticks: 1, 2, 3.
+**No voiceover. No text on screen.**
 
-**Voiceover:**
-> A user opens your app. The same list of products loads. Then the next user
-> opens it, and it loads again.
+**Shot list:**
 
-**On-screen text:** none. Let the counter do the work.
+1. `0.0s` — A phone centred in the frame loads a product list. The list settles.
+2. `0.6s` — The same list loads again beside it, offset by a few pixels.
+3. `1.2s` — The frame tiles: four copies, nine, sixteen, every one of them
+   loading the identical list at the identical instant.
+4. `2.4s` — The grid fills the screen. Beneath it, a single database cylinder
+   takes every request; its activity light strobes into a blur.
+5. `2.9s` — Cut to black. The sound stops dead.
+
+**Sound:** one soft tap per load, doubling with each tile until it is a dense
+rattle, then silence on the cut.
+
+**Why this works:** the hook is a contradiction the eye resolves without being
+told — the same picture, repeated until it is absurd. No sentence does that in
+three seconds, and the sentence is not the hook; it is the explanation that
+follows.
 
 ---
 
 ### 3–15s — The naive solution
 
-**Visual:** Cut wide. The phone stays; five more phones fade in around it, all
-making the same request. Arrows converge on the database. The counter accelerates
-past 40. The database cylinder starts to shake; a response-time number climbs.
+**Visual:** Cut wide from black. The tiled grid collapses back to one phone and
+one database. A request counter appears in the corner and climbs. Arrows
+converge on the database. The cylinder starts to shake; a response-time number
+climbs with the counter.
 
 **Voiceover:**
 > For a thousand users, that is a thousand identical questions. And the answer
@@ -110,8 +122,9 @@ the phone shows the correct number.
 
 ## Caption cards
 
-These are the words the audience reads, in order. One idea per card, the key
-term highlighted in the same accent each time.
+These are the words the audience reads, in order — and the first card appears
+**after** the silent hook, at 3 seconds, not during it. One idea per card, the
+key term highlighted in the same accent each time.
 
 1. `A user opens your app.`
 2. `The same list loads again.`

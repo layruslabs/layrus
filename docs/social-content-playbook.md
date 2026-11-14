@@ -486,6 +486,29 @@ consistent across platforms.
   something the next ten seconds do not deliver loses the viewer faster than a
   boring opening would.
 
+### Hooks are visual, not textual
+
+A hook is something the viewer **sees** in the first three seconds. Text can
+support it; text cannot be it. A sentence on screen asks someone to stop
+scrolling and read, which is a second decision after the first one they are
+already making — and most of them make it before they have read anything.
+
+The line in the hook bank is the voiceover that lands **after** the shot. The
+shot is the hook.
+
+Eight visual hooks that fit technical content:
+
+| Visual hook | Shape | Fits |
+|---|---|---|
+| **Repetition wall** | The same thing duplicated until it fills the frame | Caching, polling, duplicate work |
+| **The break** | Something working, then visibly not | Retries, timeouts, circuit breakers |
+| **The wrong number** | One value on screen that contradicts another | Stale cache, clock skew, rounding |
+| **The flip** | A diagram turned over to show the hidden half | Reverse proxies, API gateways |
+| **The leak** | Something escaping a boundary it should not | Prompt injection, missing auth |
+| **The queue** | Items piling up faster than they leave | Backpressure, message queues |
+| **The meltdown** | A gauge or counter running past its limit | Rate limiting, load, capacity |
+| **The before/after** | One cut between two states of the same thing | Docker, deploys, migrations |
+
 ### The five formulas that work for technical content
 
 | Formula | Shape | Why it works |
@@ -498,7 +521,10 @@ consistent across platforms.
 
 ### The hook bank
 
-| Topic | Opening line | Formula |
+Each line is the voiceover that follows the opening shot. Build the shot first;
+the line explains what the viewer has already seen.
+
+| Topic | First line (after the shot) | Formula |
 |---|---|---|
 | Caching | "Your app asks the database the same question a thousand times a day. The answer has not changed." | Cost |
 | Rate limiting | "One script, no limit, and your database is gone by morning." | Failure |
