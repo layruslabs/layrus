@@ -284,6 +284,13 @@ export default function UrlToPagePost() {
               visits can resume a session or use 0-RTT.
             </P>
 
+            <P>
+              When the checks pass, the browser shows the padlock next to the
+              address bar. That is all the icon means: the connection is
+              encrypted and the certificate matched this host. It is not a
+              verdict on whether the site is honest.
+            </P>
+
             <div
               style={{ borderColor: "var(--accent-green)" }}
               className="border-l-2 pl-4"
@@ -314,7 +321,7 @@ export default function UrlToPagePost() {
             <P>
               Mixed content is the other failure: an <code>https</code> page that
               pulls <code>http</code> resources is blocked or upgraded depending
-              on the resource. The padlock covers the page, not every byte a
+              on the resource. That padlock covers the page, not every byte a
               careless script loads.
             </P>
 
@@ -337,7 +344,7 @@ export default function UrlToPagePost() {
             <P>
               The page appears because a chain of protocols agreed on names,
               addresses, keys, requests and bytes. No single company runs it.
-              The padlock is the visible end of one agreement; the speed is the
+              The padlock in the address bar is the visible end of one agreement; the speed is the
               result of several others.
             </P>
             <P>
