@@ -1,0 +1,143 @@
+WEBVTT
+
+00:00:00.600 --> 00:00:03.475
+Have you ever wondered what happens when
+you click a link?
+
+00:00:03.595 --> 00:00:05.665
+You click a link or type an address,
+
+00:00:05.665 --> 00:00:07.678
+and just like that, a page appears.
+
+00:00:07.798 --> 00:00:10.352
+First, the name. Your browser
+can't use it,
+
+00:00:10.352 --> 00:00:12.845
+because the internet only speaks numbers.
+
+00:00:12.965 --> 00:00:14.825
+So it asks a resolver:
+
+00:00:14.825 --> 00:00:18.208
+what's the number behind layrus dot com?
+
+00:00:18.328 --> 00:00:19.953
+Then it opens a connection,
+
+00:00:19.953 --> 00:00:22.000
+and proves who's on the other end.
+
+00:00:22.044 --> 00:00:24.328
+The address starts with https,
+
+00:00:24.328 --> 00:00:28.136
+so the browser knows this page has to
+be encrypted.
+
+00:00:28.256 --> 00:00:30.872
+It opens a connection and says hello:
+
+00:00:30.872 --> 00:00:34.477
+the TLS versions it speaks, the ciphers
+it supports,
+
+00:00:34.477 --> 00:00:35.891
+and a random number.
+
+00:00:36.011 --> 00:00:39.550
+The server replies with the version and
+cipher it chose,
+
+00:00:39.550 --> 00:00:42.253
+its own random number, and its
+certificate.
+
+00:00:42.373 --> 00:00:46.171
+That certificate is the server's ID: who
+it claims to be,
+
+00:00:46.171 --> 00:00:48.545
+who issued it, and when it expires.
+
+00:00:48.665 --> 00:00:49.599
+First check:
+
+00:00:49.599 --> 00:00:54.269
+does the name on the certificate match the
+address you typed?
+
+00:00:54.389 --> 00:00:54.989
+Second:
+
+00:00:54.989 --> 00:00:59.113
+does the issuer chain back to a root the
+browser already
+
+00:00:59.113 --> 00:00:59.563
+trusts?
+
+00:00:59.683 --> 00:01:03.859
+Third: are the dates valid, and has the
+certificate been revoked?
+
+00:01:03.979 --> 00:01:06.769
+Then the server proves it holds the
+private key,
+
+00:01:06.769 --> 00:01:10.449
+and both sides derive the same session key
+without ever sending
+
+00:01:10.449 --> 00:01:10.627
+it.
+
+00:01:10.747 --> 00:01:13.610
+From that moment, everything is encrypted.
+
+00:01:13.610 --> 00:01:15.587
+The padlock is not a sticker;
+
+00:01:15.587 --> 00:01:18.313
+it is what four passed checks look like.
+
+00:01:18.433 --> 00:01:19.657
+If any check fails,
+
+00:01:19.657 --> 00:01:23.329
+the browser stops and shows a warning
+instead of the page:
+
+00:01:23.329 --> 00:01:27.323
+an expired certificate, the wrong name, or
+an untrusted issuer.
+
+00:01:27.443 --> 00:01:30.262
+And if a site offers no encryption at all,
+
+00:01:30.262 --> 00:01:32.411
+the browser marks it not secure,
+
+00:01:32.411 --> 00:01:35.700
+and HSTS can refuse to load it over
+http entirely.
+
+00:01:36.099 --> 00:01:38.429
+Only then does the request go out.
+
+00:01:38.549 --> 00:01:40.472
+The server answers with the page.
+
+00:01:40.592 --> 00:01:42.364
+And the browser paints it.
+
+00:01:42.484 --> 00:01:45.290
+All of it, in under a second.
+
+00:01:45.410 --> 00:01:47.067
+The internet isn't a place.
+
+00:01:47.187 --> 00:01:49.200
+It's an agreement about how to
+pass a message.

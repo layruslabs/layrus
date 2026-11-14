@@ -74,8 +74,14 @@ export function FeaturedVideo() {
               aria-label="What happens when you type a URL — full explainer"
               className="w-full h-full object-cover"
             >
-              <source src="/videos/url-to-page-full.mp4" type="video/mp4" />
-              Your browser does not support the video element.
+                <source src="/videos/url-to-page-full.mp4" type="video/mp4" />
+                <track
+                  kind="captions"
+                  src="/videos/url-to-page-full.vtt"
+                  srcLang="en"
+                  label="English"
+                />
+                Your browser does not support the video element.
             </video>
           </div>
         </div>
