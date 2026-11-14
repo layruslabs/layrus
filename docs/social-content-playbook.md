@@ -166,3 +166,149 @@ not weeks.
 - [Kolonell — Build in public Africa, 2026](https://kolonell.com/en/blog/build-in-public-africa-2026)
 - [Vidfora — Hardware YouTube outliers](https://vidfora.com/youtube-outliers/hardware)
 - [Shortzly — Shorts vs TikTok vs Reels, 2026](https://shortzly.com/blog/tiktok-vs-youtube-shorts-vs-instagram-reels)
+
+---
+
+# Part two — the LinkedIn checklist, and a video series
+
+The research above covers what performs. This part is the operating checklist
+and the format catalogue for a technical video series aimed at developers.
+
+## The LinkedIn checklist
+
+Four things, in the order they matter.
+
+### Content strategy
+
+- **Original, not reshares.** Resharing someone else's post borrows attention
+  for an hour; original work compounds.
+- **Show unique data, expertise or product detail.** The posts that travel are
+  the ones only Layrus could have written.
+- **Date the content.** "November 2026" on a chart or a claim signals it is
+  current, and dated material is what gets cited later.
+
+### Author and profile strategy
+
+- **Post 2–3× a week.** Three is the ceiling that stays sustainable; one is a
+  hobby.
+- **Keep the profile public** and grow the follower count — the profile is the
+  landing page every post links to.
+- **Experts post first, the company amplifies.** Personal profiles reach far
+  more people than company pages, so John posts and the page shares.
+
+### Formatting for AI
+
+- **Clear, quotable sentences.** An answer engine quoting one line should get a
+  complete thought.
+- **Question: Answer format.** It mirrors how people search, and how a model
+  retrieves.
+- **First line is the takeaway.** Everything else is support.
+- **Include images.** Posts with a diagram or screenshot are cited more often
+  than text alone.
+
+### Engagement
+
+- **Ask for comments** — with a real question, not "thoughts?".
+- **Use video for organic traction.** It is still the format the feed pushes.
+- **Boost the posts that matter.** A small spend on the one post a month that
+  carries the positioning beats spreading it across ten.
+
+## The video format catalogue
+
+Thirteen formats, and the honest case for each.
+
+| Format | What it is | Best for | Effort |
+|---|---|---|---|
+| **UI / motion-graphics explainer** | Clean animated UI, diagrams and charts, usually with a 2D character and highlighted captions | Algorithms and system concepts — the format in the reference clip | Medium |
+| **Kinetic typography** | Animated text and numbers synced to voiceover, minimal illustration | Definitions, statistics, one-line takes | Low |
+| **Blackboard / whiteboard** | Hand-drawn or self-drawing illustrations synced to narration | Foundations: what a queue is, what idempotency means | Low |
+| **2D character animation** | Illustrated characters acting out the concept | Series identity, humour, retention across episodes | Medium |
+| **Isometric / infographic** | Angled vector systems, animated data charts | Architecture, data flow, before-and-after topology | Medium |
+| **Screencast** | Screen recording with cursor zooms and narration | Real code, real product, real debugging | Low |
+| **Talking head + b-roll** | A person to camera, cutting to screenshots or footage | Founder point of view, credibility, opinions | Low |
+| **Narrated slide deck** | Slides or tablet annotations with voiceover | Deep dives, course-style teaching | Low |
+| **3D animation** | Depth-rich models | Embedded and hardware explanations, physical devices | High |
+| **Cut-out / collage** | Layered paper-style cutouts and textures | Essay-style commentary, industry takes | Medium |
+| **Lightboard** | Presenter behind illuminated glass, writing toward camera | Algorithms and maths, where the working matters | High |
+| **AI avatar** | Generated presenter lip-syncing a script | Volume, multilingual versions | Low, with caveats |
+| **Photorealistic AI cinema** | Generated live-action scenes with actors and camera movement | A hook for an abstract problem; not for explanation | High |
+
+**Two cautions.** AI avatars and AI cinema cost little to generate and are
+instantly recognisable as AI, which undercuts the credibility the series is
+built on — use them for the first three seconds at most, or not at all. And the
+explainer format only works if the diagram is correct; a wrong arrow teaches
+the wrong thing at scale.
+
+## The reference clip, measured
+
+The example runs **60 seconds, 360×640, 30 fps, H.264 with AAC** — vertical,
+phone-first, with a 2D character standing beside animated UI cards, a persistent
+header (`SYSTEM DESIGN 101`, chapter, follower count), and captions where the
+key word is highlighted.
+
+Rebuild it at **1080×1920**. The structure that makes it work:
+
+1. **0–3s** — the naive assumption, stated as a question.
+2. **3–20s** — the simple solution, shown as a UI or diagram.
+3. **20–40s** — where it breaks, with the failure named on screen.
+4. **40–60s** — the fix, its name, and one line on when to reach for it.
+
+One concept per video. The name of the concept appears once, at the end, after
+the viewer has felt the problem — naming it first turns a story into a glossary
+entry.
+
+## The 19 topics, as four arcs
+
+Twenty minutes of someone else's course, reordered so each video makes the next
+one necessary.
+
+**Arc 1 — one server is not enough**
+
+1. Caching — the cheapest speed-up, and the first thing that lies to you
+2. Rate limiting — protecting the system from its own users
+3. Load balancing — spreading the work
+4. Reverse proxies — the thing in front of everything
+5. API gateways — when a proxy learns your API
+
+**Arc 2 — getting it live**
+
+6. CI/CD — from merge to production without a human
+7. Docker — the same thing everywhere
+8. Kubernetes — many containers, one declarative file
+9. Service discovery — how services find each other
+
+**Arc 3 — things that fail**
+
+10. Timeouts — the request that never ends
+11. Retries — trying again, carefully
+12. Exponential backoff — and jitter, why retries must not synchronise
+13. Circuit breakers — failing fast on purpose
+14. Idempotency — making a retry safe
+
+**Arc 4 — work that cannot wait**
+
+15. Message queues — doing it later
+16. Pub/Sub — one event, many listeners
+17. Event-driven architecture — the system as a stream of facts
+18. Distributed transactions — the problem
+19. Sagas — the compromise
+
+**Format per arc:** UI/motion-graphics explainer for arcs 1, 3 and 4 (diagrams
+carry them), screencast for arc 2 (the artefacts are real: a Dockerfile, a
+pipeline, a manifest). Kinetic typography for the two or three episodes that are
+really one idea — backoff, idempotency, timeouts.
+
+**Cadence:** one a week, same day, same opening three seconds. Nineteen weeks is
+a course, not a campaign — but the first four establish the format, and the
+first four are the ones worth making well.
+
+## Two audiences, not one
+
+The November calendar speaks to business owners. This series speaks to
+engineers. They do not want the same post, and mixing them teaches the feed to
+show each to the wrong people.
+
+Keep them apart: business content on the founder's LinkedIn and Facebook; the
+series on LinkedIn video, YouTube Shorts and X, where the audience already
+lives. The series builds the credibility that makes the business content
+believable, which is the only reason to make it.
