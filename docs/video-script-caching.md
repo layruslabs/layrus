@@ -160,6 +160,26 @@ and 2.
 
 ---
 
+## Audio bed
+
+**Track:** sparse lo-fi pulse, **90 BPM**, no lead melody, no vocals. It must be
+inaudible as a tune and audible only as pace.
+
+| Section | Music |
+|---|---|
+| 0–3s hook | **None.** Only the doubling taps and the cut to silence |
+| 3–15s | Bed enters on the cut, 22 dB under the voice |
+| 15–32s | Same bed, one added percussion layer as the fix lands |
+| 32–50s | Drop the percussion, hold a low drone under the stale-price reveal |
+| 50–60s | Drone resolves into the original bed for the final line, then a 2s fade |
+
+**Sound design:** a soft UI tap each time a request completes; a low thud when
+the counter passes its limit; nothing else. Two sounds, used consistently, are a
+vocabulary. Ten sounds are noise.
+
+**Mix:** master to −14 LUFS, −1 dBTP. Voice at least 20 dB above the bed. Cut the
+music dead for the 0.3s before the final word, so "caching" lands in silence.
+
 ## Accuracy traps
 
 Three ways this script can teach the wrong thing:

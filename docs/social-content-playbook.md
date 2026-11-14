@@ -589,6 +589,95 @@ where the popular explanation is wrong often enough to be a liability.
 version working, not just assert it. That is the difference between a channel
 engineers trust and one they argue with in the comments.
 
+## Sound and music
+
+A bed does not make a video better on its own. One controlled study found music
+in narrated instructional video had little measurable effect on retention, and
+can make things harder for viewers with less working memory. What music reliably
+does is **carry pace**: it tells the viewer how fast this is going and where the
+cuts are. That is the job — not emotion, and not filling silence.
+
+So the default is a restrained bed, ducked under speech, and silence where the
+silence is doing work.
+
+### Tempo follows narration speed
+
+| Narration pace | Music | Feel |
+|---|---|---|
+| ~130 words per minute | **70–90 BPM** | Calm, explanatory, definitions |
+| ~150 words per minute | **90–110 BPM** | Standard explainer; the house default |
+| ~175 words per minute | **110–130 BPM** | Fast takes, promos, montage |
+
+Match the bed to the voice, not to the topic. A calm topic delivered fast still
+needs the faster bed, or the two fight.
+
+### What to use, by content type
+
+| Content | Mood | Instrumentation | Notes |
+|---|---|---|---|
+| **A term** | Neutral, clean | Sparse synth pulse, light keys | One element, no build; the definition is the content |
+| **An algorithm** | Steady, methodical | Lo-fi beat, soft percussion, no melody lead | Must not compete with the worked example |
+| **A technology** | Curious | Ambient pad, gentle arpeggio | Keep the pad under 2 kHz so it does not mask speech |
+| **A tool / screencast** | Invisible | Very low ambient, or none | Keyboard and mouse sounds are the sound design here |
+| **Embedded / hardware** | Textural, mechanical | Subtle rhythmic clicks, low drone | Real device sounds beat synthetic ones; record the board |
+| **AI** | Clean, contemporary | Minimal synth, no sci-fi clichés | No risers, no "robot" motifs, no dramatic drops |
+| **Failure story** | Tension, then release | Low drone that opens into a lighter bed | The cut from tension to relief is the story beat |
+| **Promotional** | Confident | Full instrumental, light percussion | The only place a build and a drop belong |
+
+### Clarity rules
+
+- **No lyrics, ever**, on a narrated video. Words fight words.
+- **Avoid lead instruments in 1.5–3.5 kHz** — that is where speech intelligibility
+  lives. If the track has a piano or guitar lead there, pick another track or
+  carve it out.
+- **High-pass the music** below roughly 150–200 Hz so the bed does not muddy the
+  voice.
+- **Duck the bed 6–18 dB** under speech, with a 300–450 ms release, or simply set
+  the bed **18–25 dB below** the voice. The W3C's guidance for foreground speech
+  is at least 20 dB of separation; complex topics want more.
+- **Fade 1–2s in and 2–3s out**, and cut on musical phrases rather than mid-bar.
+- **Silence is a tool.** Cut the bed dead at the hook, before the first line, or
+  under the one number that matters. Nothing focuses attention like removing the
+  thing that was filling the room.
+
+### Loudness
+
+| | Target |
+|---|---|
+| Master (YouTube, Instagram, TikTok) | **−14 LUFS** integrated, **−1 to −1.5 dBTP** |
+| Dialogue-led educational | **−16 to −14 LUFS**, 6–12 dB of dynamic range |
+| Music alone under voice | roughly **−25 to −20 LUFS** |
+
+### Licensing: the trap that costs money
+
+Platform availability is **not** commercial clearance. Each library is licensed
+for one platform and often for non-commercial accounts only.
+
+| Platform | Cleared source | What it does **not** cover |
+|---|---|---|
+| **TikTok** | Commercial Music Library, for Business accounts | TikTok only — reposting to Reels or Shorts needs separate clearance |
+| **Meta (Facebook, Instagram)** | Meta Sound Collection | Meta only; check whether a track is ads-cleared before boosting |
+| **YouTube** | Audio Library | YouTube only; Shorts trending audio is not cleared for business accounts |
+| **LinkedIn** | No in-app commercial library | You must source music yourself, licensed for commercial use and cross-posting |
+| **X** | No commercial library | Nothing here is safe for a business post |
+
+**Two rights need clearing for any commercial video:** the composition (sync)
+and the recording (master). "Royalty-free" is a licence type, not unrestricted
+use — check territory, term, paid boosting, and what happens after the licence
+ends.
+
+**Keep a log.** For every published video: URL, publication date, track title and
+ISRC, licence source, and the date you checked. Library terms change, and the log
+is what protects you a year later.
+
+### Where to source
+
+- **Free, platform-scoped:** YouTube Audio Library, Meta Sound Collection.
+- **Free/cheap, cross-platform:** Uppbeat, Pixabay Music (check each track's terms).
+- **Paid, one licence across platforms:** Epidemic Sound, Artlist, Musicbed.
+  For a company posting to five platforms, this is usually the cheaper option
+  once a takedown or a muted video is counted.
+
 ## Two audiences, not one
 
 The November calendar speaks to business owners. This series speaks to
