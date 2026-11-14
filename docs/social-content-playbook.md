@@ -293,14 +293,37 @@ one necessary.
 18. Distributed transactions — the problem
 19. Sagas — the compromise
 
-**Format per arc:** UI/motion-graphics explainer for arcs 1, 3 and 4 (diagrams
-carry them), screencast for arc 2 (the artefacts are real: a Dockerfile, a
-pipeline, a manifest). Kinetic typography for the two or three episodes that are
-really one idea — backoff, idempotency, timeouts.
+## Picking a topic on any day
 
-**Cadence:** one a week, same day, same opening three seconds. Nineteen weeks is
-a course, not a campaign — but the first four establish the format, and the
-first four are the ones worth making well.
+There is no schedule. The list is a pool: on any day, pick the topic that fits
+the week's work or the question someone actually asked, then pick the format
+that suits that topic rather than reusing the last one.
+
+| Topic | Format | Why that format |
+|---|---|---|
+| Caching | UI / motion-graphics | The miss-then-hit path is a diagram, and the stale-price failure needs to be seen |
+| Rate limiting | UI / motion-graphics | A counter climbing and requests dropping is motion, not prose |
+| Load balancing | Isometric / infographic | It is a topology problem; the shape of the fan-out is the explanation |
+| Reverse proxies | Whiteboard | Boxes and arrows in front of one server; drawing it while saying it is the point |
+| API gateways | UI / motion-graphics | Compare a proxy with a gateway on the same diagram |
+| CI/CD | Screencast | The evidence is a real pipeline running |
+| Docker | Screencast | A Dockerfile and a terminal, not an animation of a whale |
+| Kubernetes | Isometric / infographic | Pods, nodes and replicas need spatial arrangement |
+| Service discovery | Isometric / infographic | Who-knows-who is a graph |
+| Timeouts | Kinetic typography | One request, one clock, nothing else on screen |
+| Retries | UI / motion-graphics | Three attempts failing in sequence |
+| Exponential backoff | Kinetic typography | The numbers themselves are the idea: 1, 2, 4, 8, plus jitter |
+| Circuit breakers | UI / motion-graphics | Three states — closed, open, half-open — shown changing |
+| Idempotency | Kinetic typography or whiteboard | A duplicated payment is the whole story; keep the frame bare |
+| Message queues | Isometric / infographic | Producers, the queue, consumers |
+| Pub/Sub | Isometric / infographic | One event fanning to many listeners |
+| Event-driven architecture | Whiteboard | It is an argument about how to model a system, not a diagram to admire |
+| Distributed transactions | 2D character or whiteboard | The two-generals problem lands better as a story than as boxes |
+| Sagas | UI / motion-graphics | A sequence of steps with compensating steps, shown side by side |
+
+**Two rules that hold whatever you pick.** One concept per video, and the same
+first three seconds every time — a recognisable opening is what turns separate
+videos into a series. Everything else can vary.
 
 ## Two audiences, not one
 
