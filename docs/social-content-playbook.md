@@ -325,6 +325,136 @@ that suits that topic rather than reusing the last one.
 first three seconds every time — a recognisable opening is what turns separate
 videos into a series. Everything else can vary.
 
+## The wider pool
+
+The nineteen networking topics are one shelf. The pool is bigger, and most of it
+is easier to make than a load-balancing diagram, because a definition does not
+need an architecture.
+
+### How long each kind runs
+
+| Kind | Length | Why |
+|---|---|---|
+| A term | 20–30s | One word, one definition, one example. Anything longer is padding |
+| An algorithm | 45–90s | It needs a worked example before the name means anything |
+| A technology | 60–90s | What it replaces is half the explanation |
+| A tool | 40–60s | Screencast; the proof is it running |
+| An embedded or AI concept | 45–75s | Needs real hardware or a real output on screen |
+
+### Shelf 1 — terms, and what they mean
+
+Short, kinetic typography or a talking head with one graphic. These are the
+videos people save and send to a junior.
+
+- API, SDK and library — the difference, in one diagram
+- Framework vs library (who calls whom)
+- Latency vs throughput
+- Stateless vs stateful
+- Monolith vs microservices — and when the monolith is right
+- REST vs GraphQL vs gRPC
+- Polling vs WebSockets vs server-sent events
+- Compiled vs interpreted
+- TTL, and why every cache has one
+- ACID, in plain language
+- CAP theorem, without the hand-waving
+- Eventual consistency
+- Race condition vs deadlock
+- Mutex vs semaphore
+- Garbage collection, briefly
+- SLA vs SLO vs SLI
+- Blue-green vs canary deploys
+- Feature flag vs branch
+- Horizontal vs vertical scaling
+- Observability: logs, metrics, traces — three things, not one
+
+### Shelf 2 — algorithms, broken down
+
+Whiteboard or lightboard for the reasoning, UI explainer for the data moving.
+Worked example first, name second.
+
+- Big O, without the maths anxiety
+- Binary search, and why sorted data is a superpower
+- Hash tables — and what a collision actually costs
+- Consistent hashing (the thing every cache cluster needs)
+- LRU cache — the algorithm behind "recently used"
+- Token bucket vs leaky bucket vs sliding window (rate limiting, properly)
+- Bloom filters — how to be wrong cheaply
+- Sorting: quicksort vs mergesort, and which one your framework uses
+- BFS vs DFS — and what each is for
+- Dijkstra, and why maps are not brute force
+- Dynamic programming, explained with one small problem
+- Merkle trees — how blockchains and Git both use them
+- Vector clocks — ordering events without a clock
+- Raft, at the level a working engineer needs
+- Base62 and short URLs
+
+### Shelf 3 — technologies, and what they replace
+
+The useful angle is always comparison: this exists because the previous thing
+hurt.
+
+- HTTP/1.1 vs HTTP/2 vs HTTP/3
+- TLS handshake — what actually happens before the padlock
+- DNS — the lookup nobody thinks about until it breaks
+- CDN — caching, but geographically
+- Redis — cache, queue, lock, and when it is the wrong tool
+- Kafka vs RabbitMQ — log vs broker, and why the difference matters
+- Postgres vs MySQL vs SQLite
+- Object storage vs a filesystem
+- Containers vs virtual machines
+- Serverless — what you trade for the scaling
+- OAuth 2 vs API keys
+- JWT — what is inside one, and why you cannot revoke it easily
+- gRPC and protobuf, briefly
+- MQTT — the protocol behind most IoT
+- WebRTC, and why video calls are not HTTP
+
+### Shelf 4 — tools, shown working
+
+Screencasts. No animation; the value is watching a competent person use it.
+
+- Git: the three commands that cover 90% of work
+- What CI actually does on a push
+- Docker in five minutes, from a Dockerfile
+- Terraform: infrastructure you can review
+- Prometheus and Grafana: one metric, end to end
+- Sentry: reading a stack trace that is not yours
+- pnpm vs npm vs yarn — the lockfile is the point
+- Vite: why the dev server is instant now
+
+### Shelf 5 — embedded and AI, where the competition is thin
+
+This is the shelf almost no Nigerian dev-content creator is making, and it is
+the one that matches the company. Prioritise it.
+
+- What a microcontroller actually is (and why it is not a small computer)
+- GPIO, pull-ups and why your button floats
+- UART vs I2C vs SPI — picking a bus
+- Interrupts, and the cost of being interrupted
+- Watchdog timers: the reset that saves the device
+- Debounce, in hardware and software
+- ADC: turning a voltage into a number you can trust
+- Power budgeting for a battery device
+- OTA updates — shipping to a device in the field
+- MQTT QoS levels, and which one you actually need
+- Why field devices lie: stale readings and how to handle them
+- Edge vs cloud inference
+- Tokens, context windows and why the bill grows
+- Embeddings, in one picture
+- RAG: retrieval first, generation second
+- Fine-tuning vs prompting — the decision, not the hype
+- Hallucination is a product decision, not only a model problem
+
+### Picking, on any day
+
+Three questions, in order:
+
+1. **What did someone ask this week?** A real question beats a planned topic.
+2. **Which shelf does it sit on?** That fixes the length and the format before
+   you write anything.
+3. **What is the worked example?** If you cannot name one in a sentence, the
+   topic is not ready — pick a different one.
+
 ## Two audiences, not one
 
 The November calendar speaks to business owners. This series speaks to
