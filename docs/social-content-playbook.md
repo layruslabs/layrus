@@ -422,7 +422,7 @@ Screencasts. No animation; the value is watching a competent person use it.
 - pnpm vs npm vs yarn — the lockfile is the point
 - Vite: why the dev server is instant now
 
-### Shelf 5 — embedded and AI, where the competition is thin
+### Shelf 5 — embedded, where the competition is thin
 
 This is the shelf almost no Nigerian dev-content creator is making, and it is
 the one that matches the company. Prioritise it.
@@ -438,12 +438,29 @@ the one that matches the company. Prioritise it.
 - OTA updates — shipping to a device in the field
 - MQTT QoS levels, and which one you actually need
 - Why field devices lie: stale readings and how to handle them
-- Edge vs cloud inference
-- Tokens, context windows and why the bill grows
-- Embeddings, in one picture
+- Edge inference: what you gain and what you give up
+
+### Shelf 6 — AI, on its own
+
+Separate shelf because the audience is different from the firmware one, and
+because this is where most publishing gets its facts wrong. Every one of these
+needs a checkable example on screen, not a metaphor.
+
+- Tokens, context windows, and why the bill grows the way it does
+- Embeddings, in one picture — and what cosine similarity actually means
+- Vector databases: an index, not a brain
 - RAG: retrieval first, generation second
-- Fine-tuning vs prompting — the decision, not the hype
+- Chunking, and why it decides whether RAG works at all
+- Fine-tuning vs prompting vs RAG — three tools, three problems
+- Temperature and sampling: why the same prompt gives different answers
 - Hallucination is a product decision, not only a model problem
+- Evaluation: how you know the assistant got better
+- Agents vs workflows: when a loop is the wrong shape
+- Guardrails: constraining output instead of asking nicely
+- Prompt injection: why "ignore previous instructions" is a security problem
+- Latency: why the first token matters more than the full response
+- Structured output: getting JSON you can actually parse
+- Cost control: caching prompts, capping tokens, watching spend
 
 ### Picking, on any day
 
@@ -454,6 +471,97 @@ Three questions, in order:
    you write anything.
 3. **What is the worked example?** If you cannot name one in a sentence, the
    topic is not ready — pick a different one.
+
+## Hooks that hold
+
+The first three seconds are where the video is won or lost, and the evidence is
+consistent across platforms.
+
+- Roughly **half of viewers leave before the 3-second mark**, and on TikTok
+  about **71% decide to scroll within 3 seconds**.
+- Around **65% finish a video when the first five seconds land**.
+- Most short-form is watched **without sound** — about 85% — so the hook has to
+  exist as on-screen text, not only as a voice.
+- The opening has to **pay off the title and thumbnail**. A hook that promises
+  something the next ten seconds do not deliver loses the viewer faster than a
+  boring opening would.
+
+### The five formulas that work for technical content
+
+| Formula | Shape | Why it works |
+|---|---|---|
+| **Contradiction** | "Most people think X. Here is what actually happens." | Creates a gap the viewer needs closed |
+| **Cost** | "This one line costs you 40 database queries a second." | Specific, and the number is checkable |
+| **Failure first** | "This worked for eight months. Then it started lying." | A story with a wound in it |
+| **Specific question** | "Why does the first request after a deploy take 3 seconds?" | A question with stakes beats "want to learn about X?" |
+| **Pattern interrupt** | Open on the broken thing, before any words | The visual stops the scroll; the voice explains after |
+
+### The hook bank
+
+| Topic | Opening line | Formula |
+|---|---|---|
+| Caching | "Your app asks the database the same question a thousand times a day. The answer has not changed." | Cost |
+| Rate limiting | "One script, no limit, and your database is gone by morning." | Failure |
+| Load balancing | "One server is fine until the day it is not." | Contradiction |
+| Reverse proxy | "Everything your users request goes through one box you never think about." | Pattern interrupt |
+| Idempotency | "The customer tapped Pay twice. You charged them twice." | Failure |
+| Retries | "You added a retry. You doubled your outage." | Contradiction |
+| Exponential backoff | "Everyone retried at the same second. That is why it stayed down." | Contradiction |
+| Timeouts | "The request never failed. It just never finished." | Contradiction |
+| Circuit breaker | "The fastest way to recover is to stop trying." | Contradiction |
+| JWT | "You cannot log someone out of a JWT. That is the trade." | Cost |
+| CAP theorem | "You cannot pick two. Partition tolerance is not optional." | Contradiction |
+| Docker | "It works on your machine. That is the problem." | Contradiction |
+| Microcontroller | "Your laptop and this chip are not the same kind of computer." | Contradiction |
+| Pull-up resistors | "The button is not broken. The pin is floating." | Failure |
+| Kafka vs RabbitMQ | "One of these remembers. The other forgets." | Contradiction |
+| RAG | "The model did not lie. It was never given the right page." | Contradiction |
+| Fine-tuning | "Fine-tuning will not teach your model a fact. Prompting might not either." | Contradiction |
+| Prompt injection | "Your assistant will follow an instruction hidden in a customer's message." | Failure |
+
+**Four rules for using them.**
+
+1. **The hook must be true.** Every line above is a claim the video has to
+   support. A contradiction that turns out to be a simplification is how a
+   teaching channel loses engineers.
+2. **Pay it off inside twenty seconds.** The hook buys attention; the first
+   explanation has to start cashing it immediately.
+3. **One visual change in the first three seconds.** A cut, a counter starting,
+   a diagram appearing — anything that is not the same static frame the viewer
+   scrolled past.
+4. **Same rhythm every episode.** The words change; the shape of the opening
+   does not. That is what makes a series recognisable.
+
+## Accuracy: the traps
+
+Every script gets checked against a primary source before it is filmed —
+vendor documentation, an RFC, or the specification itself. These are the topics
+where the popular explanation is wrong often enough to be a liability.
+
+| Topic | The version people repeat | What to say instead |
+|---|---|---|
+| API vs SDK | "An SDK is a kind of API" | An API is the contract; an SDK is a toolkit that usually wraps one |
+| Framework vs library | "They are the same thing" | Inversion of control: the framework calls your code, you call the library |
+| Latency vs throughput | "They are opposites" | They are different measures; both can improve at once, and both can degrade together |
+| CAP theorem | "Pick any two" | During a partition you choose consistency or availability; partition tolerance is not a choice. PACELC extends it: otherwise, latency vs consistency |
+| ACID | "It means the database is safe" | Atomicity, consistency, isolation, durability — each is a separate guarantee with its own cost |
+| Idempotency | "The same response every time" | The same effect on the system; the response may differ |
+| Bloom filter | "It can be wrong either way" | No false negatives, possible false positives — that asymmetry is the point |
+| Exponential backoff | "Just wait longer" | Wait longer, and add jitter, or every client retries in lockstep |
+| JWT | "It is stateless, so it is better" | Stateless verification is the trade; revocation needs a denylist or a short lifetime |
+| HTTP/3 | "It is HTTP/2 but faster" | It runs over QUIC on UDP, which removes TCP head-of-line blocking |
+| Containers vs VMs | "Containers are lightweight VMs" | Containers share the host kernel; a VM has its own |
+| Serverless | "It scales infinitely" | It scales per request, with cold starts and execution limits |
+| Kafka vs RabbitMQ | "They are both message queues" | Kafka is a retained log with consumer positions; RabbitMQ is a broker that hands out and acknowledges messages |
+| MQTT QoS 2 | "Exactly once, guaranteed" | Exactly once within the protocol; end-to-end duplicates are still your problem unless the handler is idempotent |
+| RAG | "It stops hallucinations" | It grounds answers in retrieved text; retrieval quality decides whether that works |
+| Fine-tuning | "It teaches the model your data" | It shapes behaviour and format; it is unreliable for facts, which is what retrieval is for |
+| Microcontroller | "A small computer" | A CPU, memory and peripherals on one chip, usually with no OS and hard timing constraints |
+| Pull-up resistor | "It just keeps the pin high" | It defines the voltage when nothing is driving the line, so the input does not float |
+
+**The rule:** if a script corrects a common belief, it must show the correct
+version working, not just assert it. That is the difference between a channel
+engineers trust and one they argue with in the comments.
 
 ## Two audiences, not one
 
